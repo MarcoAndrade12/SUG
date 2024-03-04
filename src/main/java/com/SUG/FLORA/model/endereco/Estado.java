@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model.endereco;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -29,45 +30,9 @@ public class Estado {
     @Column(nullable = false, unique = true, length = 5)
     private String sigla;
 
-    @ManyToOne
-    @JoinColumn(name = "regiaoPais_id", nullable = false, unique = false)
-    private RegiaoDoPais regiaoDoPais;
-
-    @ManyToOne
-    @JoinColumn(name = "pais_id", nullable = false, unique = false)
-    private Pais pais;
-
     @OneToMany
-    @JoinTable(
-        name = "estado_ass_cidades",
-        joinColumns = @JoinColumn(name="estado_id"),
-        inverseJoinColumns = @JoinColumn(name="cidade_id")
-    )
-    private Set<Cidade> cidades;
-
-    @OneToMany
-    @JoinTable(
-        name = "estado_ass_bairros",
-        joinColumns = @JoinColumn(name="estado_id"),
-        inverseJoinColumns = @JoinColumn(name="bairro_id")
-    )
-    private Set<Bairro> bairros;
-
-    @OneToMany
-    @JoinTable(
-        name = "estado_ass_logradouros",
-        joinColumns = @JoinColumn(name="estado_id"),
-        inverseJoinColumns = @JoinColumn(name="logradouro_id")
-    )
-    private Set<Logradouro> logradouros;
-
-    @OneToMany
-    @JoinTable(
-        name = "estado_ass_ceps",
-        joinColumns = @JoinColumn(name="estado_id"),
-        inverseJoinColumns = @JoinColumn(name="cep_id")
-    )
-    private Set<CEP> ceps;
+    @JoinColumn(name = "estado_id")
+    private List<Cidade> cidades;
 
     @Column(nullable = false, unique = false)
     private boolean isDeleted;

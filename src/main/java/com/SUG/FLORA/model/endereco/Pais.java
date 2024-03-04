@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model.endereco;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -34,15 +35,11 @@ public class Pais {
         joinColumns = @JoinColumn(name="pais_id"),
         inverseJoinColumns = @JoinColumn(name="regiao_id")
     )
-    private Set<RegiaoDoPais> regioes;
+    private List<RegiaoDoPais> regioes;
     
     @OneToMany
-    @JoinTable(
-        name = "pais_ass_estados",
-        joinColumns = @JoinColumn(name="pais_id"),
-        inverseJoinColumns = @JoinColumn(name="estado_id")
-    )
-    private Set<Estado> estados;
+    @JoinColumn(name = "pais_id")
+    private List<Estado> estados;
 
     @Column(nullable = false, unique = false)
     private boolean isDeleted;

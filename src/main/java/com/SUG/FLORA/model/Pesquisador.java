@@ -18,13 +18,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-public class Pesquisador {
+public class Pesquisador extends Usuario{
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,7 +44,7 @@ public class Pesquisador {
     private LocalDate data_cadastro;
 
     @Column(nullable = false, unique = false)
-    private LocalDateTime deleted;
+    private LocalDateTime deletedAt;
 
     @Column(nullable = false, unique = false)
     private String nome;
@@ -63,7 +64,7 @@ public class Pesquisador {
     @Enumerated(EnumType.STRING)
     private EnumStatusUsuario status;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "endereco_id", nullable = false, unique = false)
     private Endereco endereco;
 

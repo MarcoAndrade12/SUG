@@ -11,12 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Logradouro {
 
     @Id
@@ -29,23 +30,7 @@ public class Logradouro {
     @Column(nullable = false, unique = false)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "bairro_id", nullable = false, unique = false)
-    private Bairro bairro;
-    
-    @ManyToOne
-    @JoinColumn(name = "cidade_id", nullable = false, unique = false)
-    private Cidade cidade;
-    
-    @ManyToOne
-    @JoinColumn(name = "estado_id", nullable = false, unique = false)
-    private Estado estado;
-    
-    @ManyToOne
-    @JoinColumn(name = "pais_id", nullable = false, unique = false)
-    private Pais pais;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
 

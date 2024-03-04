@@ -49,6 +49,7 @@ public class SecurityConfiguration {
             formLogin
                 .loginPage("/login")
                 .permitAll()
+                .loginProcessingUrl("/login")
             
         ); 
 
