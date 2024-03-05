@@ -1,23 +1,19 @@
 package com.SUG.FLORA.model.endereco;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.SUG.FLORA.model.Domain;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
-@Getter
-@Setter
-public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class Endereco extends Domain{
 
     @Column(nullable = false, unique = false)
     private int numero_casa;
@@ -48,7 +44,4 @@ public class Endereco {
     @ManyToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
-
-    @Column(nullable = false, unique = false)
-    private boolean isDeleted;
 }

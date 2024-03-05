@@ -1,29 +1,23 @@
 package com.SUG.FLORA.model.endereco;
 
 import java.util.List;
-import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.SUG.FLORA.model.Domain;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class Bairro {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+@EqualsAndHashCode(callSuper=false)
+public class Bairro extends Domain{
 
     @Column(nullable = false, unique = false)
     private String nome;
@@ -40,6 +34,4 @@ public class Bairro {
     )
     private List<CEP> ceps;
 
-    @Column(nullable = false, unique = false)
-    private boolean isDeleted;
 }

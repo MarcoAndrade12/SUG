@@ -1,28 +1,17 @@
 package com.SUG.FLORA.model.endereco;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import com.SUG.FLORA.model.Domain;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class CEP {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+@EqualsAndHashCode(callSuper=false)
+public class CEP extends Domain{
 
     @Column(nullable = false, unique = true)
     private String numero;

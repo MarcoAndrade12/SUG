@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class indexController {
     
-    @GetMapping("/")
+    @GetMapping(path = {"/", "/index"})
     public String getPage(){
         return "index";
     }

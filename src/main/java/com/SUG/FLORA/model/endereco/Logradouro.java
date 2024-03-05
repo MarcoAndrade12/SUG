@@ -1,28 +1,20 @@
 package com.SUG.FLORA.model.endereco;
 
-import com.SUG.FLORA.enums.EnumTipoLogradouro;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import com.SUG.FLORA.enums.EnumTipoLogradouro;
+import com.SUG.FLORA.model.Domain;
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Data
-public class Logradouro {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Logradouro extends Domain{
 
     @Enumerated(EnumType.STRING)
     private EnumTipoLogradouro tipo;
@@ -33,7 +25,4 @@ public class Logradouro {
     @OneToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
-
-    @Column(nullable = false, unique = false)
-    private boolean isDeleted;
 }

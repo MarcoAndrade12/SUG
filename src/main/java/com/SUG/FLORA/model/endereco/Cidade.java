@@ -1,25 +1,21 @@
 package com.SUG.FLORA.model.endereco;
 
 import java.util.List;
-import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import com.SUG.FLORA.model.Domain;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class Cidade {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+@EqualsAndHashCode(callSuper=false)
+public class Cidade extends Domain{
 
     @Column(nullable = false, unique = false)
     private String nome;
@@ -27,8 +23,5 @@ public class Cidade {
     @OneToMany
     @JoinColumn(name="cidade_id")
     private List<Bairro> bairros;
-
-    @Column(nullable = false, unique = true)
-    private boolean isDeleted;
 
 }
