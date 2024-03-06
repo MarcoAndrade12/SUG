@@ -10,10 +10,11 @@ import javax.persistence.OneToOne;
 import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.model.Domain;
 
-import lombok.Data;
-
+import lombok.Getter;
+import lombok.Setter;
 @Entity
-@Data
+@Getter
+@Setter
 public class Logradouro extends Domain{
 
     @Enumerated(EnumType.STRING)

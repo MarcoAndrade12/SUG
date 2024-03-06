@@ -22,10 +22,12 @@ import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.model.endereco.Endereco;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Usuario extends Domain implements UserDetails{
 
     private String email;
@@ -60,7 +62,7 @@ public class Usuario extends Domain implements UserDetails{
     private EnumStatusUsuario status;
 
     @OneToOne
-    @JoinColumn(name = "endereco_id", nullable = false, unique = false)
+    @JoinColumn(name = "endereco_id", nullable = true, unique = false)
     private Endereco endereco;
     
     

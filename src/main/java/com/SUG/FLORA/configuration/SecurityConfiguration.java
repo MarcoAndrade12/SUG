@@ -32,27 +32,17 @@ public class SecurityConfiguration {
 	
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user1")
-            .password(new EncoderBean().getEncoder().encode("123"))
-            .roles("USER")
-            .build();
-        UserDetails user2 = User.withUsername("user2")
-            .password(new EncoderBean().getEncoder().encode("123"))
-            .roles("USER")
-            .build();
-        UserDetails admin = User.withUsername("admin")
-            .password(new EncoderBean().getEncoder().encode("123"))
-            .roles("ADMIN")
-            .build();
         
-        if(usuarioRepository.findAll().size()==0) {
-        	Usuario u = new Usuario();
-        	u.setEmail("teste@teste.com");
-        	u.setSenha(new EncoderBean().getEncoder().encode("123"));
-        	usuarioRepository.save(u);
-        }
+        Usuario u = new Usuario();
+        u.setEmail("teste@teste.com");
+        u.setSenha(new EncoderBean().getEncoder().encode("123"));
+        u.setCpf("132");
+        u.setRg("20251256");
+        u.setNome("Teste");
+        u.setSobrenome("Testes");
+        u.setConsentimento(true);
         
-        return new InMemoryUserDetailsManager(user1, user2, admin);
+        return new InMemoryUserDetailsManager(u);
     }
 
     @Bean
