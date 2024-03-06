@@ -10,7 +10,7 @@ public class LoginController {
     
     @GetMapping("/login")
     public String getLogin() {
-        System.out.println("TESTEEEEEE");
+        System.out.println("TESTEEEEE");
         return "login";
     }
 
