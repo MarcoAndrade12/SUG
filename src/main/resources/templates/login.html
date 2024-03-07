@@ -7,12 +7,24 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>SUG-Flora Login</title>
 </head>
-<body class="body-flex">
-    
-<div class="container-fillW flex jc ac">
-    <div class="container-fill flex row">
+<body class="body-flex bg-green body-img">
+
+<div class="container-fillW flex jc ac border-10rem">
+    <div class="container-fill flex row border-10rem">
 
         <img class="img-bg-left-mid" src="/img/bg-login.png" alt="">
+
+        <form class="container-width-mid flex jc ac col margin-left-1" action="/login" method="post">
+            <img class="logo" src="/img/sugflora-logo.png" alt="">
+            <h1 class="title" for="">Bem vindo</h1>
+                <input class="input-text" type="email" name="username" id="username" placeholder="Insira seu email">
+                <input class="input-password" type="password" name="password" id="password" placeholder="Insira sua senha">
+                <button class="btn success" type="submit">Logar</button>
+            
+            <a class="link-alert" href="#">
+                Esqueci minha senha :(
+            </a>
+        </form>
 
     </div>
 

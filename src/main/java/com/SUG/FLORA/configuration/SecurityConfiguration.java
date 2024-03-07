@@ -50,7 +50,7 @@ public class SecurityConfiguration {
         .csrf()
         .disable()
 		.authorizeHttpRequests()
-		.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/icon/**", "/printer/**" , "/teste.html", "/index.html", "/index_agent.html",  "/topic/", "/ws", "/report/**",
+		.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**", "/printer/**" , "/teste.html", "/index.html", "/index_agent.html",  "/topic/", "/ws", "/report/**",
 					 "/chat/**").permitAll()
 		.anyRequest().authenticated()
         .and()       

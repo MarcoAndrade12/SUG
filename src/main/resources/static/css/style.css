@@ -7,18 +7,34 @@
     overflow: hidden;
 }
 
+.bg-black {
+    background-color: black;
+}
+
+.bg-green {
+    background-color: #155b36;
+}
+
 .container-fillW {
-    background-color: rgb(236, 255, 227);
-    width: 95vw;
-    height: 95vh;
+    width: 100vw;
+    height: 98vh;
     overflow: hidden;
 }
 
+.video-bg {
+    animation-play-state: running;
+    position: absolute;
+}
+
+.border-10rem {
+    border-radius: 10rem;
+}
+
 .container-fill {
-    background-color: rgb(236, 255, 227);
     width: 98%;
     height: 98%;
     overflow: hidden;
+    background-color: antiquewhite;
 }
 
 .flex {
@@ -35,10 +51,99 @@
 
 .row {
     flex-direction: row;
-    background-color: antiquewhite;
+}
+
+.col {
+    flex-direction: column;
 }
 
 .img-bg-left-mid {
     height: auto;
-    clip-path: polygon(0 0, 73% 0, 37% 100%, 0% 100%, 0 50%);
+    clip-path: polygon(0 0, 65% 0, 35% 100%, 0% 100%, 0 50%);
+    object-fit: cover;
+    margin-right: -400px;
+}
+
+.container-width-mid {
+    width: -webkit-fill-available;
+}
+
+.logo {
+    width: 15rem;
+
+}
+
+.title {
+    margin-top: -30px;
+}
+
+.input-text, .input-password {
+    border-radius: 1rem;
+    border-style: unset;
+    margin: 3px;
+    height: 30px;
+    width: 60%;
+    padding-left: 10px;
+    max-width: 350px;
+}
+
+.btn {
+    border-radius: 1rem;
+    border-style: unset;
+    margin: 10px 3px;
+    height: 30px;
+    width: 60%;
+    padding-left: 10px;
+    max-width: 350px;
+}
+
+.success {
+    background-color: #25995c;
+    color: white;
+    transition: all 0.5s;
+}
+
+.margin-left-1 {
+    margin-left: 10px;
+}
+
+.success:hover {
+    transform: scale(1.05);
+    background-color: cadetblue;
+    cursor: pointer;
+}
+
+.link-alert {
+    color: limegreen;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.link-alert:hover {
+    color: #25995c;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 750px) {
+    
+    .img-bg-left-mid {
+        display: none;
+    }
+
+    .body-img {
+        background-image: url('/img/bg-login.png');
+        background-size: cover; /* Faz com que a imagem cubra todo o espaço da div */
+        background-position: center; /* Centraliza a imagem na div */
+    }
+    
+    .container-fill {
+        background-color: rgba(250, 235, 215, 0);
+    }
+
+    .logo {
+        list-style: circle;
+        width: 15rem;
+        background-image: radial-gradient(circle at 118px 127px, white, transparent 110px);
+    
+    }
 }
