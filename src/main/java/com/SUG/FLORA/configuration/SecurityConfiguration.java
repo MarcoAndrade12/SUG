@@ -1,5 +1,9 @@
 package com.SUG.FLORA.configuration;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +19,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.SUG.FLORA.enums.EnumSexo;
+import com.SUG.FLORA.enums.EnumStatusUsuario;
+import com.SUG.FLORA.model.Profile;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.repository.UsuarioRepository;
+
 
 @Configuration
 @EnableWebSecurity
@@ -28,28 +36,13 @@ public class SecurityConfiguration {
 	AuthenticationManager authenticationManager;
 	 
 	@Autowired
-	private UserDetailsService jwtUserDetailsService;
-	
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        
-        Usuario u = new Usuario();
-        u.setEmail("teste@teste.com");
-        u.setSenha(new EncoderBean().getEncoder().encode("123"));
-        u.setCpf("132");
-        u.setRg("20251256");
-        u.setNome("Teste");
-        u.setSobrenome("Testes");
-        u.setConsentimento(true);
-        
-        return new InMemoryUserDetailsManager(u);
-    }
+	private JwtUserDetailsService jwtUserDetailsService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(jwtUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        authenticationManagerBuilder.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
         
         authenticationManager = authenticationManagerBuilder.build();
 
@@ -68,8 +61,46 @@ public class SecurityConfiguration {
 		.maxSessionsPreventsLogin(true)
 		.expiredUrl("/login");
         
+        confnewAdminInMemory();
+
         return http.build();
+
+        
     }
 
+    public void confnewAdminInMemory(){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        if (usuarios.isEmpty()) {
+            List<Profile> profiles = new ArrayList<>();
+            
+            Profile prof = new Profile();
+            prof.setName("ADMIN");
+            prof.setCreationDate(LocalDateTime.now());
+            
+            profiles.add(prof);
+
+
+            Usuario u = new Usuario();
+            u.setEmail("teste@teste.com");
+            u.setSenha(passwordEncoder().encode("123"));
+            u.setCpf("132");
+            u.setRg("20251256");
+            u.setNome("Teste");
+            u.setSobrenome("Testes");
+            u.setSexo(EnumSexo.MASCULINO);
+            u.setStatus(EnumStatusUsuario.ATIVO);
+            u.setConsentimento(true);
+            u.setProfiles(profiles);
+
+            System.out.println(u);
+            usuarioRepository.save(u);
+
+        }
+    }
+
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
 }

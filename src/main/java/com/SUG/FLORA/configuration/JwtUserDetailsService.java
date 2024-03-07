@@ -21,7 +21,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	
 		System.out.println("@"+username);
 		Usuario user = userRepository.findByEmailAndDeletedFalse(username);
-		
+		System.out.println(user);
 		if (user!=null) {
 			return user;
 		} else {
