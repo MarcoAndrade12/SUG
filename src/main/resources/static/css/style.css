@@ -59,7 +59,7 @@
 
 .img-bg-left-mid {
     height: auto;
-    clip-path: polygon(0 0, 65% 0, 35% 100%, 0% 100%, 0 50%);
+    clip-path: polygon(0 0, 85% 0, 55% 100%, 0% 100%, 0 50%);
     object-fit: cover;
     margin-right: -400px;
 }
@@ -124,7 +124,7 @@
     transform: scale(1.05);
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 1150px) {
     
     .img-bg-left-mid {
         display: none;
