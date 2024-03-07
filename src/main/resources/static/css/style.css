@@ -1,0 +1,44 @@
+.body-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container-fillW {
+    background-color: rgb(236, 255, 227);
+    width: 95vw;
+    height: 95vh;
+    overflow: hidden;
+}
+
+.container-fill {
+    background-color: rgb(236, 255, 227);
+    width: 98%;
+    height: 98%;
+    overflow: hidden;
+}
+
+.flex {
+    display: flex;
+}
+
+.jc {
+    justify-content: center;
+}
+
+.ac {
+    align-items: center;
+}
+
+.row {
+    flex-direction: row;
+    background-color: antiquewhite;
+}
+
+.img-bg-left-mid {
+    height: auto;
+    clip-path: polygon(0 0, 73% 0, 37% 100%, 0% 100%, 0 50%);
+}
