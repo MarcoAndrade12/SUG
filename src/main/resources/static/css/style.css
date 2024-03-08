@@ -93,6 +93,7 @@
     margin: 10px 3px;
     height: 30px;
     width: 60%;
+    min-width: fit-content;
     padding-left: 10px;
     max-width: 350px;
 }
@@ -122,6 +123,19 @@
 .link-alert:hover {
     color: #25995c;
     transform: scale(1.05);
+}
+
+.background-modal {
+    width: 100vw;
+    height: 100vh;
+    transition: all 0.5s;
+    display: flex;
+}
+
+.modal-box {
+    width: auto;
+    height: auto;
+    border-radius: 1rem;
 }
 
 @media screen and (max-width: 1150px) {
