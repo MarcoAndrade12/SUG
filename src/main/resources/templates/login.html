@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/recursos/modal.js"></script>
-    <script src="/js/teste.js"></script>
+    <script src="/js/recuperarSenha.js"></script>
     <title>SUG-Flora Login</title>
 </head>
 <body class="body-flex bg-green body-img">
@@ -18,10 +18,12 @@
 
         <form class="container-width-mid flex jc ac col margin-left-1" action="/login" method="post">
             <img class="logo" src="/img/sugflora-logo.png" alt="">
+            
             <h1 class="title" for="">Bem vindo</h1>
-                <input class="input-text" type="email" name="username" id="username" placeholder="Insira seu email">
-                <input class="input-password" type="password" name="password" id="password" placeholder="Insira sua senha">
-                <button class="btn success" type="submit">Logar</button>
+
+            <input class="input-text" type="email" name="username" id="username" placeholder="Insira seu email">
+            <input class="input-password" type="password" name="password" id="password" placeholder="Insira sua senha">
+            <button class="btn success" type="submit">Logar</button>
             
             <a class="link-alert" onclick="RecuperarSenha()">
                 Esqueci minha senha :(

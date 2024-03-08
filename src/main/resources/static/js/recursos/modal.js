@@ -43,23 +43,41 @@ class BackGroundModal {
 
 class ModalBox {
 
-    classes = [];
+    classes = ["modal-box"];
+    isForm;
+    action;
+    method;
     menssage;
     color;
     self;
     buttons = [];
 
-    constructor(buttons=[new Buttom()], classes = ["modal-box"], color="white", menssage="Hello") {
+    constructor(buttons=[new Buttom("Butão")], isForm=false, formulario="", action="#", method="post", menssage="Hello", classes = ["modal-box"], color="white") {
         this.classes = this.classes.concat(classes);
         this.buttons = this.buttons.concat(buttons);
         this.color = color;
         this.menssage = menssage;
+        this.isForm = isForm;
+        this.action = action;
+        this.method = method;
+        this.formulario = formulario;
         this.setSelf();
     }
 
     setSelf(){
-        var modalbox = document.createElement("div");
-        modalbox.classList.add(this.classes);
+        if (this.isForm) {
+            var modalbox = document.createElement("form");
+            modalbox.method = this.method;
+            modalbox.action = this.action;
+        } else {
+            var modalbox = document.createElement("div");
+        }
+ 
+        this.classes.forEach(classe => {
+            modalbox.classList.add(classe);
+            console.log(classe);
+        });
+
         modalbox.style.zIndex = 1001;
         modalbox.style.backgroundColor = this.color;
         modalbox.style.padding = "1rem";
@@ -67,19 +85,29 @@ class ModalBox {
         modalbox.style.flexDirection = "column";
         modalbox.style.justifyContent = "space-between";
         modalbox.style.alignItems = "center"
-        modalbox.style.gap = "1rem";
+        modalbox.style.gap = "5px";
         
         var msg = document.createElement("label");
         msg.classList.add("msg-model");
         msg.innerText = this.menssage;
+        modalbox.appendChild(msg);
+        
+        console.log(this.formulario);
+
+        if(this.isForm) {
+            modalbox.appendChild(this.formulario.getSelf());
+        }
 
         var buttons = document.createElement("div");
-        modalbox.appendChild(msg);
+        buttons.style.display = "flex";
+        buttons.style.flexDirection = "row";    
+
 
         this.buttons.forEach(button => {
-            modalbox.appendChild(button.getSelf());
+            buttons.appendChild(button.getSelf());
         });
 
+        modalbox.appendChild(buttons);
 
         this.self = modalbox;
     }
@@ -101,11 +129,20 @@ class Buttom {
     text;
     onclick;
 
-    constructor(text="Butão", styles=["success", "btn"], type="buttom", classes=["btn"], onclick=hello){
+    constructor(text="Butão", styles=["success", "btn"], type="buttom", classes=["btn"], onclick=hello, closeModel=true){
         this.classes.concat(classes);
         this.text = text;
         this.type = type;
-        this.onclick = onclick;
+
+        if (closeModel){
+            this.onclick = function() {
+                Modal.closeModel(onclick);
+            }
+
+        } else {
+            this.onclick = onclick;
+        }
+
         this.styles = this.styles.concat(styles);
         this.setSelf();
     }
@@ -117,7 +154,6 @@ class Buttom {
             buttom.classList.add(style);
         });
 
-        // buttom.classList.add(this.styles);
         buttom.type = this.type;
         buttom.onclick = this.onclick;
         
@@ -131,33 +167,65 @@ class Buttom {
         return this.self;
     }
 
+}
 
+class Input {
+
+    classes = [];
+    placeholder = "Um Input";
+    type = "text";
+    required = false;
+    self;
+
+    constructor(type= "text", placeholder = "Um Input", required = false, classes=["input-text", "input-modal"]){
+        this.self = document.createElement("input");
+
+        classes.forEach(classe => {
+            this.self.classList.add(classe);
+        });
+
+        this.self.type = type;
+        this.self.placeholder = placeholder;
+        this.self.required = required;
+    }
+
+    getSelf(){
+        return this.self;
+    }
+
+    toString(){
+        return this.self;
+    }
 
 }
 
 
 class Modal {
 
-    background;
-    modalBox;
+    static background;
+    static modalBox;
     buttons = [];
     
-    constructor(mensagem="Hello World!!", buttons = []){
-        this.modalBox = new ModalBox();
-        this.background = new BackGroundModal(this.modalBox);
-        
+    constructor(mensagem="Hello World!!", buttons = [new Buttom()], form=false, formulario=null, action="#", method="post", modalClasses=["modal-box"], colorModal="white",backgroundColor="#59ff0a7a"){
+        Modal.modalBox = new ModalBox(buttons, form, formulario, action, method, mensagem,  modalClasses, colorModal);
+        Modal.background = new BackGroundModal(Modal.modalBox, backgroundColor);
     }
 
     GetBackground(){
-        return this.background;
+        return Modal.background;
     }
 
     Render(){
-        document.body.appendChild(this.background.getSelf())
+        document.body.appendChild(Modal.background.getSelf())
     }
     
 
-
+    static closeModel(functi){
+        if (Modal.background) {
+            functi();
+            this.background.self.remove();
+        }
+    }
 
 }
 

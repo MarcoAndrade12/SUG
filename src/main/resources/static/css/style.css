@@ -11,6 +11,10 @@
     background-color: black;
 }
 
+.bg-grey {
+    background-color: grey;
+}
+
 .bg-green {
     background-color: #155b36;
 }
@@ -34,7 +38,7 @@
     width: 98%;
     height: 98%;
     overflow: hidden;
-    background-color: antiquewhite;
+    background-color: #f8ffcf;
 }
 
 .flex {
@@ -45,6 +49,10 @@
     justify-content: center;
 }
 
+.txt-center {
+    text-align: center;
+}
+
 .ac {
     align-items: center;
 }
@@ -52,6 +60,8 @@
 .row {
     flex-direction: row;
 }
+
+
 
 .col {
     flex-direction: column;
@@ -87,15 +97,24 @@
     max-width: 350px;
 }
 
+.input-modal {
+    width: 20em;
+    border-style: double;
+}
+
 .btn {
     border-radius: 1rem;
     border-style: unset;
     margin: 10px 3px;
     height: 30px;
     width: 60%;
-    min-width: fit-content;
+    min-width: 60px;
     padding-left: 10px;
     max-width: 350px;
+}
+
+.width-content {
+    width: auto;
 }
 
 .success {
@@ -104,11 +123,23 @@
     transition: all 0.5s;
 }
 
+.danger {
+    background-color: #992525;
+    color: white;
+    transition: all 0.5s;
+}
+
+.attent {
+    background-color: #e1ff3a;
+    color: rgb(0, 0, 0);
+    transition: all 0.5s;
+}
+
 .margin-left-1 {
     margin-left: 10px;
 }
 
-.success:hover {
+.success:hover, .danger:hover {
     transform: scale(1.05);
     background-color: cadetblue;
     cursor: pointer;
@@ -136,6 +167,12 @@
     width: auto;
     height: auto;
     border-radius: 1rem;
+    max-width: min-content;
+}
+
+.btn:active {
+    transform: scale(0.90);
+    transform: translate(0, 2px);
 }
 
 @media screen and (max-width: 1150px) {
