@@ -3,6 +3,7 @@ package com.SUG.FLORA.configuration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,9 @@ import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.model.Profile;
 import com.SUG.FLORA.model.Usuario;
+import com.SUG.FLORA.repository.ProfileRepository;
 import com.SUG.FLORA.repository.UsuarioRepository;
+import com.SUG.FLORA.services.UsuarioService;
 
 
 @Configuration
@@ -38,52 +41,53 @@ public class SecurityConfiguration {
 	@Autowired
 	private JwtUserDetailsService jwtUserDetailsService;
 
+    @Autowired
+    ProfileRepository profileRepository;
+
+    @Autowired
+    UsuarioService usuarioService;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-        
-        authenticationManager = authenticationManagerBuilder.build();
+        http.csrf( t -> t.disable());
 
         http
-        .csrf()
-        .disable()
-		.authorizeHttpRequests()
-		.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**", "/printer/**" , "/teste.html", "/index.html", "/index_agent.html",  "/topic/", "/ws", "/report/**",
-					 "/chat/**").permitAll()
-		.anyRequest().authenticated()
-        .and()       
-		.formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/index", true))
-		.logout(logout -> logout.logoutUrl("/logout"))		
-		.authenticationManager(authenticationManager)
-		.sessionManagement().maximumSessions(1)
-		.maxSessionsPreventsLogin(true)
-		.expiredUrl("/login");
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**", "/icon/**", "/printer/**" , "/teste.html", "/index.html", "/index_agent.html",  "/topic/", "/ws", "/report/**",
+                "/chat/**").permitAll()
+                .requestMatchers("/index").authenticated()
+                .anyRequest().authenticated()
+            )
+            .formLogin((formLogin) ->
+                formLogin
+                    .loginPage("/login").permitAll()
+                    .loginProcessingUrl("/login").permitAll()
+                    .defaultSuccessUrl("/index")
+            );  
+
+            http.userDetailsService((UserDetailsService) usuarioService);
         
         confnewAdminInMemory();
 
         return http.build();
 
-        
     }
 
-    public void confnewAdminInMemory(){
-        List<Usuario> usuarios = usuarioRepository.findAll();
+    public void confnewAdminInMemory() throws Exception{
+        if (usuarioRepository.findAll().size() == 0) {
 
-        if (usuarios.isEmpty()) {
-            List<Profile> profiles = new ArrayList<>();
-            
-            Profile prof = new Profile();
-            prof.setName("ADMIN");
-            prof.setCreationDate(LocalDateTime.now());
-            
-            profiles.add(prof);
+            Profile profile = profileRepository.findByName("ROLE_ADMIN");
 
-
+            if ( profile == null) {
+                profile = new Profile();
+                profile.setName("ADMIN");
+            } 
+                
             Usuario u = new Usuario();
-            u.setEmail("teste@teste.com");
-            u.setSenha(passwordEncoder().encode("123"));
+            u.setEmail("admin@admin.com");
+            u.setSenha(passwordEncoder().encode("admin"));
             u.setCpf("132");
             u.setRg("20251256");
             u.setNome("Teste");
@@ -91,12 +95,19 @@ public class SecurityConfiguration {
             u.setSexo(EnumSexo.MASCULINO);
             u.setStatus(EnumStatusUsuario.ATIVO);
             u.setConsentimento(true);
-            u.setProfiles(profiles);
+            u.setProfile(profile);
+            
+            try {
+                usuarioRepository.save(u);
+            } catch (Exception e) {
+                System.out.println("Erro ao salvar usuário");
+            }
 
-            System.out.println(u);
-            usuarioRepository.save(u);
+
 
         }
+        
+
     }
 
     public BCryptPasswordEncoder passwordEncoder(){

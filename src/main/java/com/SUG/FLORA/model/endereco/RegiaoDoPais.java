@@ -2,11 +2,11 @@ package com.SUG.FLORA.model.endereco;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.enums.EnumRegiao;
 import com.SUG.FLORA.model.Domain;

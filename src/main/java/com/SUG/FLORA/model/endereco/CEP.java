@@ -1,7 +1,7 @@
 package com.SUG.FLORA.model.endereco;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 
 import com.SUG.FLORA.model.Domain;
 

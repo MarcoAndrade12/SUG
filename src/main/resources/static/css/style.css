@@ -57,6 +57,19 @@
     align-items: center;
 }
 
+.self-align-rigth {
+    align-self: flex-end;
+}
+
+.rigth-nav {
+    display: flex;
+    width: -webkit-fill-available;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .row {
     flex-direction: row;
 }
@@ -109,8 +122,22 @@
     height: 30px;
     width: 60%;
     min-width: 60px;
-    padding-left: 10px;
+    padding-left: 5px;
     max-width: 350px;
+}
+
+.btn-nav {
+    border-radius: 1rem;
+    border-style: unset;
+    margin: 10px 3px;
+    height: 30px;
+    width: 60%;
+    min-width: 60px;
+    padding-left: 10px 0px;
+    max-width: 350px;
+    background-color: cadetblue;
+    color: white;
+    transition: all 0.5s;
 }
 
 .width-content {
@@ -139,10 +166,38 @@
     margin-left: 10px;
 }
 
-.success:hover, .danger:hover {
+.success:hover, .danger:hover{
     transform: scale(1.05);
     background-color: cadetblue;
     cursor: pointer;
+}
+
+.btn-nav:hover  {
+    transform: scale(1.05);
+    background-color: rgb(67, 115, 116);
+    border-bottom-style: outset;
+    cursor: pointer;
+}
+
+.icon:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0) rotate(0deg);}
+    25% { 
+        transform: translateX(-2px) rotate(-5deg)
+    }
+    50% { transform: translateX(2px) rotate(5deg)}
+    75% { transform: translateX(-2px) rotate(-5deg) }
+    100% { transform: translateX(0) rotate(5deg) }
+  }
+
+.icon {
+    width: 2rem;
+    margin-left: 5px;
 }
 
 .link-alert {
@@ -175,6 +230,41 @@
     transform: translate(0, 2px);
 }
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: flex-start;
+    width: 99vw;
+    height: 6vh;
+    background-color: cadetblue;
+    align-items: center;
+    padding: 5px;
+    gap: 5px;
+    position: static;
+}
+
+
+@media screen and (min-width: 490px) {
+    .icon-burguer {
+        display: none;
+    }
+
+}
+@media screen and (max-width: 491px) {
+    .link-nav {
+        display: none;
+    }
+
+    .icon-sug {
+        display: none;
+    }
+
+
+}
+
+
 @media screen and (max-width: 1150px) {
     
     .img-bg-left-mid {
@@ -197,4 +287,5 @@
         background-image: radial-gradient(circle at 118px 127px, white, transparent 110px);
     
     }
+    
 }

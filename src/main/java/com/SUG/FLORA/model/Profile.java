@@ -1,19 +1,20 @@
 package com.SUG.FLORA.model;
 
-import javax.persistence.Entity;
-
 import org.springframework.security.core.GrantedAuthority;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@EqualsAndHashCode(callSuper=false)
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class Profile extends Domain implements GrantedAuthority{
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(unique=true, nullable=false)
 	private String name;
 
 	public String getName() {
@@ -21,7 +22,7 @@ public class Profile extends Domain implements GrantedAuthority{
 	}
 
 	public void setName(String nome) {
-		this.name = nome;
+		this.name = "ROLE_" + nome;
 	}
 
 	@Override

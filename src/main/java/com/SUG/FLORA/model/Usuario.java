@@ -4,34 +4,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.model.endereco.Endereco;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class Usuario extends Domain implements UserDetails{
 
     @Column(nullable = false, unique = true)
@@ -39,15 +39,12 @@ public class Usuario extends Domain implements UserDetails{
     @Column(nullable = false, unique = false)
     private String senha;
     
-    
-	@ManyToMany(cascade = { CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
-	@JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "profile_id"))
-	private List<Profile> profiles = new ArrayList<Profile>();
-
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id", nullable = true, unique = false)
+	private Profile profile;
 
     @Column(nullable = false, unique = false)
     private boolean consentimento;
-
 
     @Column(nullable = false, unique = false)
     private String nome;
@@ -76,6 +73,8 @@ public class Usuario extends Domain implements UserDetails{
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<Profile> profiles = new ArrayList<>();
+        profiles.add(getProfile());
         return profiles;
     }
 
