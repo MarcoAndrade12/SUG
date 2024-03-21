@@ -6,6 +6,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.DTOs.EnderecoDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,4 +45,23 @@ public class Endereco extends Domain{
     @ManyToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
+
+    public EnderecoDTO getDTO() {
+        EnderecoDTO DTO = new EnderecoDTO();
+        DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+        DTO.setNumero_casa(numero_casa);
+        DTO.setComplemento(complemento);
+        DTO.setPais(pais.getDTO());
+        DTO.setEstado(estado.getDTO());
+        DTO.setCidade(cidade.getDTO());
+        DTO.setBairro(bairro.getDTO());
+        DTO.setLogradouro(logradouro.getDTO());
+        DTO.setCep(cep.getDTO());
+
+        return DTO;
+    }
 }

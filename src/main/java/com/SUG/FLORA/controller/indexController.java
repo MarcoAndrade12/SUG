@@ -28,9 +28,10 @@ public class indexController {
     @GetMapping("/index")
     public String getPage(@AuthenticationPrincipal Usuario usuario){
 
-        System.out.println(usuario.getProfile());
+        boolean isAdmin = usuario.getAuthorities()
+            .stream().anyMatch(profile -> profile.equals("ROLE_ADMIN"));
 
-        if (usuario.getProfile().getName().equals("ROLE_ADMIN")) {
+        if (isAdmin) {
             return "admin/index_admin";
         }
 

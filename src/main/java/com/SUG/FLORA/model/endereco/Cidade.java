@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.DTOs.CidadeDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,5 +24,18 @@ public class Cidade extends Domain{
     @OneToMany
     @JoinColumn(name="cidade_id")
     private List<Bairro> bairros;
+
+    public CidadeDTO getDTO() {
+        CidadeDTO DTO = new CidadeDTO();
+        DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+        DTO.setNome(nome);
+        DTO.setBairros(bairros.stream().map(bairro -> bairro.getDTO()).toList());
+
+        return DTO;
+    }
 
 }

@@ -2,6 +2,8 @@ package com.SUG.FLORA.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.SUG.FLORA.model.DTOs.ProfileDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -30,5 +32,15 @@ public class Profile extends Domain implements GrantedAuthority{
 		return getName();
 	}
 	
+	public ProfileDTO getDTO(){
+		ProfileDTO DTO = new ProfileDTO();
+		DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+		DTO.setName(name);
+		return DTO;
+	}
 	
 }

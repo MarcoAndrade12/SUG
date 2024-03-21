@@ -95,7 +95,7 @@ public class SecurityConfiguration {
             u.setSexo(EnumSexo.MASCULINO);
             u.setStatus(EnumStatusUsuario.ATIVO);
             u.setConsentimento(true);
-            u.setProfile(profile);
+            u.getProfiles().add(profile);;
             
             try {
                 usuarioRepository.save(u);

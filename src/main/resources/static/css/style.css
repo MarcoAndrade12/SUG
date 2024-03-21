@@ -19,6 +19,15 @@
     background-color: #155b36;
 }
 
+.bg-white {
+    background-color: white;
+}
+
+.bg-creme {
+    background-color: #f8ffcf;
+
+}
+
 .container-fillW {
     width: 100vw;
     height: 98vh;
@@ -38,7 +47,6 @@
     width: 98%;
     height: 98%;
     overflow: hidden;
-    background-color: #f8ffcf;
 }
 
 .flex {

@@ -9,6 +9,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.DTOs.PaisDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +36,19 @@ public class Pais extends Domain{
     @OneToMany
     @JoinColumn(name = "pais_id")
     private List<Estado> estados;
+
+    public PaisDTO getDTO() {
+        PaisDTO DTO = new PaisDTO();
+        DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+        DTO.setNome(nome);
+        DTO.setSigla(sigla);
+        DTO.setRegioes(regioes.stream().map(regiao -> regiao.getDTO()).toList());
+        DTO.setEstados(estados.stream().map(estado -> estado.getDTO()).toList());
+
+        return DTO;
+    }
 }

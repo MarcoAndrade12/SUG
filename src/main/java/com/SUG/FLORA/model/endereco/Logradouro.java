@@ -9,6 +9,7 @@ import jakarta.persistence.OneToOne;
 
 import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,4 +27,18 @@ public class Logradouro extends Domain{
     @OneToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
+
+    public LogradouroDTO getDTO() {
+        LogradouroDTO DTO = new LogradouroDTO();
+        DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+        DTO.setTipo(tipo);
+        DTO.setNome(nome);
+        DTO.setCep(cep.getDTO());
+        
+        return DTO;
+    }
 }

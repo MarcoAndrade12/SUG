@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.enums.EnumRegiao;
 import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.DTOs.RegiaoDoPaisDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,19 @@ public class RegiaoDoPais extends Domain{
     @OneToMany
     @JoinColumn(name = "regiao_id")
     private List<Estado> estados;
+
+    public RegiaoDoPaisDTO getDTO() {
+        RegiaoDoPaisDTO DTO = new RegiaoDoPaisDTO();
+        DTO.setId(getId());
+		DTO.setCreationDate(getCreationDate());
+		DTO.setDeleted(isDeleted());
+		DTO.setDeletedDate(getDeletedDate());
+
+        DTO.setNome(nome);
+        DTO.setEstados(estados.stream().map(estado -> estado.getDTO()).toList());
+
+        return DTO;
+    }
 
 
 }

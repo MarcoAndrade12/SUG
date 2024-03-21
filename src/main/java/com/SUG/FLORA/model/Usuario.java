@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
+import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.model.endereco.Endereco;
 
 import jakarta.persistence.CascadeType;
@@ -23,6 +24,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -39,9 +42,9 @@ public class Usuario extends Domain implements UserDetails{
     @Column(nullable = false, unique = false)
     private String senha;
     
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinColumn(name = "profile_id", nullable = true, unique = false)
-	private Profile profile;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
+    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name="usuario_id"), inverseJoinColumns = @JoinColumn(name="profile_id"))
+    private List<Profile> profiles = new ArrayList<>();
 
     @Column(nullable = false, unique = false)
     private boolean consentimento;
@@ -71,10 +74,32 @@ public class Usuario extends Domain implements UserDetails{
     private Endereco endereco;
     
     
+    public UsuarioDTO getDTO(){
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(getId());
+        usuarioDTO.setCreationDate(getCreationDate());
+        usuarioDTO.setDeleted(isDeleted());
+        usuarioDTO.setDeletedDate(getDeletedDate());
+        usuarioDTO.setEmail(email);
+        usuarioDTO.setProfiles(profiles.stream().map(profile -> profile.getDTO()).toList());
+        usuarioDTO.setConsentimento(consentimento);
+        usuarioDTO.setNome(nome);
+        usuarioDTO.setSobrenome(sobrenome);
+        usuarioDTO.setRg(rg);
+        usuarioDTO.setCpf(cpf);
+        usuarioDTO.setSexo(sexo);
+        usuarioDTO.setStatus(status);
+
+        if (endereco != null) {
+            usuarioDTO.setEndereco(endereco.getDTO());
+        }
+
+
+        return usuarioDTO;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<Profile> profiles = new ArrayList<>();
-        profiles.add(getProfile());
         return profiles;
     }
 

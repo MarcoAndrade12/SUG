@@ -11,7 +11,7 @@ import com.SUG.FLORA.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, UUID>{
 	
-	List<Usuario> findByDeletedFalse();
+	List<Usuario> findAllByDeletedFalse();
 
 	Usuario findByEmailAndDeletedFalse(String username);
 
