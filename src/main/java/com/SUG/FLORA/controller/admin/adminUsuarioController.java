@@ -1,4 +1,4 @@
-package com.SUG.FLORA.controller;
+package com.SUG.FLORA.controller.admin;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
-import com.SUG.FLORA.repository.UsuarioRepository;
 import com.SUG.FLORA.services.UsuarioService;
 
 import org.springframework.ui.Model;

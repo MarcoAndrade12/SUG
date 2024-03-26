@@ -14,7 +14,7 @@ public class LoginController {
     @Autowired
     private SecurityConfiguration securityConfiguration;
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String getLogin() {
 
         System.out.println("GET");
