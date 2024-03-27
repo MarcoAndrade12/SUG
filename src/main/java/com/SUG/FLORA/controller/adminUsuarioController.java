@@ -31,5 +31,16 @@ public class adminUsuarioController {
         return "admin/usuarios_admin";
     }
 
+    @GetMapping("/cadastro_usuario")
+    public String getPageNovoUsuario(){
+        return "admin/novo_usuario_admin";
+    }
+
+    @GetMapping("/editar_usuario")
+    public String getPageEditarUsuario(){
+        return "admin/editar_usuario_admin";
+    }
+    
+
 
 }
