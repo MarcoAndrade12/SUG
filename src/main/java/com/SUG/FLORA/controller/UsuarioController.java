@@ -15,32 +15,29 @@ import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/usuarios")
-public class adminUsuarioController {
+public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
-    
+
     @GetMapping("")
-    public String getPage(Model model){
+    public String getPage(Model model) {
 
         List<UsuarioDTO> usuariosDTOs = usuarioService.findAllUsuariosDTOsByDeletedFalse();
 
         model.addAttribute("usuarios", usuariosDTOs);
-        
 
         return "admin/usuarios_admin";
     }
 
-    @GetMapping("/cadastro_usuario")
-    public String getPageNovoUsuario(){
+    @GetMapping("cadastrar")
+    public String getPageNovoUsuario() {
         return "admin/novo_usuario_admin";
     }
 
-    @GetMapping("/editar_usuario")
-    public String getPageEditarUsuario(){
+    @GetMapping("editar")
+    public String getPageEditarUsuario() {
         return "admin/editar_usuario_admin";
     }
-    
-
 
 }

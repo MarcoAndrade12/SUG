@@ -24,12 +24,12 @@ public class indexController {
 
     @Autowired
     ProfileRepository profileRepository;
-    
-    @GetMapping("/index")
-    public String getPage(@AuthenticationPrincipal Usuario usuario){
+
+    @GetMapping("index")
+    public String getPage(@AuthenticationPrincipal Usuario usuario) {
 
         boolean isAdmin = usuario.getAuthorities()
-            .stream().anyMatch(profile -> profile.equals("ROLE_ADMIN"));
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin) {
             return "admin/index_admin";
@@ -37,6 +37,5 @@ public class indexController {
 
         return "index";
     }
-
 
 }
