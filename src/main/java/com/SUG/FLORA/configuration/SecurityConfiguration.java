@@ -64,7 +64,7 @@ public class SecurityConfiguration {
                 formLogin
                     .loginPage("/login").permitAll()
                     .loginProcessingUrl("/login").permitAll()
-                    .defaultSuccessUrl("/index")
+                    .defaultSuccessUrl("/index", true)
             );  
 
             http.userDetailsService((UserDetailsService) usuarioService);

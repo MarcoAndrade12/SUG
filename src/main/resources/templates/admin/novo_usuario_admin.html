@@ -11,150 +11,167 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
+    <script src="/js/recursos/formSerializer.js"></script>
     <title>Sug-Flora</title>
 
 <body>
 
-    <nav th:replace="fragments/navbarAdmin :: navbarAdmin"></nav>
+    <nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
 
 
-    <form class="row g-3 needs-validation m-5" novalidate>
-        <h2 for="validationCustom03" class="form-label">Dados</h2>
+    <form class="row g-3 needs-validation m-5" action="/usuarios" method="post" id="form">
+        <section class="row g-3" id="Usuario">
+            <h2 for="validationCustom03" class="form-label">Dados</h2>
 
-        <div class="col-md-4">
-            <label for="validationCustom01" class="form-label">Primeiro Nome</label>
-            <input type="text" class="form-control" id="nome" placeholder="Primeiro nome do usuário" required>
-            <div class="valid-feedback">
-                Tudo certo aqui!
-            </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationCustom02" class="form-label">Sobrenome</label>
-            <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome do usuário" required>
-            <div class="valid-feedback">
-                Tudo certo aqui também!
-            </div>
-        </div>
 
-        <div class="col-md-4">
-            <label for="validationCustomUsername" class="form-label">Email</label>
-            <div class="input-group has-validation">
-                <input type="text" class="form-control" id="email" placeholder="emailaqui" required>
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" class="form-control" id="dominio" placeholder="dominio.com" required>
-                <div class="invalid-feedback">
-                    Por favor, seu email aqui.
+            <div class="col-md-4">
+                <label for="validationCustom01" class="form-label">Primeiro Nome</label>
+                <input type="text" class="form-control" id="nome" placeholder="Primeiro nome do usuário" required>
+                <div class="valid-feedback">
+                    Tudo certo aqui!
                 </div>
             </div>
-        </div>
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome do usuário" required>
+                <div class="valid-feedback">
+                    Tudo certo aqui também!
+                </div>
+            </div>
 
-        <div class="col-md-4">
-            <label for="validationCustom02" class="form-label">RG</label>
-            <input type="text" class="form-control" id="rg" placeholder="Número do RG do usuário" required>
-            <div class="valid-feedback">
-                Tudo certo aqui também!
+            <div class="col-md-4">
+                <label for="validationCustomUsername" class="form-label">Email</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="email" placeholder="emailaqui" required>
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" class="form-control" id="dominio" placeholder="dominio.com" required>
+                    <div class="invalid-feedback">
+                        Por favor, seu email aqui.
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationCustom02" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf" placeholder="Número do CPF do usuário" required>
-            <div class="valid-feedback">
-                Tudo certo aqui também!
+
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">RG</label>
+                <input type="text" class="form-control" id="rg" placeholder="Número do RG do usuário" required>
+                <div class="valid-feedback">
+                    Tudo certo aqui também!
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <label for="validationCustom04" class="form-label">Sexo</label>
-            <select class="form-select" id="pais" required>
-                <option selected disabled value="">Selecione...</option>
-                <option>Masculino</option>
-                <option>Feminino</option>
-            </select>
-            <div class="invalid-feedback">
-                Selecione um sexo válido.
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" placeholder="Número do CPF do usuário" required>
+                <div class="valid-feedback">
+                    Tudo certo aqui também!
+                </div>
             </div>
-        </div>
-        
+            <div class="col-md-4">
+                <label for="validationCustom04" class="form-label">Sexo</label>
+                <select class="form-select" id="pais" required>
+                    <option selected disabled value="">Selecione...</option>
+                    <option>Masculino</option>
+                    <option>Feminino</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um sexo válido.
+                </div>
+            </div>
+        </section>
+
+
         <hr>
-        <h2 for="validationCustom03" class="form-label">Endereço</h2>
+        <section class="row g-3" id="Endereco">
+            <h2 for="validationCustom03" class="form-label">Endereço</h2>
 
-        <div class="col-md-2">
-            <label for="validationCustom04" class="form-label">País</label>
-            <select class="form-select" id="pais" required>
-                <option selected disabled value="">Selecione...</option>
-                <option>Brasil</option>
-            </select>
-            <div class="invalid-feedback">
-                Selecione um país válido.
-            </div>
-        </div>
+            <section id="teste"><h1>teste</h1></section>
 
-        <div class="col-md-2">
-            <label for="validationCustom04" class="form-label">Estado</label>
-            <select class="form-select" id="estado" required>
-                <option selected disabled value="">Selecione...</option>
-                <option>São Paulo</option>
-            </select>
-            <div class="invalid-feedback">
-                Selecione um estado válido.
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <label for="validationCustom04" class="form-label">Tipo Logradouro</label>
-            <select class="form-select" id="tipo_logradouro" required>
-                <option selected disabled value="">Selecione...</option>
-                <option>Rua</option>
-                <option>Avenida</option>
-                <option>Travessa</option>
-                <option>Estrada</option>
-            </select>
-            <div class="invalid-feedback">
-                Selecione um tipo de logradouro válido.
-            </div>
-        </div>
-
-        <div class="col-md-5">
-            <label for="validationCustom04" class="form-label">Logradouro</label>
-            <select class="form-select" id="logradouro" required>
-                <option selected disabled value="">Selecione...</option>
-                <option>Armênia</option>
-            </select>
-            <div class="invalid-feedback">
-                Selecione um estado válido.
-            </div>
-        </div>
-
-        <div class="col-md-1">
-            <label for="validationCustom03" class="form-label">Número</label>
-            <input type="number" class="form-control" id="numero" required>
-            <div class="invalid-feedback">
-                Insira o número do logradouro.
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <label for="validationCustom03" class="form-label">CEP</label>
-            <input type="text" class="form-control" id="cep" required>
-            <div class="invalid-feedback">
-                Insira o número do logradouro.
-            </div>
-        </div>
-
-
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                <label class="form-check-label" for="invalidCheck">
-                    Eu aceito os termos.
-                </label>
+            <div class="col-md-2">
+                <label for="validationCustom04" class="form-label">País</label>
+                <select class="form-select" id="pais" required>
+                    <option selected disabled value="">Selecione...</option>
+                    <option>Brasil</option>
+                </select>
                 <div class="invalid-feedback">
-                    Você precisa aceitar os termos antes de proceguir.  
+                    Selecione um país válido.
                 </div>
             </div>
-        </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom04" class="form-label">Estado</label>
+                <select class="form-select" id="estado" required>
+                    <option selected disabled value="">Selecione...</option>
+                    <option>São Paulo</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um estado válido.
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <label for="validationCustom04" class="form-label">Tipo</label>
+                <select class="form-select" id="tipo_logradouro" required>
+                    <option selected disabled value="">Selecione...</option>
+                    <option>Rua</option>
+                    <option>Avenida</option>
+                    <option>Travessa</option>
+                    <option>Estrada</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um tipo de logradouro válido.
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <label for="validationCustom04" class="form-label">Logradouro</label>
+                <select class="form-select" id="logradouro" required>
+                    <option selected disabled value="">Selecione...</option>
+                    <option>Armênia</option>
+                </select>
+                <div class="invalid-feedback">
+                    Selecione um estado válido.
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <label for="validationCustom03" class="form-label">Número</label>
+                <input type="number" class="form-control" id="numero" required>
+                <div class="invalid-feedback">
+                    Insira o número do logradouro.
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom03" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="numero" required>
+                <div class="invalid-feedback">
+                    Insira o complemento do logradouro.
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="validationCustom03" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="cep" required>
+                <div class="invalid-feedback">
+                    Insira o número do logradouro.
+                </div>
+            </div>
+
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                        Eu aceito os termos.
+                    </label>
+                    <div class="invalid-feedback">
+                        Você precisa aceitar os termos antes de proceguir.
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Enviar</button>
+            <button class="btn btn-primary" type="button" onclick="FormSerializer(form)">Enviar</button>
         </div>
     </form>
 
