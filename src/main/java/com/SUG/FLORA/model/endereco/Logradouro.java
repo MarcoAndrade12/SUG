@@ -8,15 +8,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 import com.SUG.FLORA.enums.EnumTipoLogradouro;
+import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Domain;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
+import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
 @Entity
-@Getter
-@Setter
-public class Logradouro extends Domain{
+@Data
+public class Logradouro extends Domain implements DTOConvertible {
 
     @Enumerated(EnumType.STRING)
     private EnumTipoLogradouro tipo;
@@ -28,17 +29,21 @@ public class Logradouro extends Domain{
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
     private CEP cep;
 
+    @Override
     public LogradouroDTO getDTO() {
         LogradouroDTO DTO = new LogradouroDTO();
         DTO.setId(getId());
-		DTO.setCreationDate(getCreationDate());
-		DTO.setDeleted(isDeleted());
-		DTO.setDeletedDate(getDeletedDate());
+        DTO.setCreationDate(getCreationDate());
+        DTO.setDeleted(isDeleted());
+        DTO.setDeletedDate(getDeletedDate());
+
+        TipoLogradouroDTO tipo = new TipoLogradouroDTO();
+        tipo.setTipo(tipo.getTipo());
 
         DTO.setTipo(tipo);
         DTO.setNome(nome);
         DTO.setCep(cep.getDTO());
-        
+
         return DTO;
     }
 }

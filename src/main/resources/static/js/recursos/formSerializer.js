@@ -1,48 +1,43 @@
-function DivSerializer (sessaoSerializer, div) {
+function DivSerializer (json, div) {
     div = Array.from(div.children);
     div.forEach(tag => {
         if (tag.localName === 'input') {
-            sessaoSerializer[tag.id] = document.getElementById(tag.id).value;
+            json[tag.id] = document.getElementById(tag.id).value;
+        } else if (tag.localName === 'select') {
+            SelectSerializer(json, tag);
         } else if (tag.localName === 'section'){
-            sessaoSerializer[tag.id] = SessaoSerializer(tag);
+            json[tag.id] = FormSerializer({}, tag);
         } else if (tag.localName === 'div'){
-            DivSerializer(sessaoSerializer, tag);   
+            DivSerializer(json, tag);   
         }});
 }
 
-function SessaoSerializer(sessao) {
-    childrens = Array.from(sessao.children);
-    let sessaoSerializer = {};
+function SelectSerializer(json, select) {
+    options = Array.from(select.children);
+    options.forEach(option => {
+        if (option.selected) {
+            json[select.id] = select.value;
+        }
+    })
+}
+
+function FormSerializer(json, form) {
+
+    var childrens = Array.from(form.children);
+
 
     childrens.forEach(tag => {
-        
         if (tag.localName === 'input') {
-            sessaoSerializer[tag.id] = document.getElementById(tag.id).value;
+            json[tag.id] = document.getElementById(tag.id).value;
+        } else if (tag.localName === 'select') {
+            SelectSerializer(json, tag);
         } else if (tag.localName === 'section'){
-            sessaoSerializer[tag.id] = SessaoSerializer(tag);
+            json[tag.id] = FormSerializer({}, tag);
         } else if (tag.localName === 'div'){
-            DivSerializer(sessaoSerializer, tag);
+            DivSerializer(json, tag);
         }
     });
 
-    console.log(sessaoSerializer);
-    return sessaoSerializer;
-}
-
-
-function FormSerializer(formulario) {
-
-    sessoes =  Array.from(formulario.children).filter(children => children.localName === 'section');
-    console.log(formulario);
-    var serializer = {};
-
-    sessoes.forEach(sessao => {
-        serializer[sessao.id] = SessaoSerializer(sessao);
-    });
-
-    console.log(serializer);
-
-    return serializer;
-
+    return json;
 }
 

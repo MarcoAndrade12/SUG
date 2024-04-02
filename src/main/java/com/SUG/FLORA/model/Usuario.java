@@ -7,13 +7,15 @@ import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.SexoDTO;
+import com.SUG.FLORA.model.DTOs.StatusDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.model.endereco.Endereco;
 
@@ -35,15 +37,15 @@ import lombok.ToString;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Usuario extends Domain implements UserDetails{
+public class Usuario extends Domain implements UserDetails, DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, unique = false)
     private String senha;
-    
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name="usuario_id"), inverseJoinColumns = @JoinColumn(name="profile_id"))
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private List<Profile> profiles = new ArrayList<>();
 
     @Column(nullable = false, unique = false)
@@ -72,9 +74,9 @@ public class Usuario extends Domain implements UserDetails{
     @OneToOne
     @JoinColumn(name = "endereco_id", nullable = true, unique = false)
     private Endereco endereco;
-    
-    
-    public UsuarioDTO getDTO(){
+
+    @Override
+    public UsuarioDTO getDTO() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(getId());
         usuarioDTO.setCreationDate(getCreationDate());
@@ -87,13 +89,19 @@ public class Usuario extends Domain implements UserDetails{
         usuarioDTO.setSobrenome(sobrenome);
         usuarioDTO.setRg(rg);
         usuarioDTO.setCpf(cpf);
-        usuarioDTO.setSexo(sexo);
-        usuarioDTO.setStatus(status);
+
+        SexoDTO sexoDTO = new SexoDTO();
+        sexoDTO.setNome(sexo.name());
+        usuarioDTO.setSexo(sexoDTO);
+
+        StatusDTO statusDTO = new StatusDTO();
+        statusDTO.setStatus(status.name());
+
+        usuarioDTO.setStatus(statusDTO);
 
         if (endereco != null) {
             usuarioDTO.setEndereco(endereco.getDTO());
         }
-
 
         return usuarioDTO;
     }
@@ -115,7 +123,7 @@ public class Usuario extends Domain implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;    
+        return true;
     }
 
     @Override
@@ -133,6 +141,4 @@ public class Usuario extends Domain implements UserDetails{
         return true;
     }
 
-   
-    
 }

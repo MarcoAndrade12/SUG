@@ -5,25 +5,24 @@ import java.util.UUID;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
+import com.SUG.FLORA.interfaces.DTO;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class UsuarioDTO extends DomainDTO{
+@Data
+public class UsuarioDTO extends DomainDTO implements DTO {
 
-    private String email;
-    private List<ProfileDTO> profiles;
-    private boolean consentimento;
     private String nome;
     private String sobrenome;
     private String rg;
     private String cpf;
-    private EnumSexo sexo;
-    private EnumStatusUsuario status;
+    private SexoDTO sexo;
+    private String email;
+    private List<ProfileDTO> profiles;
     private EnderecoDTO endereco;
-    
+    private StatusDTO status;
+    private boolean consentimento;
 
 }

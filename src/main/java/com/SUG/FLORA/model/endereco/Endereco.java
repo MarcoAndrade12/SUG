@@ -13,8 +13,8 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class Endereco extends Domain{
+@EqualsAndHashCode(callSuper = false)
+public class Endereco extends Domain {
 
     @Column(nullable = false, unique = false)
     private int numero_casa;
@@ -49,11 +49,11 @@ public class Endereco extends Domain{
     public EnderecoDTO getDTO() {
         EnderecoDTO DTO = new EnderecoDTO();
         DTO.setId(getId());
-		DTO.setCreationDate(getCreationDate());
-		DTO.setDeleted(isDeleted());
-		DTO.setDeletedDate(getDeletedDate());
+        DTO.setCreationDate(getCreationDate());
+        DTO.setDeleted(isDeleted());
+        DTO.setDeletedDate(getDeletedDate());
 
-        DTO.setNumero_casa(numero_casa);
+        DTO.setNumero(numero_casa);
         DTO.setComplemento(complemento);
         DTO.setPais(pais.getDTO());
         DTO.setEstado(estado.getDTO());

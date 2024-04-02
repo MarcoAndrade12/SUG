@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
+import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Domain;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
 
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Estado extends Domain{
+public class Estado extends Domain implements DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -31,9 +32,9 @@ public class Estado extends Domain{
     public EstadoDTO getDTO() {
         EstadoDTO DTO = new EstadoDTO();
         DTO.setId(getId());
-		DTO.setCreationDate(getCreationDate());
-		DTO.setDeleted(isDeleted());
-		DTO.setDeletedDate(getDeletedDate());
+        DTO.setCreationDate(getCreationDate());
+        DTO.setDeleted(isDeleted());
+        DTO.setDeletedDate(getDeletedDate());
 
         DTO.setNome(nome);
         DTO.setSigla(sigla);

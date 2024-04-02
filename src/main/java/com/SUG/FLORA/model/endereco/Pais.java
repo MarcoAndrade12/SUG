@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
+import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Domain;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
 
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Pais extends Domain{
+public class Pais extends Domain implements DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -26,23 +27,20 @@ public class Pais extends Domain{
     private String sigla;
 
     @OneToMany
-    @JoinTable(
-        name = "pais_ass_regioes",
-        joinColumns = @JoinColumn(name="pais_id"),
-        inverseJoinColumns = @JoinColumn(name="regiao_id")
-    )
+    @JoinTable(name = "pais_ass_regioes", joinColumns = @JoinColumn(name = "pais_id"), inverseJoinColumns = @JoinColumn(name = "regiao_id"))
     private List<RegiaoDoPais> regioes;
-    
+
     @OneToMany
     @JoinColumn(name = "pais_id")
     private List<Estado> estados;
 
+    @Override
     public PaisDTO getDTO() {
         PaisDTO DTO = new PaisDTO();
         DTO.setId(getId());
-		DTO.setCreationDate(getCreationDate());
-		DTO.setDeleted(isDeleted());
-		DTO.setDeletedDate(getDeletedDate());
+        DTO.setCreationDate(getCreationDate());
+        DTO.setDeleted(isDeleted());
+        DTO.setDeletedDate(getDeletedDate());
 
         DTO.setNome(nome);
         DTO.setSigla(sigla);

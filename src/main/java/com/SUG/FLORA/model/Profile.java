@@ -2,6 +2,7 @@ package com.SUG.FLORA.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.ProfileDTO;
 
 import jakarta.persistence.Column;
@@ -11,12 +12,12 @@ import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class Profile extends Domain implements GrantedAuthority{
+@EqualsAndHashCode(callSuper = false)
+public class Profile extends Domain implements GrantedAuthority, DTOConvertible {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String name;
 
 	public String getName() {
@@ -31,8 +32,9 @@ public class Profile extends Domain implements GrantedAuthority{
 	public String getAuthority() {
 		return getName();
 	}
-	
-	public ProfileDTO getDTO(){
+
+	@Override
+	public ProfileDTO getDTO() {
 		ProfileDTO DTO = new ProfileDTO();
 		DTO.setId(getId());
 		DTO.setCreationDate(getCreationDate());
@@ -42,5 +44,5 @@ public class Profile extends Domain implements GrantedAuthority{
 		DTO.setName(name);
 		return DTO;
 	}
-	
+
 }
