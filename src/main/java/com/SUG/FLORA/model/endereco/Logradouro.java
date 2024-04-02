@@ -14,9 +14,11 @@ import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class Logradouro extends Domain implements DTOConvertible {
 
     @Enumerated(EnumType.STRING)

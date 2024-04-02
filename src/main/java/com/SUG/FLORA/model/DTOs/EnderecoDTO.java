@@ -1,6 +1,5 @@
 package com.SUG.FLORA.model.DTOs;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

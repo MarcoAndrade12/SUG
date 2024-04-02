@@ -15,4 +15,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UUID>{
 
 	Usuario findByEmailAndDeletedFalse(String username);
 
+    Usuario findByEmail(String email);
+
 }

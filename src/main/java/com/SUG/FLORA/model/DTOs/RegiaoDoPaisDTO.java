@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.SUG.FLORA.enums.EnumRegiao;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

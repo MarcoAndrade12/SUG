@@ -1,4 +1,4 @@
-package com.SUG.FLORA.controller;
+package com.SUG.FLORA.configuration;
 
 import java.util.ArrayList;
 import java.util.List;

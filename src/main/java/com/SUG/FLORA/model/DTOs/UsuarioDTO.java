@@ -1,17 +1,13 @@
 package com.SUG.FLORA.model.DTOs;
 
 import java.util.List;
-import java.util.UUID;
-
-import com.SUG.FLORA.enums.EnumSexo;
-import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.interfaces.DTO;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class UsuarioDTO extends DomainDTO implements DTO {
 
     private String nome;

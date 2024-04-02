@@ -1,13 +1,10 @@
 package com.SUG.FLORA.services;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +17,6 @@ import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
 import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
-import com.SUG.FLORA.model.endereco.Logradouro;
-import com.SUG.FLORA.model.endereco.Pais;
 import com.SUG.FLORA.repository.endereco.BairroRepository;
 import com.SUG.FLORA.repository.endereco.CidadeRepository;
 import com.SUG.FLORA.repository.endereco.EstadoRepository;
