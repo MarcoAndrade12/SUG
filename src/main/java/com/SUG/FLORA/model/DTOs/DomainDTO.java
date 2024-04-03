@@ -14,5 +14,6 @@ public class DomainDTO {
     private LocalDateTime creationDate;
     private boolean deleted;
     private LocalDateTime deletedDate;
+    private LocalDateTime lastUpdate;
     
 }

@@ -3,6 +3,7 @@ package com.SUG.FLORA.model.endereco;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
+import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Domain;
 import com.SUG.FLORA.model.DTOs.cepDTO;
 
@@ -12,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CEP extends Domain{
+public class CEP extends Domain implements DTOConvertible{
 
     @Column(nullable = false, unique = true)
     private String numero;

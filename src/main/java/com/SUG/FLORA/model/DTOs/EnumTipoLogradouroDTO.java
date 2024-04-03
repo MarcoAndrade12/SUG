@@ -1,6 +1,8 @@
 package com.SUG.FLORA.model.DTOs;
 
+import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.interfaces.DTO;
+import com.SUG.FLORA.interfaces.DTOConvertible;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +13,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TipoLogradouroDTO extends DomainDTO implements DTO {
+public class EnumTipoLogradouroDTO implements DTO {
     private String tipo;
+
+    @Override
+    public EnumTipoLogradouro getModel() {
+        return EnumTipoLogradouro.valueOf(tipo);
+    }
 }

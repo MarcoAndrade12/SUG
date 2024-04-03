@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SUG.FLORA.enums.EnumSexo;
+import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.BairroDTO;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
@@ -77,9 +78,7 @@ public class UsuarioController {
     @PostMapping("")
     public ResponseEntity<String> novoUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 
-        System.out.println(usuarioDTO.getNome());
-        System.out.println(usuarioDTO.getEmail());
-        System.out.println(usuarioDTO.getEndereco().getLogradouro().getTipo());
+        Usuario usuario = usuarioDTO.getModel();
 
         return ResponseEntity.ok().body("Usuário adicionado com sucesso");
     }

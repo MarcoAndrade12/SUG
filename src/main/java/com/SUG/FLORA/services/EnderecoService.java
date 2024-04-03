@@ -3,6 +3,8 @@ package com.SUG.FLORA.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +13,17 @@ import org.springframework.stereotype.Service;
 import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.BairroDTO;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
 import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
+import com.SUG.FLORA.model.endereco.Endereco;
 import com.SUG.FLORA.repository.endereco.BairroRepository;
 import com.SUG.FLORA.repository.endereco.CidadeRepository;
+import com.SUG.FLORA.repository.endereco.EnderecoRepository;
 import com.SUG.FLORA.repository.endereco.EstadoRepository;
 import com.SUG.FLORA.repository.endereco.LogradouroRepository;
 import com.SUG.FLORA.repository.endereco.PaisRepository;
@@ -40,6 +45,9 @@ public class EnderecoService {
 
     @Autowired
     LogradouroRepository logradouroRepository;
+
+    @Autowired
+    EnderecoRepository enderecoRepository;
 
     public List<? extends DTO> ToDTOs(List<? extends DTOConvertible> entities) {
         List<DTO> entityDTOs = new ArrayList<>();
@@ -83,6 +91,10 @@ public class EnderecoService {
         System.out.println(tipos);
 
         return tipos;
+    }
+
+    public Endereco findEnderecoById(UUID id) {
+        return enderecoRepository.findById(id).get();
     }
 
 }

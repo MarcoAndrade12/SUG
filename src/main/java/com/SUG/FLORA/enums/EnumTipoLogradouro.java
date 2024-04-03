@@ -1,6 +1,10 @@
 package com.SUG.FLORA.enums;
 
-public enum EnumTipoLogradouro {
+import com.SUG.FLORA.interfaces.DTO;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
+
+public enum EnumTipoLogradouro implements DTOConvertible {
     RUA,
     AVENIDA,
     TRAVESSA,
@@ -10,5 +14,13 @@ public enum EnumTipoLogradouro {
     RODOVIA,
     CAMINHO,
     VIA,
-    OUTRO
+    OUTRO;
+
+    @Override
+    public EnumTipoLogradouroDTO getDTO() {
+        EnumTipoLogradouroDTO dto = new EnumTipoLogradouroDTO();
+        dto.setTipo(this.name());
+        return dto;
+
+    }
 }
