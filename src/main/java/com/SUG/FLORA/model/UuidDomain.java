@@ -14,7 +14,7 @@ import lombok.Data;
 
 @MappedSuperclass
 @Data
-public class Domain {
+public class UuidDomain {
 	
 	@Id
     @GeneratedValue(generator = "UUID")

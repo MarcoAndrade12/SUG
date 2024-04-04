@@ -4,7 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.UuidDomain;
 import com.SUG.FLORA.model.DTOs.cepDTO;
 
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class CEP extends Domain implements DTOConvertible{
+public class CEP extends IntDomain implements DTOConvertible{
 
     @Column(nullable = false, unique = true)
     private String numero;

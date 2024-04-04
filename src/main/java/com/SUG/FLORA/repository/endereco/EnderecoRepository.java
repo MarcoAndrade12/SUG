@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.SUG.FLORA.model.endereco.Endereco;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, UUID>{
+public interface EnderecoRepository extends JpaRepository<Endereco, Integer>{
     
 }

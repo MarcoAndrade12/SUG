@@ -1,12 +1,16 @@
 package com.SUG.FLORA.model.endereco;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.UuidDomain;
 import com.SUG.FLORA.model.DTOs.BairroDTO;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,18 +18,18 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Bairro extends Domain implements DTOConvertible {
+public class Bairro extends IntDomain implements DTOConvertible {
 
     @Column(nullable = false, unique = false)
     private String nome;
 
     @OneToMany
     @JoinColumn(name = "bairro_id")
-    private List<Logradouro> logradouros;
+    private List<Logradouro> logradouros = new ArrayList<Logradouro>();
 
     @ManyToMany
     @JoinTable(name = "bairro_ass_cep", joinColumns = @JoinColumn(name = "bairro_id"), inverseJoinColumns = @JoinColumn(name = "cep_id"))
-    private List<CEP> ceps;
+    private List<CEP> ceps = new ArrayList<CEP>();
 
     @Override
     public BairroDTO getDTO() {
@@ -41,5 +45,6 @@ public class Bairro extends Domain implements DTOConvertible {
 
         return DTO;
     }
+
 
 }

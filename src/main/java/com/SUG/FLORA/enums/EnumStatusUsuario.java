@@ -2,16 +2,17 @@ package com.SUG.FLORA.enums;
 
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.DTOs.StatusDTO;
+import com.SUG.FLORA.interfaces.DTOEnumconvertible;
+import com.SUG.FLORA.model.DTOs.EnumStatusDTO;
 
-public enum EnumStatusUsuario implements DTOConvertible{
+public enum EnumStatusUsuario implements DTOEnumconvertible{
     ATIVO,
     INATIVO,
     DELETADO;
 
     @Override
-    public StatusDTO getDTO() {
-		StatusDTO DTO = new StatusDTO();
+    public EnumStatusDTO getDTO() {
+		EnumStatusDTO DTO = new EnumStatusDTO();
         DTO.setStatus(this.name());
         return DTO;
     }

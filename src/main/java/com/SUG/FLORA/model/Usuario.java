@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.DTOs.SexoDTO;
-import com.SUG.FLORA.model.DTOs.StatusDTO;
+import com.SUG.FLORA.model.DTOs.EnumSexoDTO;
+import com.SUG.FLORA.model.DTOs.EnumStatusDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.model.endereco.Endereco;
 
@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Usuario extends Domain implements UserDetails, DTOConvertible {
+public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -84,11 +84,11 @@ public class Usuario extends Domain implements UserDetails, DTOConvertible {
         usuarioDTO.setRg(rg);
         usuarioDTO.setCpf(cpf);
 
-        SexoDTO sexoDTO = new SexoDTO();
+        EnumSexoDTO sexoDTO = new EnumSexoDTO();
         sexoDTO.setNome(sexo.name());
         usuarioDTO.setSexo(sexoDTO);
 
-        StatusDTO statusDTO = new StatusDTO();
+        EnumStatusDTO statusDTO = new EnumStatusDTO();
         statusDTO.setStatus(status.name());
 
         usuarioDTO.setStatus(statusDTO);

@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class cepDTO extends DomainDTO implements DTO{
+public class cepDTO extends IntDomainDTO implements DTO{
 
     private String numero;
     private String altitude;

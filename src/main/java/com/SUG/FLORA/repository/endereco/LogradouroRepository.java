@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.SUG.FLORA.model.endereco.Logradouro;
 
-public interface LogradouroRepository extends JpaRepository<Logradouro, UUID> {
+public interface LogradouroRepository extends JpaRepository<Logradouro, Integer> {
 
     List<Logradouro> findAllByDeletedFalse();
 

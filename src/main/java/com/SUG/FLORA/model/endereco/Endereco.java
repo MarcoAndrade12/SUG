@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
 import com.SUG.FLORA.model.DTOs.EnderecoDTO;
 
 import lombok.Data;
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Endereco extends Domain {
+public class Endereco extends IntDomain {
 
     @Column(nullable = false, unique = false)
     private int numero_casa;
@@ -24,27 +24,27 @@ public class Endereco extends Domain {
 
     @ManyToOne
     @JoinColumn(name = "pais_id", nullable = false, unique = false)
-    private Pais pais;
+    private Pais pais = new Pais();
 
     @ManyToOne
     @JoinColumn(name = "estado_id", nullable = false, unique = false)
-    private Estado estado;
+    private Estado estado = new Estado();
 
     @ManyToOne
     @JoinColumn(name = "cidade_id", nullable = false, unique = false)
-    private Cidade cidade;
+    private Cidade cidade = new Cidade();
 
     @ManyToOne
     @JoinColumn(name = "bairro_id", nullable = false, unique = false)
-    private Bairro bairro;
+    private Bairro bairro = new Bairro();
 
     @ManyToOne
     @JoinColumn(name = "logradouro_id", nullable = false, unique = false)
-    private Logradouro logradouro;
+    private Logradouro logradouro = new Logradouro();
 
     @ManyToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
-    private CEP cep;
+    private CEP cep = new CEP();
 
     public EnderecoDTO getDTO() {
         EnderecoDTO DTO = new EnderecoDTO();

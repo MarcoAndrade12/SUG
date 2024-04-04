@@ -9,9 +9,10 @@ import jakarta.persistence.OneToOne;
 
 import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.UuidDomain;
+import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
-import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Logradouro extends Domain implements DTOConvertible {
+public class Logradouro extends IntDomain implements DTOConvertible {
 
     @Enumerated(EnumType.STRING)
     private EnumTipoLogradouro tipo;
@@ -29,7 +30,7 @@ public class Logradouro extends Domain implements DTOConvertible {
 
     @OneToOne
     @JoinColumn(name = "cep_id", nullable = false, unique = false)
-    private CEP cep;
+    private CEP cep = new CEP();
 
     @Override
     public LogradouroDTO getDTO() {
@@ -39,7 +40,7 @@ public class Logradouro extends Domain implements DTOConvertible {
         DTO.setDeleted(isDeleted());
         DTO.setDeletedDate(getDeletedDate());
 
-        TipoLogradouroDTO tipo = new TipoLogradouroDTO();
+        EnumTipoLogradouroDTO tipo = new EnumTipoLogradouroDTO();
         tipo.setTipo(tipo.getTipo());
 
         DTO.setTipo(tipo);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.SUG.FLORA.model.endereco.Pais;
 
 @Repository
-public interface PaisRepository extends JpaRepository<Pais, UUID> {
+public interface PaisRepository extends JpaRepository<Pais, Integer> {
 
     List<Pais> findAllByDeletedFalse();
 

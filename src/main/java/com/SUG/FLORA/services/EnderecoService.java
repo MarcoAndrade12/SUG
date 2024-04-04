@@ -16,10 +16,11 @@ import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.BairroDTO;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
+import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
-import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
+import com.SUG.FLORA.model.endereco.Cidade;
 import com.SUG.FLORA.model.endereco.Endereco;
 import com.SUG.FLORA.repository.endereco.BairroRepository;
 import com.SUG.FLORA.repository.endereco.CidadeRepository;
@@ -84,17 +85,19 @@ public class EnderecoService {
         return (List<LogradouroDTO>) ToDTOs(logradouroRepository.findAllByDeletedFalse());
     }
 
-    public List<TipoLogradouroDTO> findAllTiposLogradourosDTOsByDeletedFalse() {
-        List<TipoLogradouroDTO> tipos = Arrays.stream(EnumTipoLogradouro.values())
-                .map(tipo -> new TipoLogradouroDTO(tipo.name())).collect(Collectors.toList());
-
-        System.out.println(tipos);
+    public List<EnumTipoLogradouroDTO> findAllTiposLogradourosDTOsByDeletedFalse() {
+        List<EnumTipoLogradouroDTO> tipos = Arrays.stream(EnumTipoLogradouro.values())
+                .map(tipo -> new EnumTipoLogradouroDTO(tipo.name())).collect(Collectors.toList());
 
         return tipos;
     }
 
-    public Endereco findEnderecoById(UUID id) {
+    public Endereco findEnderecoById(int id) {
         return enderecoRepository.findById(id).get();
+    }
+
+    public Cidade salvarCidade(Cidade cidade) {
+        return cidadeRepository.save(cidade);
     }
 
 }

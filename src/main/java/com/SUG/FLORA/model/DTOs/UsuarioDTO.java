@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model.DTOs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.SUG.FLORA.enums.EnumStatusUsuario;
@@ -12,17 +13,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UsuarioDTO extends DomainDTO implements DTO {
+public class UsuarioDTO extends UuidDomainDTO implements DTO {
 
     private String nome;
     private String sobrenome;
     private String rg;
     private String cpf;
-    private SexoDTO sexo;
+    private EnumSexoDTO sexo = new EnumSexoDTO();
     private String email;
-    private List<ProfileDTO> profiles;
-    private EnderecoDTO endereco;
-    private StatusDTO status;
+    private List<ProfileDTO> profiles = new ArrayList<ProfileDTO>();
+    private EnderecoDTO endereco = new EnderecoDTO();
+    private EnumStatusDTO status = new EnumStatusDTO();
     private boolean consentimento;
 
     public Usuario getModel() {

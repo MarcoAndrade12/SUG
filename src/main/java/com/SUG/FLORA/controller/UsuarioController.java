@@ -13,10 +13,10 @@ import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.BairroDTO;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
+import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
-import com.SUG.FLORA.model.DTOs.TipoLogradouroDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.services.EnderecoService;
 import com.SUG.FLORA.services.UsuarioService;
@@ -53,19 +53,11 @@ public class UsuarioController {
         EnumSexo[] sexoDTOs = EnumSexo.values();
 
         List<PaisDTO> paisesDTOs = enderecoService.findAllPaisesDTOsByDeletedFalse();
-        List<EstadoDTO> estadosDTOs = enderecoService.findAllEstadosDTOsByDeletedFalse();
-        List<CidadeDTO> cidadesDTOs = enderecoService.findAllCidadesDTOsByDeletedFalse();
-        List<BairroDTO> bairrosDTOs = enderecoService.findAllBairrosDTOsByDeletedFalse();
-        List<LogradouroDTO> logradourosDTOs = enderecoService.findAllLogradourosDTOsByDeletedFalse();
-        List<TipoLogradouroDTO> tiposLogradourosDTOs = enderecoService.findAllTiposLogradourosDTOsByDeletedFalse();
+        List<EnumTipoLogradouroDTO> tiposLogradourosDTOs = enderecoService.findAllTiposLogradourosDTOsByDeletedFalse();
 
         model.addAttribute("sexos", sexoDTOs);
         model.addAttribute("paises", paisesDTOs);
-        model.addAttribute("estados", estadosDTOs);
-        model.addAttribute("cidades", cidadesDTOs);
-        model.addAttribute("bairros", bairrosDTOs);
         model.addAttribute("tipos_logradouros", tiposLogradourosDTOs);
-        model.addAttribute("logradouros", logradourosDTOs);
 
         return "admin/novo_usuario_admin";
     }

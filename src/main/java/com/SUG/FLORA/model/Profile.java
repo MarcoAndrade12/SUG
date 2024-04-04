@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Profile extends Domain implements GrantedAuthority, DTOConvertible {
+public class Profile extends UuidDomain implements GrantedAuthority, DTOConvertible {
 
 	private static final long serialVersionUID = 1L;
 

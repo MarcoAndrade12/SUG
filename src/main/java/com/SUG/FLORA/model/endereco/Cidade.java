@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model.endereco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -8,7 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.UuidDomain;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
 
 import lombok.Data;
@@ -17,14 +19,14 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Cidade extends Domain implements DTOConvertible {
+public class Cidade extends IntDomain implements DTOConvertible {
 
     @Column(nullable = false, unique = false)
     private String nome;
 
     @OneToMany
     @JoinColumn(name = "cidade_id")
-    private List<Bairro> bairros;
+    private List<Bairro> bairros = new ArrayList<Bairro>();
 
     @Override
     public CidadeDTO getDTO() {

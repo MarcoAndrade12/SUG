@@ -9,11 +9,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LogradouroDTO extends DomainDTO implements DTO {
+public class LogradouroDTO extends IntDomainDTO implements DTO {
 
-    private EnumTipoLogradouroDTO tipo;
+    private EnumTipoLogradouroDTO tipo = new EnumTipoLogradouroDTO();
     private String nome;
-    private cepDTO cep;
+    private cepDTO cep = new cepDTO();
 
     @Override
     public Logradouro getModel() {

@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model.endereco;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -9,7 +10,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.Domain;
+import com.SUG.FLORA.model.IntDomain;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
 
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Pais extends Domain implements DTOConvertible {
+public class Pais extends IntDomain implements DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String nome;
@@ -28,11 +29,11 @@ public class Pais extends Domain implements DTOConvertible {
 
     @OneToMany
     @JoinTable(name = "pais_ass_regioes", joinColumns = @JoinColumn(name = "pais_id"), inverseJoinColumns = @JoinColumn(name = "regiao_id"))
-    private List<RegiaoDoPais> regioes;
+    private List<RegiaoDoPais> regioes = new ArrayList<RegiaoDoPais>();
 
     @OneToMany
     @JoinColumn(name = "pais_id")
-    private List<Estado> estados;
+    private List<Estado> estados = new ArrayList<Estado>();
 
     @Override
     public PaisDTO getDTO() {

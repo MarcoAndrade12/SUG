@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfileDTO extends DomainDTO implements DTO {
+public class ProfileDTO extends UuidDomainDTO implements DTO {
     private String name;
 
     @Override

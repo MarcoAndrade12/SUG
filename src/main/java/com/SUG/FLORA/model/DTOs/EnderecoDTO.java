@@ -5,15 +5,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EnderecoDTO extends DomainDTO {
+public class EnderecoDTO extends IntDomainDTO {
 
-    private PaisDTO pais;
-    private EstadoDTO estado;
-    private CidadeDTO cidade;
-    private BairroDTO bairro;
-    private LogradouroDTO logradouro;
+    private PaisDTO pais = new PaisDTO();
+    private EstadoDTO estado = new EstadoDTO();
+    private CidadeDTO cidade = new CidadeDTO();
+    private BairroDTO bairro = new BairroDTO();
+    private LogradouroDTO logradouro = new LogradouroDTO();
     private String complemento;
     private int numero;
-    private cepDTO cep;
+    private cepDTO cep = new cepDTO();
 
 }

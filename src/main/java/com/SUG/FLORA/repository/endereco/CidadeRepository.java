@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.SUG.FLORA.model.endereco.Cidade;
 
-public interface CidadeRepository extends JpaRepository<Cidade, UUID> {
+public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 
     List<Cidade> findAllByDeletedFalse();
 }

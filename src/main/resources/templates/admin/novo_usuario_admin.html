@@ -70,18 +70,24 @@
             <section class="col-md-2" id="pais">
                 <label for="validationCustom04" class="form-label">País</label>
                 <select class="form-select" id="nome" required>
-                    <option selected disabled value="">Selecione...</option>
-                    <option th:each="pais : ${paises}" th:text="${pais.nome}" th:value="${pais.id}" ></option>
+                    <option selected value="">Selecione...</option>
                 </select>
             </section>
 
             <section class="col-md-2" id="estado">
                 <label for="validationCustom04" class="form-label">Estado</label>
-                <select class="form-select" id="nome" required>
+                <select class="form-select" id="nome" required onchange="ListAllCidades(value)">
                     <option selected disabled value="">Selecione...</option>
                     <option>São Paulo</option>
                 </select>
 
+            </section>
+
+            <section class="col-md-2" id="cidade">
+                <label for="validationCustom04" class="form-label">Cidade</label>
+                <select class="form-select" id="nome" required>
+                    <option selected disabled value="">Selecione...</option>
+                </select>
             </section>
 
             <section class="col-md-2" id="bairro">

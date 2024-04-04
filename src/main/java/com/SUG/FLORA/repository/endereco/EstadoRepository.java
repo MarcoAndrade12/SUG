@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.SUG.FLORA.model.endereco.Estado;
 
-public interface EstadoRepository extends JpaRepository<Estado, UUID> {
+public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
     List<Estado> findAllByDeletedFalse();
 
