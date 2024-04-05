@@ -65,11 +65,11 @@
 
         <hr>
         <section class="row g-3" id="endereco">
-            <h2 for="validationCustom03" class="form-label">Endereço</h2>
+            <h2 for="validationCustom03" class="form-label">Local</h2>
 
             <section class="col-md-2" id="pais">
                 <label for="validationCustom04" class="form-label">País</label>
-                <select class="form-select" id="nome" required>
+                <select class="form-select" id="nome" required onchange="ListAllEstados(value)">
                     <option selected value="">Selecione...</option>
                 </select>
             </section>
@@ -90,69 +90,9 @@
                 </select>
             </section>
 
-            <section class="col-md-2" id="bairro">
-                <label for="validationCustom04" class="form-label">Bairro</label>
-                <select class="form-select" id="nome" required>
-                    <option selected disabled value="">Selecione...</option>
-                    <option>Jardim Ângela</option>
-                    <option>Romanopolis</option>
-                </select>
-            </section>
-
-            <section class="col-md-6" id="logradouro">
-                <div class="row g-3">
-                    <div class="col-md-3">
-
-                        <label for="validationCustom04" class="form-label">Tipo</label>
-                        <select class="form-select" id="tipo" required>
-                            <option selected disabled value="">Selecione...</option>
-                            <option value="0">Rua</option>
-                            <option>Avenida</option>
-                            <option>Travessa</option>
-                            <option>Estrada</option>
-                        </select>
-                    </div>
-                    <div class="col-md-9">
-
-                        <label for="validationCustom04" class="form-label">Logradouro</label>
-                        <select class="form-select" id="nome" required>
-                            <option selected disabled value="">Selecione...</option>
-                            <option>Armênia</option>
-                        </select>
-                    </div>
-                </div>
-
-
-            </section>
-
-            <div class="col-md-3">
-                <label for="validationCustom03" class="form-label">Complemento</label>
-                <input type="text" class="form-control" id="complemento" required>
-
-            </div>
-
-            <div class="col-md-2">
-                <label for="validationCustom03" class="form-label">Número</label>
-                <input type="number" class="form-control" id="numero" required>
-
-            </div>
-
-            <section class="col-md-3" id="cep">
-                    <label for="validationCustom03" class="form-label">CEP</label>
-                    <input type="text" class="form-control" id="numero" required>
-            </section>
 
         </section>
-<!-- 
-        <div class="col-12">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="consentimento" required va>
-                <label class="form-check-label" for="invalidCheck">
-                    Eu aceito os termos.
-                </label>
-
-            </div>
-        </div> -->
+        <hr>
 
         <div class="col-12">
             <button class="btn btn-primary" type="button" onclick="EnviarNovoUsuario(form)">Enviar</button>

@@ -14,19 +14,15 @@ import com.SUG.FLORA.enums.EnumTipoLogradouro;
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.Usuario;
-import com.SUG.FLORA.model.DTOs.BairroDTO;
 import com.SUG.FLORA.model.DTOs.CidadeDTO;
 import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
-import com.SUG.FLORA.model.DTOs.LogradouroDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
 import com.SUG.FLORA.model.endereco.Cidade;
 import com.SUG.FLORA.model.endereco.Endereco;
-import com.SUG.FLORA.repository.endereco.BairroRepository;
 import com.SUG.FLORA.repository.endereco.CidadeRepository;
 import com.SUG.FLORA.repository.endereco.EnderecoRepository;
 import com.SUG.FLORA.repository.endereco.EstadoRepository;
-import com.SUG.FLORA.repository.endereco.LogradouroRepository;
 import com.SUG.FLORA.repository.endereco.PaisRepository;
 
 @Service
@@ -41,11 +37,6 @@ public class EnderecoService {
     @Autowired
     CidadeRepository cidadeRepository;
 
-    @Autowired
-    BairroRepository bairroRepository;
-
-    @Autowired
-    LogradouroRepository logradouroRepository;
 
     @Autowired
     EnderecoRepository enderecoRepository;
@@ -73,23 +64,6 @@ public class EnderecoService {
     @SuppressWarnings("unchecked")
     public List<CidadeDTO> findAllCidadesDTOsByDeletedFalse() {
         return (List<CidadeDTO>) ToDTOs(cidadeRepository.findAllByDeletedFalse());
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<BairroDTO> findAllBairrosDTOsByDeletedFalse() {
-        return (List<BairroDTO>) ToDTOs(bairroRepository.findAllByDeletedFalse());
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<LogradouroDTO> findAllLogradourosDTOsByDeletedFalse() {
-        return (List<LogradouroDTO>) ToDTOs(logradouroRepository.findAllByDeletedFalse());
-    }
-
-    public List<EnumTipoLogradouroDTO> findAllTiposLogradourosDTOsByDeletedFalse() {
-        List<EnumTipoLogradouroDTO> tipos = Arrays.stream(EnumTipoLogradouro.values())
-                .map(tipo -> new EnumTipoLogradouroDTO(tipo.name())).collect(Collectors.toList());
-
-        return tipos;
     }
 
     public Endereco findEnderecoById(int id) {

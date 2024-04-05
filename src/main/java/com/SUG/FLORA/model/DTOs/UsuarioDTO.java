@@ -35,12 +35,12 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
         usuario.setDeleted(isDeleted());
         usuario.setDeletedDate(getDeletedDate());
         usuario.setLastUpdate(getLastUpdate());
-        usuario.setNome(nome);
-        usuario.setSobrenome(sobrenome);
-        usuario.setRg(rg);
-        usuario.setCpf(cpf);
+        usuario.setNome(getNome());
+        usuario.setSobrenome(getSobrenome());
+        usuario.setRg(getRg());
+        usuario.setCpf(getCpf());
         usuario.setSexo(sexo.getModel());
-        usuario.setEmail(email);
+        usuario.setEmail(getEmail());
         
         usuario.setProfiles((List<Profile>) profiles
             .stream()
@@ -50,6 +50,7 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
 
         usuario.setStatus(status.getModel());
         usuario.setConsentimento(consentimento);
+        usuario.setEndereco(endereco.getModel());
 
         return usuario;
     }

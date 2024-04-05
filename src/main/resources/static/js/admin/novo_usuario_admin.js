@@ -1,34 +1,35 @@
 const enderecos = {};
 
 ListAllPais();
-ListAllEstados();
-
 
 function ListAllPais(){
-    fetch ("https://servicodados.ibge.gov.br/api/v1/localidades/paises")
+    fetch ("https://servicodados.ibge.gov.br/api/v1/localidades/paises/76")
         .then(response => response.json())
         .then(paises => {
+            var select = document.getElementById("pais").getElementsByTagName("select")[0];
+            select.innerHTML = "<option selected value=''>Selecione...</option>";
+
             paises.forEach(pais => {
-                var select = document.getElementById("pais").getElementsByTagName("select")[0];
-
-
                 option = document.createElement("option");
                 option.value = pais['id']['M49'];
                 option.text = pais['nome'];
-                
                 select.appendChild(option);
 
             });       
         });
+    
+    ListAllEstados();
 }
 
-function ListAllEstados(pais){
+function ListAllEstados(pais=""){
 
     fetch ("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
         .then(response => response.json())
         .then(paises => {
+            var select = document.getElementById("estado").getElementsByTagName("select")[0];
+            select.innerHTML = "<option selected value=''>Selecione...</option>";
+
             paises.forEach(pais => {
-                var select = document.getElementById("estado").getElementsByTagName("select")[0];
                 option = document.createElement("option");
                 option.value = pais['id'];
                 option.text = pais['nome'];
@@ -37,23 +38,25 @@ function ListAllEstados(pais){
 
             });       
         });
+    
+    ListAllCidades();
+
 }
 
 
-function ListAllCidades(estado){
+function ListAllCidades(estado=''){
 
     fetch ("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estado + "/municipios?orderBy=nome")
         .then(response => response.json())
         .then(cidades => {
             var select = document.getElementById("cidade").getElementsByTagName("select")[0];
-            select.children = "";
+            select.innerHTML = "<option selected value=''>Selecione...</option>";
 
             cidades.forEach(cidade => {
+                option = document.createElement("option");
                 option.value = cidade['id'];
                 option.text = cidade['nome'];
-                
                 select.appendChild(option);
-
             });       
         });
 }

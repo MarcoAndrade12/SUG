@@ -24,10 +24,6 @@ public class Cidade extends IntDomain implements DTOConvertible {
     @Column(nullable = false, unique = false)
     private String nome;
 
-    @OneToMany
-    @JoinColumn(name = "cidade_id")
-    private List<Bairro> bairros = new ArrayList<Bairro>();
-
     @Override
     public CidadeDTO getDTO() {
         CidadeDTO DTO = new CidadeDTO();
@@ -37,7 +33,6 @@ public class Cidade extends IntDomain implements DTOConvertible {
         DTO.setDeletedDate(getDeletedDate());
 
         DTO.setNome(nome);
-        DTO.setBairros(bairros.stream().map(bairro -> bairro.getDTO()).toList());
 
         return DTO;
     }
