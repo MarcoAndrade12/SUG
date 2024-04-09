@@ -11,7 +11,8 @@ import com.SUG.FLORA.model.DTOs.EnumSexoDTO;
 
 public enum EnumSexo implements DTOEnumconvertible{
     MASCULINO,
-    FEMININO;
+    FEMININO,
+    INDEFINIDO;
 
     @Override
     public DTOEnum getDTO() {

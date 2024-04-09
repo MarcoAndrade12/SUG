@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 public class EnumStatusDTO implements DTOEnum{
-    private String status;
+    private String name;
 
     public EnumStatusUsuario getModel() {
-        return EnumStatusUsuario.valueOf(status);
+        return EnumStatusUsuario.valueOf(name);
     }
 }

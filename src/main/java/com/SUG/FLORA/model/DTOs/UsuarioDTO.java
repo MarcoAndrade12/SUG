@@ -29,7 +29,7 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
     public Usuario getModel() {
 
         Usuario usuario = new Usuario();
-
+        
         usuario.setId(getId());
         usuario.setCreationDate(getCreationDate());
         usuario.setDeleted(isDeleted());
@@ -41,17 +41,18 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
         usuario.setCpf(getCpf());
         usuario.setSexo(sexo.getModel());
         usuario.setEmail(getEmail());
+
         
         usuario.setProfiles((List<Profile>) profiles
             .stream()
             .map(
                 profile -> profile.getModel())
             .toList());
-
+        
         usuario.setStatus(status.getModel());
         usuario.setConsentimento(consentimento);
         usuario.setEndereco(endereco.getModel());
-
+        
         return usuario;
     }
 

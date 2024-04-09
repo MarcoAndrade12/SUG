@@ -65,11 +65,19 @@ public class UsuarioService  implements UserDetailsService{
         return usuario!= null;
     }
 
-    @Transactional
     public Usuario salvarUsuario(Usuario usuario) {
         if (EmailExists(usuario.getEmail())) {
             throw new AtributoDuplicadoException("Já existe um usuario com este email");
         }
+
+        if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+            throw new AtributoInvalidoException("O Email não pode ser vazio");
+        }
+
+        if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
+            throw new AtributoInvalidoException("A senha não pode ser vazia");
+        }
+
         
         try {
             Usuario usuarioSaved = usuarioRepository.save(usuario);
@@ -87,7 +95,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarEmailUsuario(UUID id, String email) throws UsuarioNaoEncontrado {
 
         if (!isValidEmail(email)) {
@@ -107,7 +114,6 @@ public class UsuarioService  implements UserDetailsService{
 
     }
 
-    @Transactional
     public Usuario alterarNomeUsuario(UUID id, String nome) throws UsuarioNaoEncontrado {
         if (nome.isEmpty()) {
             throw new AtributoInvalidoException("O nome não pode ser vazio!");
@@ -124,7 +130,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarSobrenomeUsuario(UUID id, String sobrenome) throws UsuarioNaoEncontrado {
         if (sobrenome.isEmpty()) {
             throw new AtributoInvalidoException("O sobrenome não pode ser vazio!");
@@ -141,7 +146,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarRgUsuario(UUID id, String rg) throws UsuarioNaoEncontrado {
         if (rg.isEmpty()) {
             throw new AtributoInvalidoException("O rg não pode ser vazio!");
@@ -158,7 +162,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarCpfUsuario(UUID id, String cpf) throws UsuarioNaoEncontrado {
         if (cpf.isEmpty()) {
             throw new AtributoInvalidoException("O cpf não pode ser vazio!");
@@ -175,7 +178,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarSexoUsuario(UUID id, EnumSexo sexo) throws UsuarioNaoEncontrado {
 
         Usuario usuario = usuarioRepository.findById(id).get();
@@ -189,7 +191,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarConsentimentoUsuario(UUID id, boolean consentimento) throws UsuarioNaoEncontrado {
 
         Usuario usuario = usuarioRepository.findById(id).get();
@@ -203,7 +204,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-    @Transactional
     public Usuario alterarStatusUsuario(UUID id, EnumStatusUsuario status) throws UsuarioNaoEncontrado {
         
         Usuario usuario = usuarioRepository.findById(id).get();
@@ -259,9 +259,6 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-
-
-    @Transactional
     public Usuario alterarSenhaUsuario(UUID id, String senha) throws UsuarioNaoEncontrado {
 
         Usuario usuario = usuarioRepository.findById(id).get();

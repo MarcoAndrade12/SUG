@@ -92,7 +92,17 @@ function EnviarNovoUsuario(form) {
             console.log("Resposta: ", response);
 
             if (response.ok) {
-                InfoModal("Usuário cadastrado com sucesso");
+
+                response.text().then(mensagem => {
+                    InfoModal(mensagem);
+                })
+
+            } else {
+                
+                response.text().then(erro => {
+                    InfoModal(erro);
+                })
+
             }
 
 

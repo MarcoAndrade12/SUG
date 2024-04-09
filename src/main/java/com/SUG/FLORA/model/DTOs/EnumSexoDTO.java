@@ -10,6 +10,7 @@ public class EnumSexoDTO implements DTOEnum{
     private String nome;
 
     public EnumSexo getModel() {
+        System.out.println(nome);
         return EnumSexo.valueOf(nome);
     }
 }

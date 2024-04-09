@@ -59,7 +59,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true, unique = false)
-    private EnumSexo sexo;
+    private EnumSexo sexo = EnumSexo.INDEFINIDO;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = false)
@@ -89,7 +89,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
         usuarioDTO.setSexo(sexoDTO);
 
         EnumStatusDTO statusDTO = new EnumStatusDTO();
-        statusDTO.setStatus(status.name());
+        statusDTO.setName(status.name());
 
         usuarioDTO.setStatus(statusDTO);
 

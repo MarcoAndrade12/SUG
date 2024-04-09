@@ -13,7 +13,7 @@ public enum EnumStatusUsuario implements DTOEnumconvertible{
     @Override
     public EnumStatusDTO getDTO() {
 		EnumStatusDTO DTO = new EnumStatusDTO();
-        DTO.setStatus(this.name());
+        DTO.setName(this.toString());
         return DTO;
     }
 }

@@ -14,6 +14,7 @@ public class ProfileDTO extends UuidDomainDTO implements DTO {
 
     @Override
     public Profile getModel() {
+
         Profile profile = new Profile();
         profile.setId(getId());
         profile.setCreationDate(getCreationDate());

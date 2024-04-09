@@ -25,7 +25,11 @@ public class Profile extends UuidDomain implements GrantedAuthority, DTOConverti
 	}
 
 	public void setName(String nome) {
-		this.name = "ROLE_" + nome;
+		if (nome.contains("ROLE_")) {
+			this.name = nome;
+		} else {
+			this.name = "ROLE_" + nome;
+		}
 	}
 
 	@Override
