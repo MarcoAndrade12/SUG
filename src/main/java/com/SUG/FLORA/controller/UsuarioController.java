@@ -90,6 +90,7 @@ public class UsuarioController {
         } catch (AtributoInvalidoException error) {
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error.getLocalizedMessage());
+        
         } catch (Exception error) {
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível cadastrar o usuário");

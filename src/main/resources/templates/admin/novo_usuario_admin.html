@@ -14,6 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="/js/recursos/modalOK.js"></script>
     <script src="/js/recursos/formSerializer.js"></script>
+    <script src="/js/recursos/formRequiredVerify.js"></script>
     <script src="/js/admin/novo_usuario_admin.js"></script>
     <title>Sug-Flora</title>
 
@@ -28,35 +29,35 @@
 
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Primeiro Nome</label>
-            <input type="text" class="form-control" id="nome" placeholder="Primeiro nome do usuário" required>
+            <input type="text" class="form-control" id="nome" name="primeiro_nome" placeholder="Primeiro nome do usuário" required>
 
         </div>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">Sobrenome</label>
-            <input type="text" class="form-control" id="sobrenome" placeholder="Sobrenome do usuário" required>
+            <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome do usuário" required>
 
         </div>
 
         <div class="col-md-4">
             <label for="validationCustomUsername" class="form-label">Email</label>
             <div class="input-group has-validation">
-                <input type="text" class="form-control" id="email" placeholder="email aqui" required>
+                <input type="text" class="form-control" id="email" name="email" placeholder="email aqui" required>
             </div>
         </div>
 
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">RG</label>
-            <input type="text" class="form-control" id="rg" placeholder="Número do RG do usuário" required>
+            <input type="text" class="form-control" id="rg" name="rg" placeholder="Número do RG do usuário" required>
 
         </div>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf" placeholder="Número do CPF do usuário" required>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Número do CPF do usuário" required>
 
         </div>
         <section class="col-md-4" id="sexo">
             <label for="validationCustom04" class="form-label">Sexo</label>
-            <select class="form-select" id="nome" required>
+            <select class="form-select" id="nome" name="sexo" required>
                 <option selected disabled value="">Selecione...</option>
                 <option th:each="sexo, index: ${sexos}" th:value="${sexo.name}" th:text="${sexo.name}"></option>
             </select>
@@ -69,14 +70,14 @@
 
             <section class="col-md-2" id="pais">
                 <label for="validationCustom04" class="form-label">País</label>
-                <select class="form-select" id="nome" required onchange="ListAllEstados(value)">
+                <select class="form-select" id="nome" name="pais" required onchange="ListAllEstados(value)">
                     <option selected value="">Selecione...</option>
                 </select>
             </section>
 
             <section class="col-md-2" id="estado">
                 <label for="validationCustom04" class="form-label">Estado</label>
-                <select class="form-select" id="nome" required onchange="ListAllCidades(value)">
+                <select class="form-select" id="nome" name="estado" required onchange="ListAllCidades(value)">
                     <option selected disabled value="">Selecione...</option>
                     <option>São Paulo</option>
                 </select>
@@ -85,7 +86,7 @@
 
             <section class="col-md-2" id="cidade">
                 <label for="validationCustom04" class="form-label">Cidade</label>
-                <select class="form-select" id="nome" required>
+                <select class="form-select" id="nome" name="cidade" required>
                     <option selected disabled value="">Selecione...</option>
                 </select>
             </section>

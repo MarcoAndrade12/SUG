@@ -71,7 +71,14 @@ function InfoModal(mensagem) {
 }
 
 function EnviarNovoUsuario(form) {
-    console.log(form);
+
+    var todosPreenchidos = formRequiredVerify(form);
+
+    console.log(todosPreenchidos['inputs']);
+
+    for (const input in todosPreenchidos['inputs']) {
+       console.log(input);
+    }
     json = {};
     var FormJson = FormSerializer(json,form);
     const requestOptions = {
@@ -82,14 +89,10 @@ function EnviarNovoUsuario(form) {
         body: JSON.stringify(FormJson)
     };
 
-    
-    console.log("Formulário: ", FormJson);
-    console.log("Requisição: ", requestOptions);
 
+    
     fetch("/usuarios", requestOptions)
         .then(response => {
-            console.log("Status: ", response.status);
-            console.log("Resposta: ", response);
 
             if (response.ok) {
 
