@@ -13,4 +13,8 @@ public interface PaisRepository extends JpaRepository<Pais, Integer> {
 
     List<Pais> findAllByDeletedFalse();
 
+	boolean existsByNomeIgnoreCase(String nome);
+
+	Pais findByNome(String nome);
+
 }

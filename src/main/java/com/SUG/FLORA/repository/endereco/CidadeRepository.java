@@ -10,4 +10,8 @@ import com.SUG.FLORA.model.endereco.Cidade;
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
 
     List<Cidade> findAllByDeletedFalse();
+
+	Cidade findByNome(String nome);
+
+	boolean existsByNomeIgnoreCase(String nome);
 }

@@ -11,4 +11,8 @@ public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
     List<Estado> findAllByDeletedFalse();
 
+	boolean existsByNomeIgnoreCase(String nome);
+
+	Estado findByNome(String nome);
+
 }
