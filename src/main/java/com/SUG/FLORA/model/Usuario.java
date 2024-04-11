@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.DTOs.EnumSexoDTO;
-import com.SUG.FLORA.model.DTOs.EnumStatusDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.model.endereco.Endereco;
 
@@ -84,14 +82,9 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
         usuarioDTO.setRg(rg);
         usuarioDTO.setCpf(cpf);
 
-        EnumSexoDTO sexoDTO = new EnumSexoDTO();
-        sexoDTO.setNome(sexo.name());
-        usuarioDTO.setSexo(sexoDTO);
+        usuarioDTO.setSexo(sexo.toString());
 
-        EnumStatusDTO statusDTO = new EnumStatusDTO();
-        statusDTO.setName(status.name());
-
-        usuarioDTO.setStatus(statusDTO);
+        usuarioDTO.setStatus(status.toString());
 
         if (endereco != null) {
             usuarioDTO.setEndereco(endereco.getDTO());

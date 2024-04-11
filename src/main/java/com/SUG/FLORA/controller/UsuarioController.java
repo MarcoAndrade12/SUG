@@ -13,22 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.exceptions.AtributoDuplicadoException;
 import com.SUG.FLORA.exceptions.AtributoInvalidoException;
-import com.SUG.FLORA.model.Profile;
 import com.SUG.FLORA.model.Usuario;
-import com.SUG.FLORA.model.DTOs.CidadeDTO;
-import com.SUG.FLORA.model.DTOs.EnumStatusDTO;
-import com.SUG.FLORA.model.DTOs.EnumTipoLogradouroDTO;
-import com.SUG.FLORA.model.DTOs.EstadoDTO;
-import com.SUG.FLORA.model.DTOs.PaisDTO;
 import com.SUG.FLORA.model.DTOs.ProfileDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.services.EnderecoService;
 import com.SUG.FLORA.services.UsuarioService;
 
-import jakarta.transaction.Transactional;
-import lombok.extern.java.Log;
 
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -66,19 +59,18 @@ public class UsuarioController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> novoUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<String> novoUsuario(@RequestBody MultiValueMap<String, String> body) {
 
-        ProfileDTO profile = new ProfileDTO();
+        ProfileDTO profile = new ProfileDTO(body);
         profile.setName("ROLE_USER");
         
-        EnumStatusDTO enumStatusDTO = new EnumStatusDTO();
-        enumStatusDTO.setName("ATIVO");
-
+        UsuarioDTO usuarioDTO = new UsuarioDTO(body);
         usuarioDTO.getProfiles().add(profile);
-        usuarioDTO.setStatus(enumStatusDTO);
+        usuarioDTO.setStatus("ATIVO");
                 
         try {
             Usuario usuario = usuarioDTO.getModel();
+            usuario.setSenha("mudar@123");
             Usuario usuarioSaved = usuarioService.salvarUsuario(usuario);
             
             return ResponseEntity.ok().body(usuarioSaved.getCpf());

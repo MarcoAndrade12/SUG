@@ -55,14 +55,14 @@
             <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Número do CPF do usuário" required>
 
         </div>
-        <section class="col-md-4" id="sexo">
+        <div class="col-md-4" id="sexo">
             <label for="validationCustom04" class="form-label">Sexo</label>
-            <select class="form-select" id="nome" name="sexo" required>
+            <select class="form-select" id="sexo" name="sexo" required>
                 <option selected disabled value="">Selecione...</option>
                 <option th:each="sexo, index: ${sexos}" th:value="${sexo.name}" th:text="${sexo.name}"></option>
             </select>
 
-        </section>
+        </div>
 
         <hr>
         <section class="row g-3" id="endereco">
@@ -96,7 +96,7 @@
         <hr>
 
         <div class="col-12">
-            <button class="btn btn-primary" type="button" onclick="EnviarNovoUsuario(form)">Enviar</button>
+            <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
     </form>
 

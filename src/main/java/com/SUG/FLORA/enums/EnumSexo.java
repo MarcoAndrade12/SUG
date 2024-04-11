@@ -7,18 +7,21 @@ import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.interfaces.DTOEnum;
 import com.SUG.FLORA.interfaces.DTOEnumconvertible;
-import com.SUG.FLORA.model.DTOs.EnumSexoDTO;
 
-public enum EnumSexo implements DTOEnumconvertible{
+public enum EnumSexo {
     MASCULINO,
     FEMININO,
     INDEFINIDO;
 
-    @Override
-    public DTOEnum getDTO() {
-        EnumSexoDTO sexoDTO = new EnumSexoDTO();
-        sexoDTO.setNome(this.name());
-        return sexoDTO;
+public static EnumSexo stringToSexo(String sexo){
+    switch(sexo.toLowerCase()){
+        case "masculino":
+            return MASCULINO;
+        case "feminino":
+            return FEMININO;
+        default:
+            return INDEFINIDO;
     }
+}
 
 }

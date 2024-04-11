@@ -61,8 +61,6 @@ function ListAllCidades(estado=''){
         });
 }
 
- 
-    
 
 
 function InfoModal(mensagem) {

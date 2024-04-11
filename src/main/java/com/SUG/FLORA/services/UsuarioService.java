@@ -78,6 +78,7 @@ public class UsuarioService  implements UserDetailsService{
             throw new AtributoInvalidoException("A senha não pode ser vazia");
         }
 
+        System.out.println(usuario.getSexo());
         
         try {
             Usuario usuarioSaved = usuarioRepository.save(usuario);

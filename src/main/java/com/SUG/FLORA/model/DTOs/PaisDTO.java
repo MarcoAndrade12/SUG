@@ -3,6 +3,8 @@ package com.SUG.FLORA.model.DTOs;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.util.MultiValueMap;
+
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.endereco.Pais;
@@ -18,6 +20,10 @@ public class PaisDTO extends IntDomainDTO implements DTO {
     private String sigla;
     private List<RegiaoDoPaisDTO> regioes = new ArrayList<RegiaoDoPaisDTO>();
     private List<EstadoDTO> estados = new ArrayList<EstadoDTO>();
+
+    public PaisDTO(MultiValueMap<String, String> body) {
+        this.nome = body.getFirst("pais");
+    }
 
     @Override
     public Pais getModel() {

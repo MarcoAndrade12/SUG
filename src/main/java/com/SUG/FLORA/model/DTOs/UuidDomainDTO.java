@@ -3,6 +3,8 @@ package com.SUG.FLORA.model.DTOs;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.util.MultiValueMap;
+
 import com.SUG.FLORA.interfaces.DTOConvertible;
 
 import lombok.Getter;
