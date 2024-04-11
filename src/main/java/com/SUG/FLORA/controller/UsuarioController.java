@@ -1,12 +1,17 @@
 package com.SUG.FLORA.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,11 +23,6 @@ import com.SUG.FLORA.model.DTOs.ProfileDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.services.EnderecoService;
 import com.SUG.FLORA.services.UsuarioService;
-
-
-import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping(value = "/usuarios")
@@ -40,6 +40,20 @@ public class UsuarioController {
         List<UsuarioDTO> usuariosDTOs = usuarioService.findAllUsuariosDTOsByDeletedFalse();
 
         model.addAttribute("usuarios", usuariosDTOs);
+
+        return "admin/usuarios_admin";
+    }
+    
+    @GetMapping("editar-usuario/{id}")
+    public String getPage(Model model, @PathVariable String id) {
+
+        Usuario u = usuarioService.findById(UUID.fromString(id));
+        System.out.println("Id -> " + id);
+        if(u!=null) {
+        	System.out.println("Editando Usuario -> " + u.getNome());
+        }
+
+    
 
         return "admin/usuarios_admin";
     }
@@ -76,14 +90,17 @@ public class UsuarioController {
             return ResponseEntity.ok().body(usuarioSaved.getCpf());
 
         } catch (AtributoDuplicadoException error) {
+        	error.printStackTrace();
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(error.getLocalizedMessage());
         
         } catch (AtributoInvalidoException error) {
+        	error.printStackTrace();
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error.getLocalizedMessage());
         
         } catch (Exception error) {
+        	error.printStackTrace();
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não foi possível cadastrar o usuário");
         }

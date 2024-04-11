@@ -23,6 +23,8 @@ public class indexController {
     @GetMapping("index")
     public String getPage(@AuthenticationPrincipal Usuario usuario) {
 
+    	System.out.println(usuario.getId());
+    	
         boolean isAdmin = usuario.getAuthorities()
                 .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 

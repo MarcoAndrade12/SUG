@@ -22,6 +22,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		Usuario user = userRepository.findByEmailAndDeletedFalse(username);
 		
 		if (user!=null) {
+			System.out.println(user.getId());
 			return user;
 		} else {
 //			logger.debug("User not found with email: " + info);

@@ -31,28 +31,28 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String email;
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String senha;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
     @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private List<Profile> profiles = new ArrayList<>();
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private boolean consentimento;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String nome;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String sobrenome;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String rg;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String cpf;
 
     @Enumerated(EnumType.STRING)
@@ -60,7 +60,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
     private EnumSexo sexo = EnumSexo.INDEFINIDO;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private EnumStatusUsuario status;
 
     @OneToOne

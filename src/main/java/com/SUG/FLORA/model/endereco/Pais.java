@@ -21,10 +21,10 @@ import lombok.Setter;
 @Setter
 public class Pais extends IntDomain implements DTOConvertible {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String nome;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String sigla;
 
     @OneToMany

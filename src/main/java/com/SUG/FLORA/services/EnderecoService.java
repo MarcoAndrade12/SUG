@@ -66,6 +66,13 @@ public class EnderecoService {
         return (List<CidadeDTO>) ToDTOs(cidadeRepository.findAllByDeletedFalse());
     }
 
+    public Endereco salvar(Endereco e) {
+    	cidadeRepository.save(e.getCidade());
+    	estadoRepository.save(e.getEstado());
+    	paisRepository.save(e.getPais());
+    	return enderecoRepository.save(e);
+    }
+    
     public Endereco findEnderecoById(int id) {
         return enderecoRepository.findById(id).get();
     }

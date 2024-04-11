@@ -50,6 +50,10 @@ public class UsuarioService  implements UserDetailsService{
 
     }
 
+    public Usuario findById(UUID id) {
+    	return usuarioRepository.findFirstById(id);
+    }
+    
     public UsuarioDTO getUsuarioDTOByEmail(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         return usuario.getDTO();
@@ -81,6 +85,7 @@ public class UsuarioService  implements UserDetailsService{
         System.out.println(usuario.getSexo());
         
         try {
+        	enderecoService.salvar(usuario.getEndereco());
             Usuario usuarioSaved = usuarioRepository.save(usuario);
             return usuarioSaved;
         } catch (Exception e) {

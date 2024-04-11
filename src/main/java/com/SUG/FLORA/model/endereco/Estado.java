@@ -20,10 +20,10 @@ import lombok.Setter;
 @Setter
 public class Estado extends IntDomain implements DTOConvertible {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String nome;
 
-    @Column(nullable = false, unique = true, length = 5)
+    @Column(nullable = true, unique = true, length = 5)
     private String sigla;
 
     @OneToMany

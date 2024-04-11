@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class CEP extends IntDomain implements DTOConvertible{
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String numero;
     
     @Column(nullable = true, unique = false)

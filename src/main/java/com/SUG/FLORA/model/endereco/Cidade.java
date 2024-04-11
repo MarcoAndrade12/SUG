@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Cidade extends IntDomain implements DTOConvertible {
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String nome;
 
     @Override

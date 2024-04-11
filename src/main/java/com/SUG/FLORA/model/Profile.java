@@ -17,7 +17,7 @@ public class Profile extends UuidDomain implements GrantedAuthority, DTOConverti
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = true)
 	private String name;
 
 	public String getName() {

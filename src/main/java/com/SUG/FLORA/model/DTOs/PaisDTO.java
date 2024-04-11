@@ -10,10 +10,12 @@ import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.endereco.Pais;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class PaisDTO extends IntDomainDTO implements DTO {
 
     private String nome;

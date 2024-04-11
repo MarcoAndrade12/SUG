@@ -18,15 +18,15 @@ import lombok.EqualsAndHashCode;
 public class Endereco extends IntDomain implements DTOConvertible{
 
     @ManyToOne
-    @JoinColumn(name = "pais_id", nullable = false, unique = false)
+    @JoinColumn(name = "pais_id", nullable = true, unique = false)
     private Pais pais = new Pais();
 
     @ManyToOne
-    @JoinColumn(name = "estado_id", nullable = false, unique = false)
+    @JoinColumn(name = "estado_id", nullable = true, unique = false)
     private Estado estado = new Estado();
 
     @ManyToOne
-    @JoinColumn(name = "cidade_id", nullable = false, unique = false)
+    @JoinColumn(name = "cidade_id", nullable = true, unique = false)
     private Cidade cidade = new Cidade();
 
     public EnderecoDTO getDTO() {
