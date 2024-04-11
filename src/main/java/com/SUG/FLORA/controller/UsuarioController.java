@@ -51,11 +51,13 @@ public class UsuarioController {
         System.out.println("Id -> " + id);
         if(u!=null) {
         	System.out.println("Editando Usuario -> " + u.getNome());
+        	model.addAttribute("u", u);
+            model.addAttribute("sexos", EnumSexo.values());
         }
 
     
 
-        return "admin/usuarios_admin";
+        return "admin/editar_usuario_admin";
     }
 
     @GetMapping("cadastrar")
@@ -67,10 +69,6 @@ public class UsuarioController {
         return "admin/novo_usuario_admin";
     }
 
-    @GetMapping("editar")
-    public String getPageEditarUsuario() {
-        return "admin/editar_usuario_admin";
-    }
 
     @PostMapping("")
     public ResponseEntity<String> novoUsuario(@RequestBody MultiValueMap<String, String> body) {
