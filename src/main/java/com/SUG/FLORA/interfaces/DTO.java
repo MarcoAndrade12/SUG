@@ -4,4 +4,6 @@ public interface DTO {
 
     DTOConvertible getModel();
 
+    void initByModel(Object dtoConvertible);
+
 }

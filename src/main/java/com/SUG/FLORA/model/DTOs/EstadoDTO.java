@@ -37,4 +37,20 @@ public class EstadoDTO extends IntDomainDTO implements DTO {
 		this.nome = body.getFirst("estado");
 	}
 
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Estado) {
+            Estado estado = (Estado) obj;
+            copyDomainOfIntDomain(estado);
+
+            this.nome = estado.getNome();
+            this.cidades = estado.getCidadesDTO();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Estado");
+        }
+
+    }
+
 }

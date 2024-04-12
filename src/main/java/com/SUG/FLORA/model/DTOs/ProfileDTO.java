@@ -29,4 +29,20 @@ public class ProfileDTO extends UuidDomainDTO implements DTO {
         profile.setName(name);
         return profile;
     }
+
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Profile) {
+            Profile profile = (Profile) obj;
+            copyDomainOfUuidDomain(profile);
+            this.name = profile.getName();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Profile");
+        }
+
+    }
+
+
 }

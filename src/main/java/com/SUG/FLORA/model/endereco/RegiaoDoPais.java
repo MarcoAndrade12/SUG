@@ -12,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import com.SUG.FLORA.enums.EnumRegiao;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.RegiaoDoPaisDTO;
 
 import lombok.Getter;
@@ -37,9 +38,13 @@ public class RegiaoDoPais extends IntDomain implements DTOConvertible {
 		DTO.setDeletedDate(getDeletedDate());
 
         DTO.setNome(nome);
-        DTO.setEstados(estados.stream().map(estado -> estado.getDTO()).toList());
+        DTO.setEstados(getEstadosDTO());
 
         return DTO;
+    }
+
+    public List<EstadoDTO> getEstadosDTO() {
+        return estados.stream().map(estado -> estado.getDTO()).toList();
     }
 
 

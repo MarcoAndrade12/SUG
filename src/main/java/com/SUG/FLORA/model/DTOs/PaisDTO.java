@@ -41,4 +41,22 @@ public class PaisDTO extends IntDomainDTO implements DTO {
         return pais;
     }
 
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Pais) {
+            Pais pais = (Pais) obj;
+            copyDomainOfIntDomain(pais);
+
+            this.nome = pais.getNome();
+            this.sigla = pais.getSigla();
+            this.regioes = pais.getRegioesDTO();
+            this.estados = pais.getEstadosDTO();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Pais");
+        }
+
+    }
+
 }

@@ -74,4 +74,29 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
         return usuario;
     }
 
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Usuario) {
+            Usuario usuario = (Usuario) obj;
+            copyDomainOfUuidDomain(usuario);
+
+            this.nome = usuario.getNome();
+            this.sobrenome = usuario.getSobrenome();
+            this.rg = usuario.getRg();
+            this.cpf = usuario.getCpf();
+            this.sexo = usuario.getSexo().toString();
+            this.email = usuario.getEmail();
+            this.profiles = usuario.getProfilesDTO();
+            this.endereco = usuario.getEndereco().getDTO();
+            this.status = usuario.getStatus().toString();
+            this.consentimento = usuario.isConsentimento();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Usuario");
+        }
+
+    }
+
+
 }

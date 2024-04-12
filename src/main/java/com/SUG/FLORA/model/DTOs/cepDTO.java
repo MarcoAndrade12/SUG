@@ -29,4 +29,10 @@ public class cepDTO extends IntDomainDTO implements DTO{
         return cep;
     }
 
+    @Override
+    public void initByModel(Object dtoConvertible) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initByModel'");
+    }
+
 }

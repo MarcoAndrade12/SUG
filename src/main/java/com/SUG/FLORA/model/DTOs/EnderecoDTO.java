@@ -44,4 +44,21 @@ public class EnderecoDTO extends IntDomainDTO implements DTO{
 
     }
 
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Endereco) {
+            Endereco endereco = (Endereco) obj;
+            copyDomainOfIntDomain(endereco);
+
+            this.pais = endereco.getPais().getDTO();
+            this.estado = endereco.getEstado().getDTO();
+            this.cidade = endereco.getCidade().getDTO();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Endereco");
+        }
+
+    }
+
 }

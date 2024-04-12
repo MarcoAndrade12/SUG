@@ -29,4 +29,20 @@ public class RegiaoDoPaisDTO extends IntDomainDTO implements DTO{
         return regiaoDoPais;
     }
 
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof RegiaoDoPais) {
+            RegiaoDoPais regiaoDoPais = (RegiaoDoPais) obj;
+            copyDomainOfIntDomain(regiaoDoPais);
+
+            this.nome = regiaoDoPais.getNome();
+            this.estados = regiaoDoPais.getEstadosDTO();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo RegiaoDoPais");
+        }
+
+    }
+
 }

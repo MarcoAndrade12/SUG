@@ -7,6 +7,7 @@ import org.springframework.util.MultiValueMap;
 
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.IntDomain;
 import com.SUG.FLORA.model.endereco.Cidade;
 
 import lombok.Getter;
@@ -31,6 +32,21 @@ public class CidadeDTO extends IntDomainDTO implements DTO {
         cidade.setNome(nome);
 
         return cidade;
+    }
+
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Cidade) {
+            Cidade cidade = (Cidade) obj;
+            copyDomainOfIntDomain(cidade);
+
+            this.nome = cidade.getNome();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Cidade");
+        }
+
     }
 
 }

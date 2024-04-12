@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.DTOs.CidadeDTO;
 import com.SUG.FLORA.model.DTOs.EstadoDTO;
 
 import lombok.Getter;
@@ -39,8 +40,12 @@ public class Estado extends IntDomain implements DTOConvertible {
 
         DTO.setNome(nome);
         DTO.setSigla(sigla);
-        DTO.setCidades(cidades.stream().map(cidade -> cidade.getDTO()).toList());
+        DTO.setCidades(getCidadesDTO());
         return DTO;
+    }
+
+    public List<CidadeDTO> getCidadesDTO() {
+        return this.cidades.stream().map(cidade -> cidade.getDTO()).toList();
     }
 
 }

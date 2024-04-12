@@ -11,7 +11,9 @@ import jakarta.persistence.OneToMany;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.IntDomain;
+import com.SUG.FLORA.model.DTOs.EstadoDTO;
 import com.SUG.FLORA.model.DTOs.PaisDTO;
+import com.SUG.FLORA.model.DTOs.RegiaoDoPaisDTO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -45,9 +47,17 @@ public class Pais extends IntDomain implements DTOConvertible {
 
         DTO.setNome(nome);
         DTO.setSigla(sigla);
-        DTO.setRegioes(regioes.stream().map(regiao -> regiao.getDTO()).toList());
-        DTO.setEstados(estados.stream().map(estado -> estado.getDTO()).toList());
+        DTO.setRegioes(getRegioesDTO());
+        DTO.setEstados(getEstadosDTO());
 
         return DTO;
+    }
+
+    public List<RegiaoDoPaisDTO> getRegioesDTO() {
+        return regioes.stream().map(regiao -> regiao.getDTO()).toList();
+    }
+
+    public List<EstadoDTO> getEstadosDTO() {
+        return estados.stream().map(estado -> estado.getDTO()).toList();
     }
 }

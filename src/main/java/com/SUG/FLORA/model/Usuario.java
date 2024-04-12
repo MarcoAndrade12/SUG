@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.ProfileDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.model.endereco.Endereco;
 
@@ -75,7 +76,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
         usuarioDTO.setDeleted(isDeleted());
         usuarioDTO.setDeletedDate(getDeletedDate());
         usuarioDTO.setEmail(email);
-        usuarioDTO.setProfiles(profiles.stream().map(profile -> profile.getDTO()).toList());
+        usuarioDTO.setProfiles(getProfilesDTO());
         usuarioDTO.setConsentimento(consentimento);
         usuarioDTO.setNome(nome);
         usuarioDTO.setSobrenome(sobrenome);
@@ -126,6 +127,10 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public List<ProfileDTO> getProfilesDTO() {
+        return profiles.stream().map(profile -> profile.getDTO()).toList();
     }
 
 }
