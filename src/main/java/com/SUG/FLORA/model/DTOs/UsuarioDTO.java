@@ -51,11 +51,8 @@ public class UsuarioDTO extends UuidDomainDTO implements DTO {
 
         Usuario usuario = new Usuario();
         
-        usuario.setId(getId());
-        usuario.setCreationDate(getCreationDate());
-        usuario.setDeleted(isDeleted());
-        usuario.setDeletedDate(getDeletedDate());
-        usuario.setLastUpdate(getLastUpdate());
+        usuario.copyDomainOfUuidDomainDTO(this);
+        
         usuario.setNome(getNome());
         usuario.setSobrenome(getSobrenome());
         usuario.setRg(getRg());

@@ -27,7 +27,7 @@ public class CidadeDTO extends IntDomainDTO implements DTO {
 	@Override
     public Cidade getModel() {
         Cidade cidade = new Cidade();
-        setDomainModel(cidade);
+        cidade.copyDomainOfIntDomainDTO(this);
         cidade.setNome(nome);
 
         return cidade;

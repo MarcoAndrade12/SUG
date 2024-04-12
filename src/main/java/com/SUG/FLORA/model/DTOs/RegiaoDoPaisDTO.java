@@ -21,7 +21,7 @@ public class RegiaoDoPaisDTO extends IntDomainDTO implements DTO{
     public RegiaoDoPais getModel() {
 
         RegiaoDoPais regiaoDoPais = new RegiaoDoPais();
-        setDomainModel(regiaoDoPais);
+        regiaoDoPais.copyDomainOfIntDomainDTO(this);
 
         regiaoDoPais.setNome(nome);
         regiaoDoPais.setEstados(estados.stream().map(estado -> estado.getModel()).toList());

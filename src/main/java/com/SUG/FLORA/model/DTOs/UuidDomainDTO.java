@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.util.MultiValueMap;
 
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.UuidDomain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,14 +21,12 @@ public class UuidDomainDTO {
     private LocalDateTime deletedDate;
     private LocalDateTime lastUpdate;
 
-    public DTOConvertible setDomainModel(DTOConvertible dtoConvertible) {
-        dtoConvertible.setId(id);
-        dtoConvertible.setCreationDate(creationDate);
-        dtoConvertible.setDeleted(deleted);
-        dtoConvertible.setDeletedDate(deletedDate);
-        dtoConvertible.setLastUpdate(lastUpdate);
-
-        return dtoConvertible;
+    public void copyDomainOfUuidDomain(UuidDomain uuidDomain) {
+        setId(uuidDomain.getId());
+        setCreationDate(uuidDomain.getCreationDate());
+        setDeleted(uuidDomain.isDeleted());
+        setDeletedDate(uuidDomain.getDeletedDate());
+        setLastUpdate(uuidDomain.getLastUpdate());
     }
     
 }

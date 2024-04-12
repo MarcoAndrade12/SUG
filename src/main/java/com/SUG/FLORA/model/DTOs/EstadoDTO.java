@@ -25,7 +25,7 @@ public class EstadoDTO extends IntDomainDTO implements DTO {
     @Override
     public Estado getModel() {
         Estado estado = new Estado();
-        setDomainModel(estado);
+        estado.copyDomainOfIntDomainDTO(this);
         estado.setNome(nome);
         estado.setSigla(sigla);
         estado.setCidades(cidades.stream().map(cidade -> cidade.getModel()).toList());

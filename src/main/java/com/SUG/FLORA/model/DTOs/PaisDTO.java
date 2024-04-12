@@ -31,7 +31,7 @@ public class PaisDTO extends IntDomainDTO implements DTO {
     public Pais getModel() {
         Pais pais = new Pais();
 
-        setDomainModel(pais);
+        pais.copyDomainOfIntDomainDTO(this);
 
         pais.setNome(nome);
         pais.setSigla(sigla);

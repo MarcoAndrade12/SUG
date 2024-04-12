@@ -24,11 +24,8 @@ public class ProfileDTO extends UuidDomainDTO implements DTO {
     public Profile getModel() {
 
         Profile profile = new Profile();
-        profile.setId(getId());
-        profile.setCreationDate(getCreationDate());
-        profile.setDeleted(isDeleted());
-        profile.setDeletedDate(getDeletedDate());
-        profile.setLastUpdate(getLastUpdate());
+        profile.copyDomainOfUuidDomainDTO(this);
+
         profile.setName(name);
         return profile;
     }

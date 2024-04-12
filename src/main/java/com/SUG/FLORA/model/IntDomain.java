@@ -5,6 +5,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.SUG.FLORA.interfaces.DTO;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.IntDomainDTO;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -35,4 +39,13 @@ public class IntDomain {
 	@Basic
     @Column
     private LocalDateTime deletedDate;
+
+	public void copyDomainOfIntDomainDTO(IntDomainDTO dto) {
+		setId(dto.getId());
+        setCreationDate(dto.getCreationDate());
+        setDeleted(dto.isDeleted());
+        setDeletedDate(dto.getDeletedDate());
+        setLastUpdate(dto.getLastUpdate());
+	}
+	
 }

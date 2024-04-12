@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.SUG.FLORA.model.DTOs.UuidDomainDTO;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
@@ -39,4 +41,12 @@ public class UuidDomain {
 	@Basic
     @Column
     private LocalDateTime deletedDate;
+
+	public void copyDomainOfUuidDomainDTO(UuidDomainDTO uuidDomainDto) {
+		setId(uuidDomainDto.getId());
+        setCreationDate(uuidDomainDto.getCreationDate());
+        setDeleted(uuidDomainDto.isDeleted());
+        setDeletedDate(uuidDomainDto.getDeletedDate());
+        setLastUpdate(uuidDomainDto.getLastUpdate());
+	}
 }

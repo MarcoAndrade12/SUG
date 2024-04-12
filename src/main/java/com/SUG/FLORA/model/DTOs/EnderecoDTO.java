@@ -35,7 +35,7 @@ public class EnderecoDTO extends IntDomainDTO implements DTO{
     @Override
     public Endereco getModel() {
         Endereco endereco = new Endereco();
-        setDomainModel(endereco);
+        endereco.copyDomainOfIntDomainDTO(this);
         endereco.setPais(pais.getModel());
         endereco.setEstado(estado.getModel());
         endereco.setCidade(cidade.getModel());
