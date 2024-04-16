@@ -8,6 +8,8 @@ import com.SUG.FLORA.model.DTOs.EspecieDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +21,8 @@ public class Especie extends IntDomain implements DTOConvertible {
     @Column(nullable = false, unique = true)
     private String nome_cientifico;
 
-    @Column(nullable = true, unique = false)
+    @OneToMany
+    @JoinColumn(name = "especie_id")
     private List<String> nome_comum = new ArrayList<String>();
 
     @Column(nullable = true, unique = false)

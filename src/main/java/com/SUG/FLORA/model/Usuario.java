@@ -71,10 +71,8 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
     @Override
     public UsuarioDTO getDTO() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(getId());
-        usuarioDTO.setCreationDate(getCreationDate());
-        usuarioDTO.setDeleted(isDeleted());
-        usuarioDTO.setDeletedDate(getDeletedDate());
+        usuarioDTO.copyDomainOfUuidDomain(this);
+        
         usuarioDTO.setEmail(email);
         usuarioDTO.setProfiles(getProfilesDTO());
         usuarioDTO.setConsentimento(consentimento);

@@ -1,12 +1,6 @@
 package com.SUG.FLORA.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-
-import org.hibernate.annotations.GenericGenerator;
-
-import com.SUG.FLORA.interfaces.DTO;
-import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.IntDomainDTO;
 
 import jakarta.persistence.Basic;
