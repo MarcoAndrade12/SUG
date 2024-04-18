@@ -21,8 +21,8 @@ public class Especie extends IntDomain implements DTOConvertible {
     @Column(nullable = false, unique = true)
     private String nome_cientifico;
 
-    @OneToMany
-    @JoinColumn(name = "especie_id")
+    //@OneToMany
+    //@JoinColumn(name = "especie_id")
     private List<String> nome_comum = new ArrayList<String>();
 
     @Column(nullable = true, unique = false)

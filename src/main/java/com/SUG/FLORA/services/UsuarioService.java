@@ -70,19 +70,6 @@ public class UsuarioService  implements UserDetailsService{
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
-        if (EmailExists(usuario.getEmail())) {
-            throw new AtributoDuplicadoException("Já existe um usuario com este email");
-        }
-
-        if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
-            throw new AtributoInvalidoException("O Email não pode ser vazio");
-        }
-
-        if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
-            throw new AtributoInvalidoException("A senha não pode ser vazia");
-        }
-
-        System.out.println(usuario.getSexo());
         
         try {
         	enderecoService.salvar(usuario.getEndereco());

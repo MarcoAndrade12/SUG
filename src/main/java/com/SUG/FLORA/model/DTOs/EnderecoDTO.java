@@ -36,9 +36,9 @@ public class EnderecoDTO extends IntDomainDTO implements DTO{
     public Endereco getModel() {
         Endereco endereco = new Endereco();
         endereco.copyDomainOfIntDomainDTO(this);
-        endereco.setPais(pais.getModel());
-        endereco.setEstado(estado.getModel());
-        endereco.setCidade(cidade.getModel());
+//        endereco.setPais(pais.getModel());
+//        endereco.setEstado(estado.getModel());
+//        endereco.setCidade(cidade.getModel());
 
         return endereco;
 
@@ -51,9 +51,9 @@ public class EnderecoDTO extends IntDomainDTO implements DTO{
             Endereco endereco = (Endereco) obj;
             copyDomainOfIntDomain(endereco);
 
-            this.pais = endereco.getPais().getDTO();
-            this.estado = endereco.getEstado().getDTO();
-            this.cidade = endereco.getCidade().getDTO();
+//            this.pais = endereco.getPais().getDTO();
+//            this.estado = endereco.getEstado().getDTO();
+//            this.cidade = endereco.getCidade().getDTO();
 
         } else {
             throw new IllegalArgumentException("Esperava-se um objeto do tipo Endereco");

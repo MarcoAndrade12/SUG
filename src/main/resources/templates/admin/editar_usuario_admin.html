@@ -23,7 +23,7 @@
     <nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
 
 
-    <form class="row g-3 needs-validation m-5" action="/usuarios" method="post" id="form">
+    <form class="row g-3 needs-validation m-5" method="post" id="form">
         <h2 for="validationCustom03" class="form-label">Dados</h2>
 
 
@@ -70,14 +70,14 @@
 
             <section class="col-md-2" id="pais">
                 <label for="validationCustom04" class="form-label">País</label>
-                <select class="form-select" th:value="${u.endereco.pais.nome}" id="nome" name="pais" required onchange="ListAllEstados(value)">
+                <select class="form-select" th:value="${u.endereco.pais}" id="nome" name="pais" required onchange="ListAllEstados(value)">
                     <option selected value="">Selecione...</option>
                 </select>
             </section>
 
             <section class="col-md-2" id="estado">
                 <label for="validationCustom04" class="form-label">Estado</label>
-                <select class="form-select" id="nome" th:value="${u.endereco.estado.nome}" name="estado" required onchange="ListAllCidades(value)">
+                <select class="form-select" id="nome" th:value="${u.endereco.estado}" name="estado" required onchange="ListAllCidades(value)">
                     <option selected disabled value="">Selecione...</option>
                     <option>São Paulo</option>
                 </select>
@@ -86,7 +86,7 @@
 
             <section class="col-md-2" id="cidade">
                 <label for="validationCustom04" class="form-label">Cidade</label>
-                <select class="form-select" id="nome" th:value="${u.endereco.cidade.nome}" name="cidade" required>
+                <select class="form-select" id="nome" th:value="${u.endereco.cidade}" name="cidade" required>
                     <option selected disabled value="">Selecione...</option>
                 </select>
             </section>
@@ -101,9 +101,9 @@
     </form>
 <script th:inline="javascript">
 	/*<![CDATA[*/
-	var pais = /*[[${u.endereco.pais.nome}]]*/'';
-	var estado = /*[[${u.endereco.estado.nome}]]*/'';
-	var cidade = /*[[${u.endereco.cidade.nome}]]*/'';
+	var pais = /*[[${u.endereco.pais}]]*/'';
+	var estado = /*[[${u.endereco.estado}]]*/'';
+	var cidade = /*[[${u.endereco.cidade}]]*/'';
 	ListAllPais(pais,estado,cidade);
 	/*]]>*/
 	

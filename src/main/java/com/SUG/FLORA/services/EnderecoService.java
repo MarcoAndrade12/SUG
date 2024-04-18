@@ -70,32 +70,32 @@ public class EnderecoService {
 
     public Endereco salvar(Endereco e) {
     	
-    	if (!cidadeRepository.existsByNomeIgnoreCase(e.getCidade().getNome())) {
-    		System.out.println("Cidade não existe");
-    		
-    		e.setCidade(cidadeRepository.save(e.getCidade()));
-    		e.getEstado().getCidades().add(e.getCidade());
-    	} else {
-    		e.setCidade(cidadeRepository.findByNome(e.getCidade().getNome()));
-    	}
-
-    	if (!estadoRepository.existsByNomeIgnoreCase(e.getEstado().getNome())) {    
-    		System.out.println("Estado não existe");
-
-    		e.setEstado(estadoRepository.save(e.getEstado()));  
-    		e.getPais().getEstados().add(e.getEstado());
-    	} else {
-    		e.setEstado(estadoRepository.findByNome(e.getEstado().getNome()));    		
-    	}
-
-    	
-    	if (!paisRepository.existsByNomeIgnoreCase(e.getPais().getNome())) {
-    		System.out.println("Pais não existe");
-
-    		e.setPais(paisRepository.save(e.getPais()));
-    	} else {
-    		e.setPais(paisRepository.findByNome(e.getPais().getNome()));
-    	}
+//    	if (!cidadeRepository.existsByNomeIgnoreCase(e.getCidade().getNome())) {
+//    		System.out.println("Cidade não existe");
+//    		
+//    		e.setCidade(cidadeRepository.save(e.getCidade()));
+//    		e.getEstado().getCidades().add(e.getCidade());
+//    	} else {
+//    		e.setCidade(cidadeRepository.findByNome(e.getCidade().getNome()));
+//    	}
+//
+//    	if (!estadoRepository.existsByNomeIgnoreCase(e.getEstado().getNome())) {    
+//    		System.out.println("Estado não existe");
+//
+//    		e.setEstado(estadoRepository.save(e.getEstado()));  
+//    		e.getPais().getEstados().add(e.getEstado());
+//    	} else {
+//    		e.setEstado(estadoRepository.findByNome(e.getEstado().getNome()));    		
+//    	}
+//
+//    	
+//    	if (!paisRepository.existsByNomeIgnoreCase(e.getPais().getNome())) {
+//    		System.out.println("Pais não existe");
+//
+//    		e.setPais(paisRepository.save(e.getPais()));
+//    	} else {
+//    		e.setPais(paisRepository.findByNome(e.getPais().getNome()));
+//    	}
     	
     	return enderecoRepository.save(e);
     }

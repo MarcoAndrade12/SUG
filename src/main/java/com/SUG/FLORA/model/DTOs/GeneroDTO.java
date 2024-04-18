@@ -9,7 +9,7 @@ import com.SUG.FLORA.model.Genero;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
-@Entity
+
 @Data
 public class GeneroDTO extends IntDomainDTO implements DTO {
     
