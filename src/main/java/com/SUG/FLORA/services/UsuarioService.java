@@ -12,21 +12,18 @@ import org.springframework.stereotype.Service;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
-import com.SUG.FLORA.exceptions.AtributoDuplicadoException;
 import com.SUG.FLORA.exceptions.AtributoInvalidoException;
 import com.SUG.FLORA.exceptions.AtributoJaExisteException;
 import com.SUG.FLORA.exceptions.UsuarioNaoEncontrado;
+import com.SUG.FLORA.model.Endereco;
 import com.SUG.FLORA.model.Profile;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
-import com.SUG.FLORA.model.endereco.Endereco;
 import com.SUG.FLORA.repository.UsuarioRepository;
 
-import jakarta.transaction.Transactional;
-
 @Service
-public class UsuarioService  implements UserDetailsService{
-    
+public class UsuarioService implements UserDetailsService {
+
     @Autowired
     UsuarioRepository usuarioRepository;
 
@@ -36,24 +33,23 @@ public class UsuarioService  implements UserDetailsService{
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public List<UsuarioDTO> findAllUsuariosDTOsByDeletedFalse(){
+    public List<UsuarioDTO> findAllUsuariosDTOsByDeletedFalse() {
 
         List<Usuario> usuarios = usuarioRepository.findAllByDeletedFalse();
 
         List<UsuarioDTO> usuarioDTOs;
 
         usuarioDTOs = usuarios.stream().map(
-            usuario -> usuario.getDTO()
-        ).toList();
+                usuario -> usuario.getDTO()).toList();
 
         return usuarioDTOs;
 
     }
 
     public Usuario findById(UUID id) {
-    	return usuarioRepository.findFirstById(id);
+        return usuarioRepository.findFirstById(id);
     }
-    
+
     public UsuarioDTO getUsuarioDTOByEmail(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         return usuario.getDTO();
@@ -66,13 +62,13 @@ public class UsuarioService  implements UserDetailsService{
 
     public boolean EmailExists(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        return usuario!= null;
+        return usuario != null;
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
-        
+
         try {
-        	enderecoService.salvar(usuario.getEndereco());
+            enderecoService.salvar(usuario.getEndereco());
             Usuario usuarioSaved = usuarioRepository.save(usuario);
             return usuarioSaved;
         } catch (Exception e) {
@@ -98,7 +94,7 @@ public class UsuarioService  implements UserDetailsService{
 
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getEmail() != email) {
+        } else if (usuario.getEmail() != email) {
             usuario.setEmail(email);
             return usuario;
         } else {
@@ -115,7 +111,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getNome() != nome) {
+        } else if (usuario.getNome() != nome) {
             usuario.setNome(nome);
             return usuario;
         } else {
@@ -131,7 +127,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getSobrenome() != sobrenome) {
+        } else if (usuario.getSobrenome() != sobrenome) {
             usuario.setSobrenome(sobrenome);
             return usuario;
         } else {
@@ -147,7 +143,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getRg() != rg) {
+        } else if (usuario.getRg() != rg) {
             usuario.setRg(rg);
             return usuario;
         } else {
@@ -163,7 +159,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getCpf() != cpf) {
+        } else if (usuario.getCpf() != cpf) {
             usuario.setCpf(cpf);
             return usuario;
         } else {
@@ -176,7 +172,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getSexo() != sexo) {
+        } else if (usuario.getSexo() != sexo) {
             usuario.setSexo(sexo);
             return usuario;
         } else {
@@ -189,7 +185,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.isConsentimento() != consentimento) {
+        } else if (usuario.isConsentimento() != consentimento) {
             usuario.setConsentimento(consentimento);
             return usuario;
         } else {
@@ -198,11 +194,11 @@ public class UsuarioService  implements UserDetailsService{
     }
 
     public Usuario alterarStatusUsuario(UUID id, EnumStatusUsuario status) throws UsuarioNaoEncontrado {
-        
+
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getStatus() != status) {
+        } else if (usuario.getStatus() != status) {
             usuario.setStatus(status);
             return usuario;
         } else {
@@ -215,9 +211,9 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(enderecoService.findEnderecoById(endereco.getId()) == null) {
+        } else if (enderecoService.findEnderecoById(endereco.getId()) == null) {
             throw new AtributoInvalidoException("Endereço não foi salvo no banco anteriormente");
-        } else if(usuario.getEndereco() != endereco) {
+        } else if (usuario.getEndereco() != endereco) {
             usuario.setEndereco(endereco);
             return usuario;
         } else {
@@ -225,13 +221,12 @@ public class UsuarioService  implements UserDetailsService{
         }
     }
 
-
     public Usuario AddProfileUsuario(UUID id, Profile profile) throws UsuarioNaoEncontrado {
 
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(!usuario.getProfiles().contains(profile)) {
+        } else if (!usuario.getProfiles().contains(profile)) {
             usuario.getProfiles().add(profile);
             return usuario;
         } else {
@@ -244,7 +239,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getProfiles().contains(profile)) {
+        } else if (usuario.getProfiles().contains(profile)) {
             usuario.getProfiles().remove(profile);
             return usuario;
         } else {
@@ -257,7 +252,7 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findById(id).get();
         if (usuario == null) {
             throw new UsuarioNaoEncontrado("Usuário não encontrado");
-        } else if(usuario.getSenha() != senha) {
+        } else if (usuario.getSenha() != senha) {
             usuario.setSenha(senha);
             return usuario;
         } else {
@@ -270,8 +265,5 @@ public class UsuarioService  implements UserDetailsService{
         Usuario usuario = usuarioRepository.findByEmailAndDeletedFalse(username);
         return usuario;
     }
-
-    
-
 
 }

@@ -12,7 +12,6 @@ import com.SUG.FLORA.enums.EnumStatusUsuario;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.ProfileDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
-import com.SUG.FLORA.model.endereco.Endereco;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -72,7 +71,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
     public UsuarioDTO getDTO() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.copyDomainOfUuidDomain(this);
-        
+
         usuarioDTO.setEmail(email);
         usuarioDTO.setProfiles(getProfilesDTO());
         usuarioDTO.setConsentimento(consentimento);

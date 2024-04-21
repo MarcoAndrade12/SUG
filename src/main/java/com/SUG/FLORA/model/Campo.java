@@ -2,7 +2,6 @@ package com.SUG.FLORA.model;
 
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
-import com.SUG.FLORA.model.endereco.Endereco;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -15,7 +14,6 @@ public class Campo extends UuidDomain implements DTOConvertible {
 
     private String nome;
     private Endereco endereco;
-
 
     @Override
     public DTO getDTO() {

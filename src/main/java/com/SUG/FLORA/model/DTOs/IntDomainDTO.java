@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class IntDomainDTO {
 
-    private int id;
+    private long id;
     private LocalDateTime creationDate;
     private boolean deleted;
     private LocalDateTime deletedDate;
@@ -26,5 +26,5 @@ public class IntDomainDTO {
         setDeletedDate(intDomain.getDeletedDate());
         setLastUpdate(intDomain.getLastUpdate());
     }
-    
+
 }
