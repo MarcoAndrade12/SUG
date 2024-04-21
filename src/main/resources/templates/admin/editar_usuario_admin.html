@@ -12,9 +12,12 @@
         crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+	
     <script src="/js/recursos/modalOK.js"></script>
     <script src="/js/recursos/formSerializer.js"></script>
     <script src="/js/recursos/formRequiredVerify.js"></script>
+	<script src="/js/functions.js"></script>
     <script src="/js/admin/editar_usuario_admin.js"></script>
     <title>Sug-Flora</title>
 
@@ -23,7 +26,7 @@
     <nav th:replace="~{fragments/navbarAdmin :: navbarAdmin}"></nav>
 
 
-    <form class="row g-3 needs-validation m-5" action="/usuarios" method="post" id="form">
+    <form class="row g-3 needs-validation m-5" method="post" id="form">
         <h2 for="validationCustom03" class="form-label">Dados</h2>
 
 
@@ -47,13 +50,20 @@
 
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">RG</label>
-            <input type="text" class="form-control" th:value="${u.rg}" id="rg" name="rg" placeholder="Número do RG do usuário" required>
+            <input type="text" oninput="$(this).mask('00.000.000-0');" class="form-control" th:value="${u.rg}" id="rg" name="rg" placeholder="Número do RG do usuário" required>
 
         </div>
         <div class="col-md-4">
             <label for="validationCustom02" class="form-label">CPF</label>
-            <input type="text" class="form-control" th:value="${u.cpf}" id="cpf" name="cpf" placeholder="Número do CPF do usuário" required>
-
+            <input type="text" class="form-control" onblur="validateCPF()" onInput="$(this).mask('000.000.000-00');" th:value="${u.cpf}" id="cpf" name="cpf" placeholder="Número do CPF do usuário" required>
+			
+			<script>
+				function validateCPF(){
+					var cpf = document.getElementById("cpf");
+					if(!validarCPF(cpf.value)) cpf.value='';
+				}
+			</script>
+			
         </div>
         <div class="col-md-4" id="sexo">
             <label for="validationCustom04" class="form-label">Sexo</label>
@@ -70,14 +80,14 @@
 
             <section class="col-md-2" id="pais">
                 <label for="validationCustom04" class="form-label">País</label>
-                <select class="form-select" th:value="${u.endereco.pais.nome}" id="nome" name="pais" required onchange="ListAllEstados(value)">
+                <select class="form-select" th:value="${u.endereco.pais}" id="nome" name="pais" required onchange="ListAllEstados(value)">
                     <option selected value="">Selecione...</option>
                 </select>
             </section>
 
             <section class="col-md-2" id="estado">
                 <label for="validationCustom04" class="form-label">Estado</label>
-                <select class="form-select" id="nome" th:value="${u.endereco.estado.nome}" name="estado" required onchange="ListAllCidades(value)">
+                <select class="form-select" id="nome" th:value="${u.endereco.estado}" name="estado" required onchange="ListAllCidades(value)">
                     <option selected disabled value="">Selecione...</option>
                     <option>São Paulo</option>
                 </select>
@@ -86,7 +96,7 @@
 
             <section class="col-md-2" id="cidade">
                 <label for="validationCustom04" class="form-label">Cidade</label>
-                <select class="form-select" id="nome" th:value="${u.endereco.cidade.nome}" name="cidade" required>
+                <select class="form-select" id="nome" th:value="${u.endereco.cidade}" name="cidade" required>
                     <option selected disabled value="">Selecione...</option>
                 </select>
             </section>
@@ -101,9 +111,9 @@
     </form>
 <script th:inline="javascript">
 	/*<![CDATA[*/
-	var pais = /*[[${u.endereco.pais.nome}]]*/'';
-	var estado = /*[[${u.endereco.estado.nome}]]*/'';
-	var cidade = /*[[${u.endereco.cidade.nome}]]*/'';
+	var pais = /*[[${u.endereco.pais}]]*/'';
+	var estado = /*[[${u.endereco.estado}]]*/'';
+	var cidade = /*[[${u.endereco.cidade}]]*/'';
 	ListAllPais(pais,estado,cidade);
 	/*]]>*/
 	

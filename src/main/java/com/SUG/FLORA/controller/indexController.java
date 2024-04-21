@@ -34,5 +34,35 @@ public class indexController {
 
         return "index";
     }
+    
+    @GetMapping("temp")
+    public String getPage2(@AuthenticationPrincipal Usuario usuario) {
+
+    	System.out.println(usuario.getId());
+    	
+        boolean isAdmin = usuario.getAuthorities()
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return "temp/login";
+        }
+
+        return "index";
+    }
+    
+    @GetMapping("temp2")
+    public String getPage3(@AuthenticationPrincipal Usuario usuario) {
+
+    	System.out.println(usuario.getId());
+    	
+        boolean isAdmin = usuario.getAuthorities()
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return "temp/editar-cadastro";
+        }
+
+        return "index";
+    }
 
 }

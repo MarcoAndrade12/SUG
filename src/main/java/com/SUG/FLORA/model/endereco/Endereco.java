@@ -17,18 +17,24 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Endereco extends IntDomain implements DTOConvertible{
 
-    @ManyToOne
-    @JoinColumn(name = "pais_id", nullable = true, unique = false)
-    private Pais pais = new Pais();
+//    @ManyToOne
+//    @JoinColumn(name = "pais_id", nullable = true, unique = false)
+//    private Pais pais = new Pais();
+//
+//    @ManyToOne
+//    @JoinColumn(name = "estado_id", nullable = true, unique = false)
+//    private Estado estado = new Estado();
+//
+//    @ManyToOne
+//    @JoinColumn(name = "cidade_id", nullable = true, unique = false)
+//    private Cidade cidade = new Cidade();
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id", nullable = true, unique = false)
-    private Estado estado = new Estado();
-
-    @ManyToOne
-    @JoinColumn(name = "cidade_id", nullable = true, unique = false)
-    private Cidade cidade = new Cidade();
-
+	
+	private String pais;
+	private String estado;
+	private String cidade;
+	
+	
     public EnderecoDTO getDTO() {
         EnderecoDTO DTO = new EnderecoDTO();
         DTO.setId(getId());
@@ -36,9 +42,9 @@ public class Endereco extends IntDomain implements DTOConvertible{
         DTO.setDeleted(isDeleted());
         DTO.setDeletedDate(getDeletedDate());
 
-        DTO.setPais(pais.getDTO());
-        DTO.setEstado(estado.getDTO());
-        DTO.setCidade(cidade.getDTO());
+//        DTO.setPais(pais.getDTO());
+//        DTO.setEstado(estado.getDTO());
+//        DTO.setCidade(cidade.getDTO());
 
         return DTO;
     }
