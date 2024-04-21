@@ -8,11 +8,13 @@ import com.SUG.FLORA.model.Genero;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class GeneroDTO extends IntDomainDTO implements DTO {
-    
+
     private String nome_cientifico;
     private List<EspecieDTO> especies = new ArrayList<>();
 
@@ -24,7 +26,6 @@ public class GeneroDTO extends IntDomainDTO implements DTO {
         genero.setEspecies(especies.stream().map(especie -> especie.getModel()).toList());
         return genero;
     }
-
 
     @Override
     public void initByModel(Object obj) {
@@ -41,7 +42,5 @@ public class GeneroDTO extends IntDomainDTO implements DTO {
         }
 
     }
-    
-
 
 }

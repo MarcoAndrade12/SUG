@@ -18,15 +18,15 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Genero extends IntDomain implements DTOConvertible{
-    
+public class Genero extends IntDomain implements DTOConvertible {
+
     @Column(nullable = false, unique = true)
     private String nome_cientifico;
 
     @OneToMany
     @JoinColumn(name = "genero_id")
     private List<Especie> especies = new ArrayList<>();
-    
+
     @Override
     public GeneroDTO getDTO() {
 
@@ -41,5 +41,5 @@ public class Genero extends IntDomain implements DTOConvertible{
     public List<EspecieDTO> getEspeciesDTO() {
         return this.especies.stream().map(especies -> especies.getDTO()).toList();
     }
-    
+
 }

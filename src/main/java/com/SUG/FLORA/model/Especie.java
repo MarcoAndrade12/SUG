@@ -6,7 +6,9 @@ import java.util.List;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.EspecieDTO;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -17,18 +19,17 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Especie extends IntDomain implements DTOConvertible {
-    
+
     @Column(nullable = false, unique = true)
     private String nome_cientifico;
 
-    @OneToMany
-    @JoinColumn(name = "especie_id")
+    @ElementCollection
+    @CollectionTable(name = "nome_comum", joinColumns = @JoinColumn(name = "especie_id"))
     private List<String> nome_comum = new ArrayList<String>();
 
     @Column(nullable = true, unique = false)
-    private String autor;   
-    
-    
+    private String autor;
+
     @Override
     public EspecieDTO getDTO() {
         EspecieDTO especieDTO = new EspecieDTO();
@@ -40,5 +41,5 @@ public class Especie extends IntDomain implements DTOConvertible {
 
         return especieDTO;
     }
-    
+
 }

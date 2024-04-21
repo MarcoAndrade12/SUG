@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.FamiliaDTO;
+import com.SUG.FLORA.model.DTOs.GeneroDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Familia extends IntDomain implements DTOConvertible{
+public class Familia extends IntDomain implements DTOConvertible {
 
     @Column(nullable = false, unique = true)
     private String nome_cientifico;
@@ -25,9 +27,17 @@ public class Familia extends IntDomain implements DTOConvertible{
     private List<Genero> generos;
 
     @Override
-    public DTO getDTO() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDTO'");
+    public FamiliaDTO getDTO() {
+        FamiliaDTO familiaDTO = new FamiliaDTO();
+        familiaDTO.copyDomainOfIntDomain(this);
+        familiaDTO.setNome_cientifico(nome_cientifico);
+        familiaDTO.setGeneros(getGenerosDTO());
+
+        return familiaDTO;
     }
-    
+
+    public List<GeneroDTO> getGenerosDTO() {
+        return generos.stream().map(genero -> genero.getDTO()).toList();
+    }
+
 }
