@@ -8,9 +8,9 @@ import com.SUG.FLORA.model.DTOs.EnderecoDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Entity
 public class Endereco extends IntDomain implements DTOConvertible {
 
     // @ManyToOne

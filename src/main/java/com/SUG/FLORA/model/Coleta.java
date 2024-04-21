@@ -17,6 +17,14 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Coleta extends UuidDomain implements DTOConvertible {
 
+    @ManyToOne
+    @JoinColumn(name = "projeto_id")
+    private Projeto projeto;
+
+    @ManyToOne
+    @JoinColumn(name = "campo_id")
+    private Campo campo;
+
     @Column(nullable = false, unique = false)
     private LocalDate data_coleta;
 

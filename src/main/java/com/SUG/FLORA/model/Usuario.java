@@ -22,6 +22,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -63,7 +64,7 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
     @Column(nullable = true, unique = false)
     private EnumStatusUsuario status;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = true, unique = false)
     private Endereco endereco;
 
