@@ -5,12 +5,13 @@ import java.util.List;
 
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.CampoDTO;
+import com.SUG.FLORA.model.DTOs.ProjetoDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,9 +28,18 @@ public class Projeto extends UuidDomain implements DTOConvertible {
     private List<Campo> campos = new ArrayList<>();
 
     @Override
-    public DTO getDTO() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDTO'");
+    public ProjetoDTO getDTO() {
+        ProjetoDTO projetoDTO = new ProjetoDTO();
+        projetoDTO.copyDomainOfUuidDomain(this);
+        projetoDTO.setNome(nome);
+        projetoDTO.setDescricao(descricao);
+        projetoDTO.setCampos(getCamposDTO());
+
+        return projetoDTO;
+    }
+
+    public List<CampoDTO> getCamposDTO() {
+        return campos.stream().map(campo -> campo.getDTO()).toList();
     }
 
 }

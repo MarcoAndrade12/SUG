@@ -25,6 +25,8 @@ import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.services.EnderecoService;
 import com.SUG.FLORA.services.UsuarioService;
 
+import jakarta.transaction.Transactional;
+
 @Controller
 @RequestMapping(value = "/usuarios")
 public class UsuarioController {
@@ -60,6 +62,7 @@ public class UsuarioController {
     }
 
     @PostMapping("editar-usuario/{id}")
+    @Transactional
     public String salvarEdicaoUsuario(Model model, @PathVariable String id,
             @RequestBody MultiValueMap<String, String> body) {
 
