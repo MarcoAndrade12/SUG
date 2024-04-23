@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.naming.directory.InvalidAttributeIdentifierException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.UUIDEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
@@ -133,6 +137,27 @@ public class UsuarioController {
             System.out.println(error.getLocalizedMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error.getMessage());
         }
+
+    }
+
+
+    @PostMapping("excluir_usuario")
+    public ResponseEntity<String> excluirUsuario(@RequestBody MultiValueMap<String, String> body){
+        
+        try {
+
+            Usuario usuario = usuarioService.findById(UUID.fromString(body.getFirst("id")));
+            if (usuario.isAccountNonExpired()) {
+                System.out.println(usuario.getNome());
+            }
+            return ResponseEntity.ok().body("Usuario deletado com sucesso");
+
+        } catch (Exception erro) {
+            System.out.println(erro);
+            return ResponseEntity.badRequest().body(erro.getLocalizedMessage());
+        }
+
+
 
     }
 
