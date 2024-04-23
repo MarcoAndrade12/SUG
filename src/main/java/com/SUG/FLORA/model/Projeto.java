@@ -3,6 +3,8 @@ package com.SUG.FLORA.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.ManyToAny;
+
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.CampoDTO;
@@ -12,6 +14,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,8 +23,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Projeto extends UuidDomain implements DTOConvertible {
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuarioDono;
+
     private String nome;
     private String descricao;
+
+    @ManyToMany
+    @JoinTable(name = "projeto_usuario", joinColumns = @JoinColumn(name = "projeto_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+    private List<Usuario> usuarios = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "projeto_campo", joinColumns = @JoinColumn(name = "projeto_id"), inverseJoinColumns = @JoinColumn(name = "campo_id"))
