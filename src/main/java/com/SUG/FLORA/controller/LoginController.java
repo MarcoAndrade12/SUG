@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class LoginController {
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     @GetMapping("login")
     public String getLogin() {
 

@@ -19,7 +19,7 @@ public class adminUsuarioController {
     @Autowired
     UsuarioService usuarioService;
     
-    @GetMapping("")
+    @GetMapping("test")
     public String getPage(Model model){
 
         List<UsuarioDTO> usuariosDTOs = usuarioService.findAllUsuariosDTOsByDeletedFalse();
