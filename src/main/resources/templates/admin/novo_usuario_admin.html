@@ -58,11 +58,18 @@
 
 			
 			<script>
-							function validateCPF(){
-								var cpf = document.getElementById("cpf");
-								if(!validarCPF(cpf.value))   cpf.value='';
-							}
-						</script>
+                function validateCPF() {
+                    var cpfInput = document.getElementById("cpf");
+                    var cpfValue = cpfInput.value;
+                    cpfInput.style.color = "black";
+            
+                    if (!validarCPF(cpfValue)) {
+                        cpfInput.style.color = "red"; // Altera a cor do texto para vermelho
+                        alert("CPF inválido. Por favor, digite novamente."); // Exibe uma mensagem de erro
+                    }
+                }
+            </script>
+            
         </div>
         <div class="col-md-4" id="sexo">
             <label for="validationCustom04" class="form-label">Sexo</label>

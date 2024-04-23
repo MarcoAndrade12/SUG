@@ -58,11 +58,17 @@
             <input type="text" class="form-control" onblur="validateCPF()" onInput="$(this).mask('000.000.000-00');" th:value="${u.cpf}" id="cpf" name="cpf" placeholder="Número do CPF do usuário" required>
 			
 			<script>
-				function validateCPF(){
-					var cpf = document.getElementById("cpf");
-					if(!validarCPF(cpf.value)) cpf.value='';
-				}
-			</script>
+                function validateCPF() {
+                    var cpfInput = document.getElementById("cpf");
+                    var cpfValue = cpfInput.value;
+                    cpfInput.style.color = "black";
+            
+                    if (!validarCPF(cpfValue)) {
+                        cpfInput.style.color = "red"; // Altera a cor do texto para vermelho
+                        alert("CPF inválido. Por favor, digite novamente."); // Exibe uma mensagem de erro
+                    }
+                }
+            </script>
 			
         </div>
         <div class="col-md-4" id="sexo">
