@@ -1,16 +1,11 @@
 package com.SUG.FLORA.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.SUG.FLORA.model.Profile;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.repository.ProfileRepository;
 import com.SUG.FLORA.services.UsuarioService;
@@ -24,12 +19,14 @@ public class indexController {
 
     @Autowired
     ProfileRepository profileRepository;
-    
-    @GetMapping("/index")
-    public String getPage(@AuthenticationPrincipal Usuario usuario){
 
+    @GetMapping("index")
+    public String getPage(@AuthenticationPrincipal Usuario usuario) {
+
+    	System.out.println(usuario.getId());
+    	
         boolean isAdmin = usuario.getAuthorities()
-            .stream().anyMatch(profile -> profile.equals("ROLE_ADMIN"));
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin) {
             return "admin/index_admin";
@@ -37,6 +34,35 @@ public class indexController {
 
         return "index";
     }
+    
+    @GetMapping("temp")
+    public String getPage2(@AuthenticationPrincipal Usuario usuario) {
 
+    	System.out.println(usuario.getId());
+    	
+        boolean isAdmin = usuario.getAuthorities()
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return "temp/login";
+        }
+
+        return "index";
+    }
+    
+    @GetMapping("temp2")
+    public String getPage3(@AuthenticationPrincipal Usuario usuario) {
+
+    	System.out.println(usuario.getId());
+    	
+        boolean isAdmin = usuario.getAuthorities()
+                .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return "temp/editar-cadastro";
+        }
+
+        return "index";
+    }
 
 }

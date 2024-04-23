@@ -1,6 +1,14 @@
 package com.SUG.FLORA.enums;
 
-public enum EnumRegiao {
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import com.SUG.FLORA.interfaces.DTO;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.interfaces.DTOEnum;
+import com.SUG.FLORA.interfaces.DTOEnumconvertible;
+
+public enum EnumRegiao implements DTOEnumconvertible{
     NORTE,
     SUL,
     LESTE,
@@ -10,5 +18,12 @@ public enum EnumRegiao {
     NOROESTE,
     CENTROESTE,
     CENTROSUL,
-    LESTENORDESTE
+    LESTENORDESTE;
+
+    @Override
+    public DTOEnum getDTO() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDTO'");
+    }
+
 }

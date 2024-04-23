@@ -1,11 +1,48 @@
 package com.SUG.FLORA.model.DTOs;
 
-import lombok.Data;
+import org.springframework.util.MultiValueMap;
+
+import com.SUG.FLORA.interfaces.DTO;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.Profile;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProfileDTO extends DomainDTO {
+@NoArgsConstructor
+public class ProfileDTO extends UuidDomainDTO implements DTO {
     private String name;
+
+    public ProfileDTO(MultiValueMap<String, String> body){
+        this.name = body.getFirst("primeiro_nome");
+    }  
+
+    @Override
+    public Profile getModel() {
+
+        Profile profile = new Profile();
+        profile.copyDomainOfUuidDomainDTO(this);
+
+        profile.setName(name);
+        return profile;
+    }
+
+    @Override
+    public void initByModel(Object obj) {
+
+        if (obj instanceof Profile) {
+            Profile profile = (Profile) obj;
+            copyDomainOfUuidDomain(profile);
+            this.name = profile.getName();
+
+        } else {
+            throw new IllegalArgumentException("Esperava-se um objeto do tipo Profile");
+        }
+
+    }
+
+
 }

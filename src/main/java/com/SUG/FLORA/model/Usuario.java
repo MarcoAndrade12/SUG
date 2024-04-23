@@ -3,19 +3,15 @@ package com.SUG.FLORA.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
+import com.SUG.FLORA.interfaces.DTOConvertible;
+import com.SUG.FLORA.model.DTOs.ProfileDTO;
 import com.SUG.FLORA.model.DTOs.UsuarioDTO;
-import com.SUG.FLORA.model.endereco.Endereco;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,70 +26,68 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Usuario extends Domain implements UserDetails{
+public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String email;
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String senha;
-    
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE},fetch = FetchType.EAGER)
-    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name="usuario_id"), inverseJoinColumns = @JoinColumn(name="profile_id"))
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "profile_id"))
     private List<Profile> profiles = new ArrayList<>();
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private boolean consentimento;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String nome;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private String sobrenome;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String rg;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String cpf;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true, unique = false)
-    private EnumSexo sexo;
+    private EnumSexo sexo = EnumSexo.INDEFINIDO;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = false)
+    @Column(nullable = true, unique = false)
     private EnumStatusUsuario status;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = true, unique = false)
     private Endereco endereco;
-    
-    
-    public UsuarioDTO getDTO(){
+
+    @Override
+    public UsuarioDTO getDTO() {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(getId());
-        usuarioDTO.setCreationDate(getCreationDate());
-        usuarioDTO.setDeleted(isDeleted());
-        usuarioDTO.setDeletedDate(getDeletedDate());
+        usuarioDTO.copyDomainOfUuidDomain(this);
+
         usuarioDTO.setEmail(email);
-        usuarioDTO.setProfiles(profiles.stream().map(profile -> profile.getDTO()).toList());
+        usuarioDTO.setProfiles(getProfilesDTO());
         usuarioDTO.setConsentimento(consentimento);
         usuarioDTO.setNome(nome);
         usuarioDTO.setSobrenome(sobrenome);
         usuarioDTO.setRg(rg);
         usuarioDTO.setCpf(cpf);
-        usuarioDTO.setSexo(sexo);
-        usuarioDTO.setStatus(status);
+
+        usuarioDTO.setSexo(sexo.toString());
+
+        usuarioDTO.setStatus(status.toString());
 
         if (endereco != null) {
             usuarioDTO.setEndereco(endereco.getDTO());
         }
-
 
         return usuarioDTO;
     }
@@ -115,7 +109,7 @@ public class Usuario extends Domain implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;    
+        return true;
     }
 
     @Override
@@ -133,6 +127,8 @@ public class Usuario extends Domain implements UserDetails{
         return true;
     }
 
-   
-    
+    public List<ProfileDTO> getProfilesDTO() {
+        return profiles.stream().map(profile -> profile.getDTO()).toList();
+    }
+
 }

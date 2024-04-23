@@ -253,6 +253,51 @@
     position: static;
 }
 
+.ptop-1rem {
+    padding-top: 1rem;
+}
+
+
+.tabela {
+    width: -webkit-fill-available;;
+}
+
+.cabeçalho {
+    background-color: red;
+    color: white;
+    padding: 0.5rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    display: flex;
+    gap: 3rem;
+    justify-content: space-around;
+}
+
+.corpo-tabela {
+    margin-top: 0.3rem;
+    background-color: #f8ffcf;
+}
+
+.linha-tabela {
+    background-color: #25995c;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    /* gap: 3rem;     */
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.item-linha {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 9em; /* Defina o tamanho máximo desejado */
+    display: block;
+    width: -webkit-fill-available;
+    text-align: center;
+
+}
 
 @media screen and (min-width: 490px) {
     .icon-burguer {
