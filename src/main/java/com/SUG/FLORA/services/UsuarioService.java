@@ -266,4 +266,8 @@ public class UsuarioService implements UserDetailsService {
         return usuario;
     }
 
+    public Usuario findUsuarioByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
 }
