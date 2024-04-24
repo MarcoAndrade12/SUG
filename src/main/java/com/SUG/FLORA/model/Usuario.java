@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -49,6 +50,9 @@ public class Usuario extends UuidDomain implements UserDetails, DTOConvertible {
 
     @Column(nullable = true, unique = false)
     private String sobrenome;
+
+    @Column(nullable = true, unique = false)
+    private LocalDate data_nascimento;
 
     @Column(nullable = true, unique = true)
     private String rg;

@@ -21,6 +21,14 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
     private GeneroDTO genero;
     private EspecieDTO especie;
 
+    public boolean identificada() {
+        if (familia != null & genero != null & especie != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public Coleta getModel() {
         Coleta coleta = new Coleta();
