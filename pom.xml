@@ -140,8 +140,8 @@
 		        <version>2.11.0</version>
 		        <configuration>
 		            <schemaVersion>v2</schemaVersion>
-		            <resourceGroup>sugflora_group</resourceGroup>
-		            <appName>sugflora</appName>
+		            <resourceGroup>Sug-Flora</resourceGroup>
+		            <appName>Sug-Flora</appName>
 		            <pricingTier>B1</pricingTier>
 		            <region>Brazil South</region>
 		            <runtime>
