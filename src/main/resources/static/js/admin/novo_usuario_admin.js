@@ -113,3 +113,20 @@ function EnviarNovoUsuario(form) {
         .catch(error => console.log("Erro: ", error));
 
 }
+
+function checkPassword(){
+
+    let senha1 = document.getElementById("senha1")
+    let senha2 = document.getElementById("senha2")
+
+    if (senha1.value !== senha2.value) {
+        
+        senha1.style.backgroundColor = 'red'
+        senha2.style.backgroundColor = 'red'
+        
+    } else {
+        senha1.style.backgroundColor = 'white'
+        senha2.style.backgroundColor = 'white'
+    }
+
+}
