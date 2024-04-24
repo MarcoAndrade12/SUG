@@ -43,6 +43,8 @@ public class Projeto extends UuidDomain implements DTOConvertible {
     @JoinColumn(name = "projeto_id")
     private List<Coleta> coletas = new ArrayList<>();
 
+    private boolean ativo = true;
+
     @Override
     public ProjetoDTO getDTO() {
         ProjetoDTO projetoDTO = new ProjetoDTO();

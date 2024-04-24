@@ -1,6 +1,7 @@
 package com.SUG.FLORA.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,6 +75,15 @@ public class ProjetosController {
             return "users/add-projeto-users";
         }
 
+    }
+
+    @GetMapping("/meuprojeto/{id}")
+    public String getMeuProjeto(@PathVariable String id, Model model){
+        Projeto projeto = projetoService.findById(UUID.fromString(id));
+        
+        model.addAttribute("projeto", projeto.getDTO());
+
+        return "users/listar-coletas-users";
     }
 
 }

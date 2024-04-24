@@ -58,4 +58,16 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
 
     }
 
+    public String getNomeEspecie(){
+        return familia.getNome_cientifico() + " " + genero.getNome_cientifico() + " " + especie.getNome_cientifico();
+    }
+
+    public String isIdentificada(){
+        if (identificada()) {
+            return "IDENTIFICADA";
+        } else {
+            return "NÃO IDENTIFICADA";
+        }
+    }
+
 }

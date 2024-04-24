@@ -36,4 +36,8 @@ public class ProjetoService {
 
     }
 
+    public Projeto findById(UUID id) {
+        return projetoRepository.findById(id).get();
+    }
+
 }
