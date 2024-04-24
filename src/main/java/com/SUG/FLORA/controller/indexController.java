@@ -23,23 +23,24 @@ public class indexController {
     @GetMapping("index")
     public String getPage(@AuthenticationPrincipal Usuario usuario) {
 
-    	System.out.println(usuario.getId());
-    	
+        System.out.println(usuario.getId());
+
         boolean isAdmin = usuario.getAuthorities()
                 .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 
         if (isAdmin) {
             return "admin/index_admin";
+        } else {
+            return "redirect:/projetos";
         }
 
-        return "index";
     }
-    
+
     @GetMapping("temp")
     public String getPage2(@AuthenticationPrincipal Usuario usuario) {
 
-    	System.out.println(usuario.getId());
-    	
+        System.out.println(usuario.getId());
+
         boolean isAdmin = usuario.getAuthorities()
                 .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 
@@ -49,12 +50,12 @@ public class indexController {
 
         return "index";
     }
-    
+
     @GetMapping("temp2")
     public String getPage3(@AuthenticationPrincipal Usuario usuario) {
 
-    	System.out.println(usuario.getId());
-    	
+        System.out.println(usuario.getId());
+
         boolean isAdmin = usuario.getAuthorities()
                 .stream().anyMatch(profile -> profile.getAuthority().equals("ROLE_ADMIN"));
 
@@ -63,6 +64,12 @@ public class indexController {
         }
 
         return "index";
+    }
+
+    @GetMapping("temp/cadastrar")
+    public String getPage4() {
+
+        return "temp/cadastro";
     }
 
 }
