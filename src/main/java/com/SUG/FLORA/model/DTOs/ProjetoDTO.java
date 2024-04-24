@@ -17,6 +17,7 @@ public class ProjetoDTO extends UuidDomainDTO implements DTO {
     private String nome;
     private String descricao;
     private List<CampoDTO> campos = new ArrayList<>();
+    private List<ColetaDTO> coletas = new ArrayList<>();
 
     @Override
     public Projeto getModel() {

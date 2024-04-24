@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -37,6 +38,10 @@ public class Projeto extends UuidDomain implements DTOConvertible {
     @ManyToMany
     @JoinTable(name = "projeto_campo", joinColumns = @JoinColumn(name = "projeto_id"), inverseJoinColumns = @JoinColumn(name = "campo_id"))
     private List<Campo> campos = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "projeto_id")
+    private List<Coleta> coletas = new ArrayList<>();
 
     @Override
     public ProjetoDTO getDTO() {
