@@ -1,6 +1,6 @@
 package com.SUG.FLORA;
 
-import com.SUG.FLORA.database.DatabaseConnection;
+import com.SUG.FLORA.DatabaseConnection; // Corrigindo o import para a classe DatabaseConnection
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
