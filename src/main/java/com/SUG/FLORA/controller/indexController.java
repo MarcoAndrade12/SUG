@@ -1,12 +1,16 @@
 package com.SUG.FLORA.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SUG.FLORA.model.Usuario;
+import com.SUG.FLORA.model.DTOs.UsuarioDTO;
 import com.SUG.FLORA.repository.ProfileRepository;
 import com.SUG.FLORA.services.UsuarioService;
 
@@ -34,6 +38,16 @@ public class indexController {
             return "redirect:/projetos";
         }
 
+    }
+    
+    @GetMapping("portal-admin")
+    public String getPagePortal(Model model) {
+
+        List<UsuarioDTO> usuariosDTOs = usuarioService.findAllUsuariosDTOsByDeletedFalse();
+
+        model.addAttribute("usuarios", usuariosDTOs);
+
+        return "portal-admin";
     }
 
     @GetMapping("temp")

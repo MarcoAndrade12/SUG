@@ -47,9 +47,11 @@ public class UsuarioController {
 
         model.addAttribute("usuarios", usuariosDTOs);
 
-        return "admin/usuarios_admin";
+        return "admin/list-usuario";
     }
 
+    
+    
     @GetMapping("editar-usuario/{id}")
     public String getPage(Model model, @PathVariable String id) {
 
@@ -111,7 +113,8 @@ public class UsuarioController {
         EnumSexo[] sexoDTOs = EnumSexo.values();
         model.addAttribute("sexos", sexoDTOs);
 
-        return "admin/novo_usuario_admin";
+      //  return "admin/novo_usuario_admin";
+        return "admin/add-usuario";
     }
 
     @PostMapping("")
