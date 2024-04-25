@@ -20,6 +20,8 @@ public class Coleta extends UuidDomain implements DTOConvertible {
     @Column(nullable = false, unique = false)
     private LocalDate data_coleta;
 
+    private int codigoId;
+
     @ManyToOne
     @JoinColumn(name = "familia_id")
     private Familia familia;
@@ -37,7 +39,7 @@ public class Coleta extends UuidDomain implements DTOConvertible {
 
         ColetaDTO coletaDTO = new ColetaDTO();
         coletaDTO.copyDomainOfUuidDomain(this);
-
+        coletaDTO.setCodigoId(codigoId);
         coletaDTO.setData_coleta(data_coleta);
         coletaDTO.setFamilia(familia.getDTO());
         coletaDTO.setGenero(genero.getDTO());

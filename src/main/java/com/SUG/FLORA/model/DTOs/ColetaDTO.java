@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class ColetaDTO extends UuidDomainDTO implements DTO {
 
+    private int codigoId;
     private LocalDate data_coleta;
     private FamiliaDTO familia;
     private GeneroDTO genero;
@@ -33,7 +34,7 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
     public Coleta getModel() {
         Coleta coleta = new Coleta();
         coleta.copyDomainOfUuidDomainDTO(this);
-
+        coleta.setCodigoId(codigoId);
         coleta.setData_coleta(data_coleta);
         coleta.setFamilia(familia.getModel());
         coleta.setGenero(genero.getModel());
@@ -48,6 +49,7 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
         if (dtoConvertible instanceof Coleta) {
             Coleta obj = (Coleta) dtoConvertible;
             copyDomainOfUuidDomain(obj);
+            setCodigoId(obj.getCodigoId());
             setData_coleta(obj.getData_coleta());
             setFamilia(obj.getFamilia().getDTO());
             setGenero(obj.getGenero().getDTO());
