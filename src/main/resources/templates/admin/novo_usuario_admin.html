@@ -61,10 +61,12 @@
                 function validateCPF() {
                     var cpfInput = document.getElementById("cpf");
                     var cpfValue = cpfInput.value;
-                    cpfInput.style.color = "black";
-            
+                    cpfInput.style.backgroundColor = "white"; // Resetando a cor de fundo da caixa
+                    cpfInput.style.color = "black"; // Resetando a cor do texto
+                        
                     if (!validarCPF(cpfValue)) {
-                        cpfInput.style.color = "red"; // Altera a cor do texto para vermelho
+                        cpfInput.style.backgroundColor = "#fa6b72"; // Altera a cor de fundo da caixa para vermelho
+                        cpfInput.value = ""; // Limpa o texto dentro da caixa
                         alert("CPF inválido. Por favor, digite novamente."); // Exibe uma mensagem de erro
                     }
                 }
