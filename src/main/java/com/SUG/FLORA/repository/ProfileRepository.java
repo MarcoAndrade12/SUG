@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.SUG.FLORA.model.Profile;
 
 @Repository
-public interface ProfileRepository extends JpaRepository<Profile,UUID> {
+public interface ProfileRepository extends JpaRepository<Profile, UUID> {
 
     Profile findByName(String string);
-    
+
 }

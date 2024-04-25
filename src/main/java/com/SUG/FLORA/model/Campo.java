@@ -1,5 +1,8 @@
 package com.SUG.FLORA.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.CampoDTO;
@@ -8,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +26,10 @@ public class Campo extends UuidDomain implements DTOConvertible {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_id", nullable = false, unique = false)
     private Endereco endereco;
+
+    @OneToMany
+    @JoinColumn(name = "campo_id")
+    private List<Coleta> coletas = new ArrayList<>();
 
     @Override
     public CampoDTO getDTO() {

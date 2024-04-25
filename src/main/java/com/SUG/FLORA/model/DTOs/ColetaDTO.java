@@ -21,6 +21,14 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
     private GeneroDTO genero;
     private EspecieDTO especie;
 
+    public boolean identificada() {
+        if (familia != null & genero != null & especie != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public Coleta getModel() {
         Coleta coleta = new Coleta();
@@ -48,6 +56,18 @@ public class ColetaDTO extends UuidDomainDTO implements DTO {
             throw new IllegalArgumentException("Esperava-se um objeto do tipo Coleta");
         }
 
+    }
+
+    public String getNomeEspecie(){
+        return familia.getNome_cientifico() + " " + genero.getNome_cientifico() + " " + especie.getNome_cientifico();
+    }
+
+    public String isIdentificada(){
+        if (identificada()) {
+            return "IDENTIFICADA";
+        } else {
+            return "NÃO IDENTIFICADA";
+        }
     }
 
 }
