@@ -1,13 +1,12 @@
 package com.SUG.FLORA.controller;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.naming.directory.InvalidAttributeIdentifierException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.UUIDEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.SUG.FLORA.enums.EnumSexo;
 import com.SUG.FLORA.enums.EnumStatusUsuario;
@@ -90,6 +89,22 @@ public class UsuarioController {
         return "admin/editar_usuario_admin";
     }
 
+    @GetMapping("remover-usuario/{id}")
+    @Transactional
+    public String removerUsuario( RedirectAttributes redirectAttrs, @PathVariable String id
+           ) throws IOException {
+
+        Usuario u = usuarioService.findById(UUID.fromString(id));
+
+        u.setDeleted(true);
+        u.setDeletedDate(LocalDateTime.now());
+
+        
+        redirectAttrs.addFlashAttribute("message", "success:Usuário removido com sucesso");
+        
+        return "redirect:/usuarios";
+    }
+    
     @GetMapping("cadastrar")
     public String getPageNovoUsuario(Model model) {
 
