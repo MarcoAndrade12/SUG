@@ -1,4 +1,5 @@
 package com.SUG.FLORA;
+
 import com.SUG.FLORA.database.DatabaseConnection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FloraApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FloraApplication.class, args);
-		DatabaseConnection.main(args);
+    public static void main(String[] args) {
+        // Inicializa a conexão com o banco de dados antes de iniciar a aplicação Spring Boot
+        DatabaseConnection.main(args);
 
-	}
-
+        // Inicia a aplicação Spring Boot
+        SpringApplication.run(FloraApplication.class, args);
+    }
 }
