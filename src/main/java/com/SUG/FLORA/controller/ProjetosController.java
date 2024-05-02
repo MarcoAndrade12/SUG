@@ -81,14 +81,6 @@ public class ProjetosController {
     @GetMapping("/meuprojeto/{id}")
     public String getMeuProjeto(@PathVariable String id, Model model){
         Projeto projeto = projetoService.findById(UUID.fromString(id));
-        
-        for (Coleta coleta : projeto.getColetas()) {
-            System.out.println(coleta.getFamilia().getNome_cientifico());
-            System.out.println(coleta.getGenero().getNome_cientifico());
-            System.out.println(coleta.getEspecie().getNome_cientifico());
-            System.out.println(coleta.getEspecie().getNome_comum());
-            System.out.println(coleta.getId());
-        }
 
         model.addAttribute("projeto", projeto.getDTO());
 

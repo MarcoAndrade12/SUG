@@ -108,15 +108,18 @@
 
                                         <tr class="position-static">
                                             <!-- PROJETO ID -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4" hidden>
-                                                <input name="projeto_id" id="projeto_id" class="form-control" type="text"
-                                                    placeholder="projeto" th:value="${projeto.getId()}" required>
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4"
+                                                hidden>
+                                                <input name="projeto_id" id="projeto_id" class="form-control"
+                                                    type="text" placeholder="projeto" th:value="${projeto.getId()}"
+                                                    required>
                                             </td>
 
                                             <!-- CODIGO ID -->
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="codigo_id" id="codigo_id" class="form-control" type="number"
-                                                    placeholder="cod" required th:value="${projeto.getColetas().size()+1}">
+                                                <input name="codigo_id" id="codigo_id" class="form-control"
+                                                    type="number" placeholder="cod" required
+                                                    th:value="${projeto.getColetas().size()+1}">
                                             </td>
 
                                             <!-- COLETA -->
@@ -135,8 +138,8 @@
 
                                             <!-- ESPECIE -->
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input required name="especie" id="especie" class="form-control" type="text"
-                                                    placeholder="Espécie" list="especie_list"
+                                                <input required name="especie" id="especie" class="form-control"
+                                                    type="text" placeholder="Espécie" list="especie_list"
                                                     onblur="PopularNomesComuns()">
 
                                                 <datalist id="especie_list">
@@ -146,15 +149,14 @@
 
                                             <!-- GENERO -->
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input required name="genero" id="genero" class="form-control" type="text"
-                                                    placeholder="Genero"
-                                                    >
+                                                <input required name="genero" id="genero" class="form-control"
+                                                    type="text" placeholder="Genero">
                                             </td>
 
                                             <!-- FAMILIA -->
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input required name="familia" id="familia" class="form-control" type="text"
-                                                    placeholder="Família">
+                                                <input required name="familia" id="familia" class="form-control"
+                                                    type="text" placeholder="Família">
                                             </td>
 
                                             <!-- CAMPO -->
@@ -162,11 +164,11 @@
                                                 <input required name="campo" id="campo" class="form-control" type="text"
                                                     placeholder="Campo">
                                             </td>
-                                            
+
                                             <!-- Data da coleta -->
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input required name="data_coleta" id="data_coleta" class="form-control" type="date"
-                                                    placeholder="Data da coleta">
+                                                <input required name="data_coleta" id="data_coleta" class="form-control"
+                                                    type="date" placeholder="Data da coleta">
                                             </td>
                                             <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
                                                 <button class="btn btn-success" data-list-view="*" type="submit">
@@ -177,111 +179,119 @@
                                     </form>
 
                                     <tr th:each="coleta : ${projeto.getColetas()}" class="position-static">
-                                        <!-- ID -->
-                                        <td hidden class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getId()}"
-                                                th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
-                                                
-                                                class="form-control"></a>
-                                        </td>
+                                        <form action="/coletas/excluir" method="post">
 
-                                        <!-- CODIGO -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getCodigoId()}"
-                                                th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
-                                                class="form-control"></a>
-                                        </td>
-                                        
-                                        <!-- NOME COLETA -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <a th:text="${coleta.getNomeEspecie()}"
-                                                th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
-                                                class="text-decoration-none fw-solid fs-0"></a>
-                                        </td>
+                                            <!-- PROJETO ID -->
+                                            <td hidden
+                                                class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="projeto_id" th:value="${projeto.getId()}"
+                                                    class="form-control"></a>
+                                            </td>
 
-                                        <!-- NOME COMUM
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getEspecie().getNome_comum()}"
-                                                class="form-control"></a>
-                                        </td> -->
+                                            <!-- CODIGO -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="codigo" th:value="${coleta.getCodigoId()}"
+                                                    class="form-control"></a>
+                                            </td>
 
-                                        <!-- ESPECIE -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getEspecie().getNome_cientifico()}"
-                                                th:href="'/generos/' + ${coleta.getEspecie().getId()}"
-                                                class="form-control"></a>
-                                        </td>
+                                            <!-- NOME COLETA -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <a th:text="${coleta.getNomeEspecie()}"
+                                                    class="text-decoration-none fw-solid fs-0"></a>
+                                            </td>
 
-                                        <!-- GENERO -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getGenero().getNome_cientifico()}"
-                                                th:href="'/generos/' + ${coleta.getGenero().getId()}"
-                                                class="form-control"></a>
-                                        </td>
+                                            <!-- NOME COMUM
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input th:value="${coleta.getEspecie().getNome_comum()}"
+                                                    class="form-control"></a>
+                                            </td> -->
 
-                                        <!-- FAMILIA -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getFamilia().getNome_cientifico()}"
-                                                th:href="'/familias/' + ${coleta.getFamilia().getId()}"
-                                                class="form-control">
-                                        </td>
+                                            <!-- ESPECIE -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="especie"
+                                                    th:value="${coleta.getEspecie().getNome_cientifico()}"
+                                                    class="form-control"></a>
+                                            </td>
 
-                                        <!-- CAMPO -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getCampo().getNome()}"
-                                                class="form-control">
-                                        </td>
+                                            <!-- GENERO -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="genero"
+                                                    th:value="${coleta.getGenero().getNome_cientifico()}"
+                                                    class="form-control"></a>
+                                            </td>
 
-                                        <!-- DATA COLETA -->
-                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <input th:value="${coleta.getData_coleta()}"
-                                                class="form-control" type="date"></a>
-                                        </td>
-                                        <td class="align-middle text-end white-space-nowrap pe-0 action">
-                                            <div class="font-sans-serif btn-reveal-trigger position-static">
-                                                <button
-                                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                                    type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                    aria-haspopup="true" aria-expanded="false"
-                                                    data-bs-reference="parent"><span
-                                                        class="fas fa-ellipsis-h fs--2"></span></button>
-                                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                                    <a class="dropdown-item" href="#!">Editar</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Excluir</a>
-                                                </div>
-                                            </div>
-                                        </td>
+                                            <!-- FAMILIA -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="familia"
+                                                    th:value="${coleta.getFamilia().getNome_cientifico()}"
+                                                    class="form-control">
+                                            </td>
 
-                                    </tr>
+                                            <!-- CAMPO -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="campo" th:value="${coleta.getCampo().getNome()}"
+                                                    class="form-control">
+                                            </td>
 
-                                    
-
-                                </tbody>
-                            </table>
-
+                                            <!-- DATA COLETA -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="data_coleta" th:value="${coleta.getData_coleta()}"
+                                                    class="form-control" type="date"></a>
+                                            </td>
+                                            <td class="align-middle text-end white-space-nowrap pe-0 action">
+                                                <div class="font-sans-serif btn-reveal-trigger position-static">
+                                                    <button
+                                                        class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                                        type="button" data-bs-toggle="dropdown" data-boundary="window"
+                                                        aria-haspopup="true" aria-expanded="false"
+                                                        data-bs-reference="parent"><span
+                                                            class="fas fa-ellipsis-h fs--2"></span></button>
+                                                    <div class="dropdown-menu dropdown-menu-end py-2">
+                                                        <button class="dropdown-item">Salvar</button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <form action="/coletas/excluir02" method="post">
+                                                            <!-- ID -->
+                                                            <td hidden
+                                                                class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                                <input name="coleta_id" th:value="${coleta.getId()}"
+                                                                    class="form-control"></a>
+                                                            </td>
+                                                            <button class="dropdown-item text-danger" type="submit">Excluir</button>
+                                                        </form>
                         </div>
-                        <div
-                            class="d-flex flex-wrap align-items-center justify-content-between py-3 pe-0 fs--1 border-bottom border-200">
-                            <div class="d-flex">
-                                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
-                                    data-list-info="data-list-info"></p>
-                                <a class="fw-semi-bold" href="#!" data-list-view="*">Ver todos<span
-                                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
-                                    class="fw-semi-bold d-none" href="#!" data-list-view="less">Ver menos<span
-                                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
-                            </div>
-                            <div class="d-flex">
-                                <button class="page-link" data-list-pagination="prev"><span
-                                        class="fas fa-chevron-left"></span></button>
-                                <ul class="mb-0 pagination"></ul>
-                                <button class="page-link pe-0" data-list-pagination="next"><span
-                                        class="fas fa-chevron-right"></span></button>
-                            </div>
-                        </div>
+                    </div>
+                    </td>
+                    </form>
+
+                    </tr>
+
+
+
+                    </tbody>
+                    </table>
+
+                </div>
+                <div
+                    class="d-flex flex-wrap align-items-center justify-content-between py-3 pe-0 fs--1 border-bottom border-200">
+                    <div class="d-flex">
+                        <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">
+                        </p>
+                        <a class="fw-semi-bold" href="#!" data-list-view="*">Ver todos<span
+                                class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
+                            class="fw-semi-bold d-none" href="#!" data-list-view="less">Ver menos<span
+                                class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                    <div class="d-flex">
+                        <button class="page-link" data-list-pagination="prev"><span
+                                class="fas fa-chevron-left"></span></button>
+                        <ul class="mb-0 pagination"></ul>
+                        <button class="page-link pe-0" data-list-pagination="next"><span
+                                class="fas fa-chevron-right"></span></button>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
 
         </script>

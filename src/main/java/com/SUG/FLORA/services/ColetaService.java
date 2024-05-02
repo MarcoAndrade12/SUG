@@ -1,6 +1,7 @@
 package com.SUG.FLORA.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,15 @@ public class ColetaService {
 
     public void saveColeta(Coleta coleta) {
         coletaRepository.save(coleta);
+    }
+
+    public Coleta findById(UUID id) {
+        Coleta coleta = coletaRepository.findById(id).get();
+        return coleta;
+    }
+
+    public void delete(Coleta coleta) {
+        coletaRepository.delete(coleta);
     }   
 
 }

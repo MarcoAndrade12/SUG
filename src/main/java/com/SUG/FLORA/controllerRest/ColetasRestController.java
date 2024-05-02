@@ -30,6 +30,8 @@ import com.SUG.FLORA.services.ColetaService;
 import com.SUG.FLORA.services.ProjetoService;
 
 import io.micrometer.core.ipc.http.HttpSender.Response;
+import jakarta.transaction.Transactional;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -97,6 +99,40 @@ public class ColetasRestController {
 
         return "redirect:/projetos/meuprojeto/" + post.getFirst("projeto_id");
     }
-    
+
+    @PostMapping("excluir")
+    public String deleteColetaById(@RequestBody MultiValueMap<String, String> post) {
+
+        Coleta coleta = coletaService.findById(UUID.fromString(post.getFirst("coleta_id")));
+
+        coletaService.delete(coleta);
+
+        return "redirect:/projetos/meuprojeto/" + post.getFirst("projeto_id");
+
+    }
+
+    @PostMapping("update")
+    @Transactional
+    public String UpdateColeta(@RequestBody MultiValueMap<String, String> post) {
+        Coleta coleta = coletaService.findById(UUID.fromString(post.getFirst("coleta_id")));
+
+        Especie especie = coletaService.findOrCreateEspecieByNome(post.getFirst("especie"));
+        Genero genero = coletaService.findOrCreateGeneroByNome(post.getFirst("genero"));
+        genero = coletaService.setEspecieOfGenero(especie, genero);
+
+        Familia familia = coletaService.findOrCreateFamiliaByNome(post.getFirst("familia"));
+        familia = coletaService.setGeneroOfFamilia(genero, familia);
+
+        Campo campo = campoService.findOrCreateByNome(post.getFirst("campo"));
+        
+        coleta.setCodigoId(Integer.parseInt(post.getFirst("codigo")));
+        coleta.setFamilia(familia);
+        coleta.setGenero(genero);
+        coleta.setEspecie(especie);
+        coleta.setCampo(campo);
+        coleta.setData_coleta(LocalDate.parse(post.getFirst("data_coleta")));
+
+        return "redirect:/projetos/meuprojeto/" + post.getFirst("projeto_id");
+    }
 
 }
