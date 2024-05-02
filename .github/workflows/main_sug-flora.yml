@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy WAR app to Azure Web App - Sug-Flora
+name: Build and deploy WAR app to Azure Web App - sug-flora
 
 on:
   push:
@@ -48,15 +48,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_83480FED0EDC45F1BBEA79371C385F1C }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3B66BC99376049C7A23EA99314C746BD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_96B6E6F65CA74DF2AEFAC3C1C06CB511 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1EBC7FF518AD41A5AEE5E66AEA22F24F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_10907DBF97FB46B7AC7BCAC7F529E29F }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_14721B515AF340D0875E478CA733E235 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Sug-Flora'
+          app-name: 'sug-flora'
           slot-name: 'Production'
           package: '*.war'
           

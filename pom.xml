@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.4</version>
+		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.SUG</groupId>
@@ -129,44 +129,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.microsoft.azure</groupId>
-				<artifactId>azure-webapp-maven-plugin</artifactId>
-				<version>1.9.0</version>
-			</plugin>
-		    <plugin>
-		        <groupId>com.microsoft.azure</groupId>
-		        <artifactId>azure-webapp-maven-plugin</artifactId>
-		        <version>2.11.0</version>
-		        <configuration>
-		            <schemaVersion>v2</schemaVersion>
-		            <resourceGroup>Sug-Flora</resourceGroup>
-		            <appName>Sug-Flora</appName>
-		            <pricingTier>B1</pricingTier>
-		            <region>Brazil South</region>
-		            <runtime>
-		                <os>Linux</os>
-		                <javaVersion>Java 17</javaVersion>
-		                <webContainer>Java SE</webContainer>
-		            </runtime>
-		            <appSettings>
-		                <property>
-		                    <name>JAVA_OPTS</name>
-		                    <value>-Dserver.port=80</value>
-		                </property>
-		            </appSettings>
-		            <deployment>
-		                <resources>
-		                    <resource>
-		                        <directory>${project.basedir}/target</directory>
-		                        <includes>
-		                            <include>*.jar</include>
-		                        </includes>
-		                    </resource>
-		                </resources>
-		            </deployment>
-		        </configuration>
-		    </plugin>
 		</plugins>
 	</build>
 </project>
