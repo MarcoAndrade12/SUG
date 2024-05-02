@@ -24,7 +24,7 @@ public class Campo extends UuidDomain implements DTOConvertible {
     private String descricao;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "endereco_id", nullable = false, unique = false)
+    @JoinColumn(name = "endereco_id", nullable = true, unique = false)
     private Endereco endereco;
 
     @OneToMany
@@ -38,7 +38,10 @@ public class Campo extends UuidDomain implements DTOConvertible {
         campoDTO.copyDomainOfUuidDomain(this);
         campoDTO.setNome(nome);
         campoDTO.setDescricao(descricao);
-        campoDTO.setEnderecoDTO(endereco.getDTO());
+
+        if (endereco != null) {
+            campoDTO.setEnderecoDTO(endereco.getDTO());
+        }
 
         return campoDTO;
     }

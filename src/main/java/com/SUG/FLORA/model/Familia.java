@@ -1,5 +1,6 @@
 package com.SUG.FLORA.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.SUG.FLORA.interfaces.DTO;
@@ -24,7 +25,7 @@ public class Familia extends IntDomain implements DTOConvertible {
 
     @OneToMany
     @JoinColumn(name = "familia_id")
-    private List<Genero> generos;
+    private List<Genero> generos = new ArrayList<>();
 
     @Override
     public FamiliaDTO getDTO() {

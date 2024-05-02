@@ -16,4 +16,7 @@ public interface EspecieRepository extends JpaRepository<Especie, Integer> {
 
     @Query(value = "SELECT nome_comum FROM especie e WHERE e.nome_cientifico = :nomeCientifico", nativeQuery = true)
     List<String> findAllNomeComumByNomeCientifico(String nomeCientifico);
+    
+    @Query(value = "SELECT * FROM especie e WHERE e.nome_cientifico = :nomeCientifico", nativeQuery = true)
+    Especie findBynome_cientifico(String nomeCientifico);
 }

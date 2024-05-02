@@ -47,7 +47,7 @@
                 <nav class="mb-2" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#!">SUG Flora</a></li>
-                        <li class="breadcrumb-item"><a href="#!">Projetos</a></li>
+                        <li class="breadcrumb-item"><a href="/projetos">Projetos</a></li>
                         <li class="breadcrumb-item active">Lista de coletas</li>
                     </ol>
                 </nav>
@@ -80,20 +80,23 @@
                             <table class="table fs--1 mb-0 border-top border-200">
                                 <thead>
                                     <tr>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="task"
+                                        <th class="sort align-middle ps-1" scope="col" data-sort="task"
                                             style="width:12%;">CÓDIGO</th>
-                                        <th class="sort white-space-nowrap align-middle ps-0" scope="col"
+                                        <th class="sort white-space-nowrap align-middle ps-10" scope="col"
                                             data-sort="projectName" style="width:30%;">COLETA</th>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="deadline"
-                                            style="width:15%;">NOME COMUM</th>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="deadline"
+                                        <!-- <th class="sort align-middle ps-3" scope="col" data-sort="deadline"
+                                            style="width:15%;">NOME COMUM</th> -->
+                                        <th class="sort align-middle ps-7" scope="col" data-sort="deadline"
                                             style="width:15%;">ESPÉCIE</th>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="deadline"
+                                        <th class="sort align-middle ps-7" scope="col" data-sort="deadline"
                                             style="width:15%;">GÊNERO</th>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="task"
+                                        <th class="sort align-middle ps-7" scope="col" data-sort="task"
                                             style="width:12%;">FAMÍLIA</th>
-                                        <th class="sort align-middle ps-3" scope="col" data-sort="task"
+                                        <th class="sort align-middle ps-7" scope="col" data-sort="task"
                                             style="width:12%;">CAMPO</th>
+                                        <th class="sort align-middle text-end" scope="col" data-sort="statuses"
+                                            style="width:10%;">DATA COLETA
+                                        </th>
                                         <th class="sort align-middle text-end" scope="col" data-sort="statuses"
                                             style="width:10%;">SITUAÇÃO
                                         </th>
@@ -101,29 +104,138 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list" id="table-latest-review-body">
+                                    <form action="/coletas/nova_coleta" method="post">
+
+                                        <tr class="position-static">
+                                            <!-- PROJETO ID -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4" hidden>
+                                                <input name="projeto_id" id="projeto_id" class="form-control" type="text"
+                                                    placeholder="projeto" th:value="${projeto.getId()}" required>
+                                            </td>
+
+                                            <!-- CODIGO ID -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input name="codigo_id" id="codigo_id" class="form-control" type="number"
+                                                    placeholder="cod" required th:value="${projeto.getColetas().size()+1}">
+                                            </td>
+
+                                            <!-- COLETA -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <a class="text-decoration-none fw-solid fs-0" id="nomeColeta"></a>
+                                            </td>
+
+                                            <!-- NOME COMUM 
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="nome_comum" list="nome_comum_list" id="nome_comum"
+                                                    class="form-control" type="text" placeholder="Nome comum">
+                                                <datalist id="nome_comum_list">
+                                                    <option value="Teste1"></option>
+                                                </datalist>
+                                            </td> -->
+
+                                            <!-- ESPECIE -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="especie" id="especie" class="form-control" type="text"
+                                                    placeholder="Espécie" list="especie_list"
+                                                    onblur="PopularNomesComuns()">
+
+                                                <datalist id="especie_list">
+                                                    <option value="Teste1"></option>
+                                                </datalist>
+                                            </td>
+
+                                            <!-- GENERO -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="genero" id="genero" class="form-control" type="text"
+                                                    placeholder="Genero"
+                                                    >
+                                            </td>
+
+                                            <!-- FAMILIA -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="familia" id="familia" class="form-control" type="text"
+                                                    placeholder="Família">
+                                            </td>
+
+                                            <!-- CAMPO -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="campo" id="campo" class="form-control" type="text"
+                                                    placeholder="Campo">
+                                            </td>
+                                            
+                                            <!-- Data da coleta -->
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <input required name="data_coleta" id="data_coleta" class="form-control" type="date"
+                                                    placeholder="Data da coleta">
+                                            </td>
+                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                                <button class="btn btn-success" data-list-view="*" type="submit">
+                                                    + Salvar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </form>
+
                                     <tr th:each="coleta : ${projeto.getColetas()}" class="position-static">
+                                        <!-- ID -->
+                                        <td hidden class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                            <input th:value="${coleta.getId()}"
+                                                th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
+                                                
+                                                class="form-control"></a>
+                                        </td>
+
+                                        <!-- CODIGO -->
+                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                            <input th:value="${coleta.getCodigoId()}"
+                                                th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
+                                                class="form-control"></a>
+                                        </td>
+                                        
+                                        <!-- NOME COLETA -->
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
                                             <a th:text="${coleta.getNomeEspecie()}"
                                                 th:href="'/coletas/minhacoleta/' + ${coleta.getId()}"
-                                                class="text-decoration-none fw-bold fs-0"></a>
+                                                class="text-decoration-none fw-solid fs-0"></a>
                                         </td>
+
+                                        <!-- NOME COMUM
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <a th:text="${coleta.getEspecie().getNome_comum()}"
-                                                class="text-decoration-none fw-bold fs-0"></a>
+                                            <input th:value="${coleta.getEspecie().getNome_comum()}"
+                                                class="form-control"></a>
+                                        </td> -->
+
+                                        <!-- ESPECIE -->
+                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                            <input th:value="${coleta.getEspecie().getNome_cientifico()}"
+                                                th:href="'/generos/' + ${coleta.getEspecie().getId()}"
+                                                class="form-control"></a>
                                         </td>
+
+                                        <!-- GENERO -->
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <a th:text="${coleta.getGenero().getNome_cientifico()}"
+                                            <input th:value="${coleta.getGenero().getNome_cientifico()}"
                                                 th:href="'/generos/' + ${coleta.getGenero().getId()}"
-                                                class="text-decoration-none fw-bold fs-0"></a>
+                                                class="form-control"></a>
                                         </td>
+
+                                        <!-- FAMILIA -->
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <a th:text="${coleta.getFamilia().getNome_cientifico()}"
+                                            <input th:value="${coleta.getFamilia().getNome_cientifico()}"
                                                 th:href="'/familias/' + ${coleta.getFamilia().getId()}"
-                                                class="text-decoration-none fw-bold fs-0"></a>
+                                                class="form-control">
                                         </td>
+
+                                        <!-- CAMPO -->
                                         <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                            <a th:text="${coleta.isIdentificada()}"
-                                                class="text-decoration-none fw-bold fs-0"></a>
+                                            <input th:value="${coleta.getCampo().getNome()}"
+                                                class="form-control">
+                                        </td>
+
+                                        <!-- DATA COLETA -->
+                                        <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                                            <input th:value="${coleta.getData_coleta()}"
+                                                class="form-control" type="date"></a>
                                         </td>
                                         <td class="align-middle text-end white-space-nowrap pe-0 action">
                                             <div class="font-sans-serif btn-reveal-trigger position-static">
@@ -136,72 +248,14 @@
                                                 <div class="dropdown-menu dropdown-menu-end py-2">
                                                     <a class="dropdown-item" href="#!">Editar</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" href="#!">Inativar</a>
+                                                    <a class="dropdown-item text-danger" href="#!">Excluir</a>
                                                 </div>
                                             </div>
                                         </td>
 
                                     </tr>
 
-                                    <form action="/coletas" method="post">
-
-                                        <tr class="position-static">
-                                            <!-- CODIGO ID -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="codigo_id" id="codigo_id" class="form-control" type="text"
-                                                    placeholder="cod">
-                                            </td>
-
-                                            <!-- COLETA -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <a class="text-decoration-none fw-solid fs-0" id="nomeColeta"></a>
-                                            </td>
-
-                                            <!-- NOME COMUM -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="nome_comum" list="nome_comum_list" id="nome_comum"
-                                                    class="form-control" type="text" placeholder="Nome comum">
-                                                <datalist id="nome_comum_list">
-                                                    <option value="Teste1"></option>
-                                                </datalist>
-                                            </td>
-
-                                            <!-- ESPECIE -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="especie" id="especie" class="form-control" type="text"
-                                                    placeholder="Espécie" list="especie_list"
-                                                    onblur="PopularNomesComuns()">
-
-                                                <datalist id="especie_list">
-                                                    <option value="Teste1"></option>
-                                                </datalist>
-                                            </td>
-
-                                            <!-- GENERO -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="genero" id="genero" class="form-control" type="text"
-                                                    placeholder="Genero">
-                                            </td>
-
-                                            <!-- FAMILIA -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="familia" id="familia" class="form-control" type="text"
-                                                    placeholder="Família">
-                                            </td>
-
-                                            <!-- CAMPO -->
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <input name="campo" id="campo" class="form-control" type="text"
-                                                    placeholder="Campo">
-                                            </td>
-                                            <td class="align-middle time white-space-nowrap ps-0 projectName py-4">
-                                                <button class="btn btn-success" data-list-view="*" role="button"
-                                                    type="submit">
-                                                    + Salvar
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </form>
+                                    
 
                                 </tbody>
                             </table>

@@ -8,6 +8,7 @@ import org.hibernate.annotations.ManyToAny;
 import com.SUG.FLORA.interfaces.DTO;
 import com.SUG.FLORA.interfaces.DTOConvertible;
 import com.SUG.FLORA.model.DTOs.CampoDTO;
+import com.SUG.FLORA.model.DTOs.ColetaDTO;
 import com.SUG.FLORA.model.DTOs.ProjetoDTO;
 
 import jakarta.persistence.Entity;
@@ -52,12 +53,17 @@ public class Projeto extends UuidDomain implements DTOConvertible {
         projetoDTO.setNome(nome);
         projetoDTO.setDescricao(descricao);
         projetoDTO.setCampos(getCamposDTO());
+        projetoDTO.setColetas(getColetasDTO());
 
         return projetoDTO;
     }
 
     public List<CampoDTO> getCamposDTO() {
         return campos.stream().map(campo -> campo.getDTO()).toList();
+    }
+
+    public List<ColetaDTO> getColetasDTO() {
+        return coletas.stream().map(coleta -> coleta.getDTO()).toList();
     }
 
 }

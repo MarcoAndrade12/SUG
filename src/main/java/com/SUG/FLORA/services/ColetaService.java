@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SUG.FLORA.model.Coleta;
+import com.SUG.FLORA.model.Especie;
+import com.SUG.FLORA.model.Familia;
 import com.SUG.FLORA.model.Genero;
 import com.SUG.FLORA.repository.ColetaRepository;
 import com.SUG.FLORA.repository.FamiliaRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ColetaService {
@@ -38,5 +43,64 @@ public class ColetaService {
         List<String> nomes_comuns = especieService.findAllNomesComunsByEspecieNome(nome_especie);
         return nomes_comuns;
     }
+
+    public Especie findOrCreateEspecieByNome(String nome_cientifico_especie) {
+
+        Especie especie = especieService.findByName(nome_cientifico_especie);
+
+        if (especie != null) {
+            return especie;
+        } else {
+            especie = new Especie();
+            especie.setNome_cientifico(nome_cientifico_especie);
+            especieService.save(especie);
+            return especie;
+        }
+
+    }
+
+    public Genero findOrCreateGeneroByNome(String nome_cientifico_genero) {
+        Genero genero = generoService.findByName(nome_cientifico_genero);
+
+        if (genero != null) {
+            return genero;
+        } else {
+            genero = new Genero();
+            genero.setNome_cientifico(nome_cientifico_genero);
+            generoService.save(genero);
+            return genero;
+        }
+    }
+
+    @Transactional
+    public Genero setEspecieOfGenero(Especie especie, Genero genero) {
+
+        genero.getEspecies().add(especie);
+
+        return genero;
+    }
+
+    public Familia findOrCreateFamiliaByNome(String nome_cientifico_familia) {
+        Familia familia = familiaService.findByName(nome_cientifico_familia);
+
+        if (familia != null) {
+            return familia;
+        } else {
+            familia = new Familia();
+            familia.setNome_cientifico(nome_cientifico_familia);
+            familiaService.save(familia);
+            return familia;
+        }
+    }
+
+    @Transactional
+	public Familia setGeneroOfFamilia(Genero genero, Familia familia) {
+		familia.getGeneros().add(genero);
+        return familia;
+	}
+
+    public void saveColeta(Coleta coleta) {
+        coletaRepository.save(coleta);
+    }   
 
 }

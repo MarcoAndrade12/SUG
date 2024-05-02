@@ -49,19 +49,21 @@ function PopularNomesComuns() {
 
     if (especie.value != "") {
         console.log("Populando nome_comum por especie: " + especie.value);
-        popularList(GET("/coletas/nomes_comuns?especie=" + especie.value), "nome_comum_list");
+        var get = popularList(GET("/coletas/nomes_comuns/especie" + especie.value), "nome_comum_list");
     } else if (genero.value != "") {
         console.log("Populando nome_comum por genero: " + genero.value);
-        popularList(GET("/coletas/nomes_comuns?genero=" + genero.value), "nome_comum_list");
+        var get = popularList(GET("/coletas/nomes_comuns/genero" + genero.value), "nome_comum_list");
     } else if (familia.value != "") {
         console.log("Populando nome_comum por familia: " + familia.value);
-        popularList(GET("/coletas/nomes_comuns?familia=" + familia.value), "nome_comum_list");
+        var get = popularList(GET("/coletas/nomes_comuns/familia" + familia.value), "nome_comum_list");
     } else {
         console.log("Populando nome_comum");
-        popularList(GET("/coletas/nomes_comuns"), "nome_comum_list");
+        var get = popularList(GET("/coletas/nomes_comuns"), "nome_comum_list");
     }
     
-    
+    console.log(get);
+
+
     AttNomeColeta()
 }
 
@@ -75,8 +77,43 @@ function AttNomeColeta(){
 
 }
 
-function NovoCampoColeta() {
-    console.log("Hello");
+function NovaColeta() {
+    
+    var cod = document.getElementById("codigo_id").value;
+    var nome_comum = document.getElementById("nome_comum").value;
+    var especie = document.getElementById("especie").value;
+    var familia = document.getElementById("familia").value;
+    var campo = document.getElementById("campo").value;
+
+    console.log(cod);
+    console.log(nome_comum);
+    console.log(especie);
+    console.log(familia);
+    console.log(campo);
+
+    var coleta = {};
+
+    coleta["codigo"] = cod;
+
+
+    
+    console.log(coleta);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(coleta)
+    };
+
+    fetch("/coletas/nova_coleta", requestOptions)
+        .then(response => {
+            console.log(response);
+        })
+
+
+
 }
 
 
