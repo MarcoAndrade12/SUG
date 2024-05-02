@@ -6,9 +6,13 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.SUG.FLORA.model.Campo;
+import com.SUG.FLORA.model.Coleta;
 import com.SUG.FLORA.model.Projeto;
 import com.SUG.FLORA.model.DTOs.ProjetoDTO;
 import com.SUG.FLORA.repository.ProjetoRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProjetoService {
@@ -38,6 +42,24 @@ public class ProjetoService {
 
     public Projeto findById(UUID id) {
         return projetoRepository.findById(id).get();
+    }
+
+    @Transactional
+    public void addCampoIfNotExist(Campo campo, UUID projeto_UUID) {
+        Projeto projeto = projetoRepository.findById(projeto_UUID).get();
+        
+        boolean existe = projeto.getCampos().stream().anyMatch(campoP -> campoP.getId() == campo.getId());
+        
+        if (!existe) {
+            projeto.getCampos().add(campo);
+        }
+        
+    }
+    
+    @Transactional
+    public void addColeta(Coleta coleta, UUID projeto_UUID) {
+        Projeto projeto = projetoRepository.findById(projeto_UUID).get();
+        projeto.getColetas().add(coleta);
     }
 
 }

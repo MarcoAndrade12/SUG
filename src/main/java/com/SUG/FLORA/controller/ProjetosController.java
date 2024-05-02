@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.SUG.FLORA.model.Coleta;
 import com.SUG.FLORA.model.Projeto;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.ProjetoDTO;
@@ -81,6 +82,14 @@ public class ProjetosController {
     public String getMeuProjeto(@PathVariable String id, Model model){
         Projeto projeto = projetoService.findById(UUID.fromString(id));
         
+        for (Coleta coleta : projeto.getColetas()) {
+            System.out.println(coleta.getFamilia().getNome_cientifico());
+            System.out.println(coleta.getGenero().getNome_cientifico());
+            System.out.println(coleta.getEspecie().getNome_cientifico());
+            System.out.println(coleta.getEspecie().getNome_comum());
+            System.out.println(coleta.getId());
+        }
+
         model.addAttribute("projeto", projeto.getDTO());
 
         return "users/listar-coletas-users";
