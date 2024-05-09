@@ -99,7 +99,12 @@ public class ProjetosController {
         return "users/listar-coletas-users";
     }
 
-    public String editProjeto() {
+    @GetMapping("editar/{id}")
+    public String editProjeto(@PathVariable String id, Model model) {
+        UUID projeto_id = UUID.fromString(id);
+        Projeto projeto = projetoService.findById(projeto_id);
+        model.addAttribute("projeto", projeto.getDTO());
+
         return "edit-projeto-users";
     }
 
