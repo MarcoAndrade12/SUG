@@ -105,6 +105,8 @@ public class ColetasRestController {
 
         Coleta coleta = coletaService.findById(UUID.fromString(post.getFirst("coleta_id")));
 
+        System.out.println(coleta);
+
         coletaService.delete(coleta);
 
         return "redirect:/projetos/meuprojeto/" + post.getFirst("projeto_id");

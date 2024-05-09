@@ -33,6 +33,9 @@ public class ColetaService {
     @Autowired
     EnderecoService enderecoService;
 
+    @Autowired
+    ProjetoService projetoService;
+
     public List<String> findAllNomesComuns() {
 
         List<String> nomes_comuns = especieService.findAllNomesComuns();
@@ -112,5 +115,15 @@ public class ColetaService {
     public void delete(Coleta coleta) {
         coletaRepository.delete(coleta);
     }   
+
+    public List<Coleta> getColetasByProjetoUuid(UUID projeto_Uuid) {
+        return projetoService.findAllColetasByProjetoUuid(projeto_Uuid);
+    }
+
+    public Integer getLastCodigoColetaByProjetoId(UUID projeto_Uuid){
+        Integer codigo = coletaRepository.getLastCodigoColetaByProjetoId(projeto_Uuid);
+
+        return codigo;
+    }
 
 }

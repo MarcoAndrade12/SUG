@@ -19,6 +19,7 @@ import com.SUG.FLORA.model.Coleta;
 import com.SUG.FLORA.model.Projeto;
 import com.SUG.FLORA.model.Usuario;
 import com.SUG.FLORA.model.DTOs.ProjetoDTO;
+import com.SUG.FLORA.services.ColetaService;
 import com.SUG.FLORA.services.ProjetoService;
 import com.SUG.FLORA.services.UsuarioService;
 
@@ -31,6 +32,9 @@ public class ProjetosController {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    ColetaService coletaService;
 
     @GetMapping("")
     public String getProjetos(@AuthenticationPrincipal UserDetails authenticated, Model model) {
@@ -80,9 +84,17 @@ public class ProjetosController {
 
     @GetMapping("/meuprojeto/{id}")
     public String getMeuProjeto(@PathVariable String id, Model model){
-        Projeto projeto = projetoService.findById(UUID.fromString(id));
+        UUID projeto_id = UUID.fromString(id);
+        Projeto projeto = projetoService.findById(projeto_id);
+        Integer codigo = coletaService.getLastCodigoColetaByProjetoId(projeto_id);
+        if (codigo != null) {
+            codigo++;
+        } else {
+            codigo = 0;
+        }
 
         model.addAttribute("projeto", projeto.getDTO());
+        model.addAttribute("ultimo_codigo", codigo +1);
 
         return "users/listar-coletas-users";
     }

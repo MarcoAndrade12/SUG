@@ -62,4 +62,8 @@ public class ProjetoService {
         projeto.getColetas().add(coleta);
     }
 
+    public List<Coleta> findAllColetasByProjetoUuid(UUID projeto_Uuid) {
+        return projetoRepository.getColetasByProjetoId(projeto_Uuid);
+    }
+
 }
