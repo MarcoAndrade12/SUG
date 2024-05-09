@@ -103,9 +103,9 @@ public class ColetasRestController {
     @PostMapping("excluir")
     public String deleteColetaById(@RequestBody MultiValueMap<String, String> post) {
 
-        Coleta coleta = coletaService.findById(UUID.fromString(post.getFirst("coleta_id")));
+        System.out.println(post);
 
-        System.out.println(coleta);
+        Coleta coleta = coletaService.findById(UUID.fromString(post.getFirst("coleta_id")));
 
         coletaService.delete(coleta);
 

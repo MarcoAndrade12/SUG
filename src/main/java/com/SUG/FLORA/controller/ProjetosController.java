@@ -99,4 +99,8 @@ public class ProjetosController {
         return "users/listar-coletas-users";
     }
 
+    public String editProjeto() {
+        return "edit-projeto-users";
+    }
+
 }
