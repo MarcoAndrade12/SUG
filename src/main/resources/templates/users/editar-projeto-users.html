@@ -56,20 +56,31 @@
               <li class="breadcrumb-item active">Adicionar projeto</li>
             </ol>
           </nav>
-          <h2 class="mb-4">Criar projeto</h2>
+          <h2 class="mb-4">Editar projeto</h2>
           <div class="row">
             <div class="col-xl-9">
-              <form class="row g-3 mb-6" action="/projetos/novo" method="post">
+              <form class="row g-3 mb-6" th:action="${'/projetos/editar/' + projeto.getId()}" method="post">
                 <div class="col-sm-6 col-md-12">
-                  <div class="form-floating"><input class="form-control" id="floatingInputGrid" 
+                  <div class="form-floating">
+                    <input class="form-control" id="floatingInputGrid" 
+                    th:value="${projeto.getNome()}"
                     name="nome"
-                    type="text" placeholder="Project title" /><label for="floatingInputGrid">Nome do projeto</label></div>
+                    type="text" placeholder="Project title" />
+                    <label for="floatingInputGrid">Nome do projeto</label>
+                  </div>
                 </div>
                 
                 <div class="col-12 gy-6">
-                  <div class="form-floating"><textarea class="form-control" id="floatingProjectOverview" 
-                    name="descricao"
-                    placeholder="Escreva a descrição de seu projeto aqui" style="height: 100px"></textarea><label for="floatingProjectOverview">Descrição do projeto</label></div>
+                  <div class="form-floating">
+                    <textarea 
+                      th:text="${projeto.getDescricao()}"
+                      class="form-control" 
+                      id="floatingProjectOverview" 
+                      name="descricao"
+                      placeholder="Escreva a descrição de seu projeto aqui" style="height: 100px">
+                    </textarea>
+                    <label for="floatingProjectOverview">Descrição do projeto</label>
+                  </div>
                 </div>    
                 
                 
@@ -91,7 +102,7 @@
                     <div class="col-auto"> <a href="/projetos"><button class="btn btn-lg btn-phoenix-primary px-5" type="button">Voltar</button></a></div>
                     
                     
-                    <div class="col-auto"><button class="btn btn-lg btn-primary px-5 px-sm-15">Criar Projeto</button></div>
+                    <div class="col-auto"><button class="btn btn-lg btn-primary px-5 px-sm-15">Salvar Edições</button></div>
                   </div>
                 </div>
               </form>
