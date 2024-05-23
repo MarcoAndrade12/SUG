@@ -23,6 +23,8 @@ import com.SUG.FLORA.services.ColetaService;
 import com.SUG.FLORA.services.ProjetoService;
 import com.SUG.FLORA.services.UsuarioService;
 
+import jakarta.transaction.Transactional;
+
 @Controller
 @RequestMapping("projetos")
 public class ProjetosController {
@@ -105,7 +107,25 @@ public class ProjetosController {
         Projeto projeto = projetoService.findById(projeto_id);
         model.addAttribute("projeto", projeto.getDTO());
 
-        return "edit-projeto-users";
+        return "users/editar-projeto-users";
+    }
+
+    @PostMapping("editar/{id}")
+    @Transactional
+    public String postEditProjeto(@RequestBody MultiValueMap<String, String> post, @AuthenticationPrincipal UserDetails logged, @PathVariable String id, Model model) {
+        Projeto projeto = projetoService.findById(UUID.fromString(id));
+
+        if (projeto.getUsuarioDono().getEmail().equals(logged.getUsername())) {
+
+            projeto.setNome(post.getFirst("nome"));
+            projeto.setDescricao(post.getFirst("descricao"));
+            
+            model.addAttribute("projeto", projeto.getDTO());
+
+        }
+
+
+        return "users/editar-projeto-users";
     }
 
 }
