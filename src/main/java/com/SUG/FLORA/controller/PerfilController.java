@@ -46,7 +46,7 @@ public class PerfilController {
         usuario.setEmail(post.getFirst("email"));
         
         
-        return "redirect:editar-usuario";
+        return "redirect:/projetos";
     }
     
     

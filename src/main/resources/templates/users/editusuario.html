@@ -2,43 +2,161 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Meta tags, links para CSS e scripts -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Usuário</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../../../unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href="/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <link rel="icon" href="/img/sugflora-logo.png" type="image/png">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .container-fluid {
+            margin-top: 0; /* Remove a margem superior */
+        }
+        .row {
+            height: 100%;
+        }
+        .flex-center {
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-    <!-- Formulário para edição de usuário -->
-    <form action="/perfil/editar-usuario" method="post" th:object="${usuario}">
-        <!-- Campos preenchidos com as informações atuais do usuário -->
-        
-        <div>
-            <label>Primeiro Nome:</label>
-            <input name = "nome" type="text" th:field="*{nome}">
-        </div>
-        <div>
-            <label>Sobrenome:</label>
-            <input name = "sobremome" type="text" th:field="*{sobrenome}">
-        </div>
-        <div>
-            <label>Email:</label>
-            <input name = "email" type="email" th:field="*{email}">
-        </div>
-        <div>
-            <label>Sexo:</label>
-            <select name = "sexo" th:field="*{sexo}">
-                <option value="MASCULINO">Masculino</option>
-                <option value="Feminino">Feminino</option>
-                <option value="Outro">Outro</option>
-            </select>
-        </div>
-        <div>
-            <label>RG:</label>
-            <input name = "rg" type="text" th:field="*{rg}">
-        </div>
-        <div>
-            <label>CPF:</label>
-            <input name = "cpf" type="text" th:field="*{cpf}">
-        </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index">
+                <img src="/img/sugflora-logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+                Sug-Flora - Usuário
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+                aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index">Página Inicial</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="perfil/editar-usuario">Editar Usuario</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Projetos
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/projetos">Lista de Projetos</a></li>
+                                <li><a class="dropdown-item" href="/projetos/novo">Novo Projeto</a></li>
+                            </ul>
+                        </li>
 
-        <!-- Botão para enviar o formulário -->
-        <button type="submit">Salvar Alterações</button>
-    </form>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Campos*
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">Lista de Campos*</a></li>
+                                <li><a class="dropdown-item" href="#">Novo Campo*</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                    <hr>
+                    <a href="/login">
+                        <button class="btn btn-danger" type="submit">Sair</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid px-0" data-layout="container">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row flex-center">
+                    <div class="col-lg-6">
+                        <!-- Formulário para edição de usuário -->
+                        <form action="/perfil/editar-usuario" method="post" th:object="${usuario}" class="bg-white p-4 rounded shadow">
+                            <!-- Campos preenchidos com as informações atuais do usuário -->
+                            <div class="d-flex align-items-center justify-content-center text-center">
+                                <div class="d-flex align-items-center justify-content-center text-center">
+                                  <link class="mx-auto" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
+                                  <!-- Adiciona o ícone da página -->
+                                  <link rel="icon" href="/img/sugflora-logo.png" type="image/png">
+                                  <!-- Exibe a imagem na tela -->
+                                  <img class="" style="width:90px; height:90px" src="/img/sugflora-logo.png" alt="" />
+                                </div>
+                              </div>
+                              <div class="text-center mb-7">
+                                <h3 class="text-1000">Editar Usuário</h3>
+                              </div>
+                              
+                              <div class="position-relative">
+                                <hr class="bg-200 mt-5 mb-4" />
+                                <div class="divider-content-center"></div>
+                              </div>
+                              <div class="row mb-3 g-1 text-start">
+                            <div class="mb-3">
+                                <label class="form-label">Primeiro Nome:</label>
+                                <input name="nome" type="text" class="form-control" th:field="*{nome}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Sobrenome:</label>
+                                <input name="sobrenome" type="text" class="form-control" th:field="*{sobrenome}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email:</label>
+                                <input name="email" type="email" class="form-control" th:field="*{email}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Sexo:</label>
+                                <select name="sexo" class="form-select" th:field="*{sexo}">
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">RG:</label>
+                                <input name="rg" type="text" class="form-control" th:field="*{rg}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">CPF:</label>
+                                <input name="cpf" type="text" class="form-control" th:field="*{cpf}">
+                            </div>
+                
+                            <!-- Botão para enviar o formulário -->
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 position-relative d-none d-lg-block">
+                        <div class="bg-holder" style="background-image:url('/img/bg-register.png');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
