@@ -44,8 +44,8 @@
     <main class="main" id="top">
         <div class="container-fluid px-0" data-layout="container">
 
-                <nav th:replace="~{fragments/navuser :: navuser}"></nav>
-                <div class="content">
+            <nav th:replace="~{fragments/navuser :: navuser}"></nav>
+            <div class="content">
 
                 <nav class="mb-2" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
@@ -107,7 +107,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list" id="table-latest-review-body">
-                                    <form action="/coletas/nova_coleta" method="post">
+                                    <form th:if="${projeto.isAtivo()}" action="/coletas/nova_coleta" method="post" >
 
                                         <tr class="position-static">
                                             <!-- PROJETO ID -->

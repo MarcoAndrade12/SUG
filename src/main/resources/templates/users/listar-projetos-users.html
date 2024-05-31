@@ -65,7 +65,7 @@
             data-list='{"valueNames":["projectName","assigness","start","deadline","task","projectprogress","status","action"],"page":6,"pagination":true}'>
             <div class="row mb-4 gx-6 gy-3 align-items-center">
               <div class="col-auto">
-                <h2 class="mb-0">Projetos (<span class="fw-normal text-700 ms-3" th:text="${projetos.size()}"></span>)</h2>
+                <h2 class="mb-0">Projetos (<span class="fw-normal text-700 ms-3" th:text="${projetosAtivos.size()}"></span>)</h2>
               </div>
               <div class="col-auto"><a class="btn btn-primary px-5" href="/projetos/novo"><i
                     class="fa-solid fa-plus me-2"></i>Adicionar novo projeto</a></div>
@@ -148,7 +148,7 @@
                 <thead>
                   <tr>
                     <th class="sort white-space-nowrap align-middle ps-0" scope="col" data-sort="projectName"
-                      style="width:30%;">NOME DO PROJETO</th>
+                      style="width:30%;">PROJETOS ATIVOS</th>
                     <!-- <th class="sort align-middle ps-3" scope="col" data-sort="assigness" style="width:10%;">MEMBROS</th> -->
                     <th class="sort align-middle ps-3" scope="col" data-sort="deadline" style="width:15%;">CAMPOS</th>
                     <th class="sort align-middle ps-3" scope="col" data-sort="task" style="width:12%;">COLETAS</th>
@@ -160,7 +160,7 @@
                   </tr>
                 </thead>
                 <tbody class="list" id="table-latest-review-body">
-                  <tr th:each="projeto : ${projetos}" class="position-static">
+                  <tr th:each="projeto : ${projetosAtivos}" class="position-static">
                     <td  class="align-middle time white-space-nowrap ps-0 projectName py-4">
                       <a th:text="${projeto.getNome()}" th:href="'/projetos/meuprojeto/' + ${projeto.getId()}" class="text-decoration-none fw-bold fs-0" ></a>
                     </td>
@@ -191,33 +191,81 @@
                           aria-expanded="false" data-bs-reference="parent"><span
                             class="fas fa-ellipsis-h fs--2"></span></button>
                         <div class="dropdown-menu dropdown-menu-end py-2">
-                          <a class="dropdown-item" href="#!">Editar</a>
-                          <div class="dropdown-divider"></div><a class="dropdown-item text-danger" href="#!">Inativar</a>
+                          <a class="dropdown-item" th:href="${'projetos/editar/' + projeto.getId()}">Editar</a>
+                          <div class="dropdown-divider"></div><a class="dropdown-item text-danger" th:href="${'projetos/inativar/' + projeto.getId()}">Inativar</a>
                         </div>
                       </div>
                     </td>
                     </td>
                   </tr>
                   
-                  
                 </tbody>
               </table>
             </div>
-            <div
-              class="d-flex flex-wrap align-items-center justify-content-between py-3 pe-0 fs--1 border-bottom border-200">
-              <div class="d-flex">
-                <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
-                  class="fw-semi-bold" href="#!" data-list-view="*">Ver todos<span class="fas fa-angle-right ms-1"
-                    data-fa-transform="down-1"></span></a><a class="fw-semi-bold d-none" href="#!"
-                  data-list-view="less">Ver menos<span class="fas fa-angle-right ms-1"
-                    data-fa-transform="down-1"></span></a>
-              </div>
-              <div class="d-flex"><button class="page-link" data-list-pagination="prev"><span
-                    class="fas fa-chevron-left"></span></button>
-                <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span
-                    class="fas fa-chevron-right"></span></button>
-              </div>
-            </div>
+            
+
+          </div>
+
+          <!-- PROJETOS INATIVOS -->
+          <div class="table-responsive scrollbar">
+            <table class="table fs--1 mb-0 border-top border-200">
+              <thead>
+                <tr>
+                  <th class="sort white-space-nowrap align-middle ps-0" scope="col" data-sort="projectName"
+                    style="width:30%;">PROJETOS INATIVOS</th>
+                  <!-- <th class="sort align-middle ps-3" scope="col" data-sort="assigness" style="width:10%;">MEMBROS</th> -->
+                  <th class="sort align-middle ps-3" scope="col" data-sort="deadline" style="width:15%;">CAMPOS</th>
+                  <th class="sort align-middle ps-3" scope="col" data-sort="task" style="width:12%;">COLETAS</th>
+                  <th class="sort align-middle ps-3" scope="col" data-sort="projectprogress" style="width:5%;">
+                    IDENTIFICADOS</th>
+                  <th class="sort align-middle text-end" scope="col" data-sort="statuses" style="width:10%;">SITUAÇÃO
+                  </th>
+                  <th class="sort align-middle text-end" scope="col" style="width:10%;"></th>
+                </tr>
+              </thead>
+              <tbody class="list" id="table-latest-review-body">
+                <tr th:each="projeto : ${projetosInativos}" class="position-static">
+                  <td  class="align-middle time white-space-nowrap ps-0 projectName py-4">
+                    <a th:text="${projeto.getNome()}" th:href="'/projetos/meuprojeto/' + ${projeto.getId()}" class="text-decoration-none fw-bold fs-0" ></a>
+                  </td>
+                  
+                  <!-- CAMPOS -->
+                  <td class="align-middle white-space-nowrap deadline ps-3 py-4">
+                    <p th:text="${projeto.getCampos().size()}" class="mb-0 fs--1 text-900"></p>
+                  </td>
+
+                  <!-- COLETAS -->
+                  <td class="align-middle white-space-nowrap task ps-3 py-4">
+                    <p th:text="${projeto.getColetas().size()}" class="fw-bo text-900 fs--1 mb-0"></p>
+
+                    <!-- TODO: Parei aqui -->
+                  <td class="align-middle white-space-nowrap ps-3 projectprogress">
+                    <p th:if="${projeto.getColetas().size() > 0}" th:text="${projeto.countColetasIdentificada()} + '/' + ${projeto.getColetas().size()}" class="text-800 fs--2 mb-0"></p>
+                    <p th:unless="${projeto.getColetas().size() > 0}" class="text-800 fs--2 mb-0">Nenhuma coleta disponível</p>
+                      <div class="progress" style="height:3px;">
+                    </div>
+                  </td>
+                  <td class="align-middle white-space-nowrap text-end statuses">
+                    <span th:text="${projeto.getStatus()}"
+                      class="badge badge-phoenix fs--2 badge-phoenix-primary"></span></td>
+                  <td class="align-middle text-end white-space-nowrap pe-0 action">
+                    <div class="font-sans-serif btn-reveal-trigger position-static"><button
+                        class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                        type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                        aria-expanded="false" data-bs-reference="parent"><span
+                          class="fas fa-ellipsis-h fs--2"></span></button>
+                      <div class="dropdown-menu dropdown-menu-end py-2">
+                        <a class="dropdown-item" th:href="${'projetos/editar/' + projeto.getId()}">Editar</a>
+                        <div class="dropdown-divider"></div><a class="dropdown-item text-success" th:href="${'projetos/ativar/' + projeto.getId()}">Ativar</a>
+                      </div>
+                    </div>
+                  </td>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           </div>
         </div>
       </div>

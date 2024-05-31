@@ -1,9 +1,11 @@
 package com.SUG.FLORA.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import com.SUG.FLORA.services.ProjetoService;
 import com.SUG.FLORA.services.UsuarioService;
 
 import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("projetos")
@@ -42,9 +45,14 @@ public class ProjetosController {
     public String getProjetos(@AuthenticationPrincipal UserDetails authenticated, Model model) {
         Usuario usuario = usuarioService.findUsuarioByEmail(authenticated.getUsername());
 
-        List<ProjetoDTO> projetosDTO = projetoService.findAllDTOByUsuarioEmail(usuario.getEmail());
+        List<ProjetoDTO> allProjetosDTO = projetoService.findAllDTOByUsuarioEmail(usuario.getEmail());
 
-        model.addAttribute("projetos", projetosDTO);
+        List<ProjetoDTO> projetosAtivosDTOs = allProjetosDTO.stream().filter(projeto -> projeto.isAtivo()).toList();
+
+        List<ProjetoDTO> projetosInativosDTOs = allProjetosDTO.stream().filter(projeto -> !projeto.isAtivo()).toList();
+
+        model.addAttribute("projetosAtivos", projetosAtivosDTOs);
+        model.addAttribute("projetosInativos", projetosInativosDTOs);
 
         return "users/listar-projetos-users";
     }
@@ -85,7 +93,7 @@ public class ProjetosController {
     }
 
     @GetMapping("/meuprojeto/{id}")
-    public String getMeuProjeto(@PathVariable String id, Model model){
+    public String getMeuProjeto(@PathVariable String id, Model model) {
         UUID projeto_id = UUID.fromString(id);
         Projeto projeto = projetoService.findById(projeto_id);
         Integer codigo = coletaService.getLastCodigoColetaByProjetoId(projeto_id);
@@ -96,7 +104,7 @@ public class ProjetosController {
         }
 
         model.addAttribute("projeto", projeto.getDTO());
-        model.addAttribute("ultimo_codigo", codigo +1);
+        model.addAttribute("ultimo_codigo", codigo + 1);
 
         return "users/listar-coletas-users";
     }
@@ -112,20 +120,44 @@ public class ProjetosController {
 
     @PostMapping("editar/{id}")
     @Transactional
-    public String postEditProjeto(@RequestBody MultiValueMap<String, String> post, @AuthenticationPrincipal UserDetails logged, @PathVariable String id, Model model) {
+    public String postEditProjeto(@RequestBody MultiValueMap<String, String> post,
+            @AuthenticationPrincipal UserDetails logged, @PathVariable String id, Model model) {
         Projeto projeto = projetoService.findById(UUID.fromString(id));
 
         if (projeto.getUsuarioDono().getEmail().equals(logged.getUsername())) {
 
             projeto.setNome(post.getFirst("nome"));
             projeto.setDescricao(post.getFirst("descricao"));
-            
+
             model.addAttribute("projeto", projeto.getDTO());
 
         }
 
-
         return "users/editar-projeto-users";
+    }
+
+    @Transactional
+    @GetMapping("inativar/{id}")
+    public String inativarProjeto(@PathVariable String id) {
+
+        Projeto projeto = projetoService.findById(UUID.fromString(id));
+
+        projeto.setLastUpdate(LocalDateTime.now());
+        projeto.setAtivo(false);
+
+        return "redirect:/projetos";
+    }
+
+    @Transactional
+    @GetMapping("ativar/{id}")
+    public String ativarProjeto(@PathVariable String id) {
+
+        Projeto projeto = projetoService.findById(UUID.fromString(id));
+
+        projeto.setLastUpdate(LocalDateTime.now());
+        projeto.setAtivo(true);
+
+        return "redirect:/projetos";
     }
 
 }
