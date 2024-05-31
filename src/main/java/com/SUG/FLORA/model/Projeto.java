@@ -54,6 +54,7 @@ public class Projeto extends UuidDomain implements DTOConvertible {
         projetoDTO.setDescricao(descricao);
         projetoDTO.setCampos(getCamposDTO());
         projetoDTO.setColetas(getColetasDTO());
+        projetoDTO.setAtivo(ativo);
 
         return projetoDTO;
     }
