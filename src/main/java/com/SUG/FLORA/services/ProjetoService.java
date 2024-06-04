@@ -66,4 +66,8 @@ public class ProjetoService {
         return projetoRepository.getColetasByProjetoId(projeto_Uuid);
     }
 
+    public List<Campo> findAllCamposByIdProjeto(UUID id) {
+        return projetoRepository.findAllCamposByProjetoId(id);
+    }
+
 }

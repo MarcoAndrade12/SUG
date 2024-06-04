@@ -1,5 +1,6 @@
 package com.SUG.FLORA.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class CampoService {
     @Autowired
     CampoRepository campoRepository;
 
+    @Autowired
+    ProjetoService projetoService;
+
     public Campo findOrCreateByNome(String nome_campo) {
         Campo campo = campoRepository.findByNome(nome_campo);
         if (campo != null) {
@@ -35,6 +39,14 @@ public class CampoService {
         campo.getColetas().add(coleta);
         
         return campo;
+    }
+
+    public List<Campo> findAll() {
+        return campoRepository.findAll();
+    }
+
+    public List<Campo> findAllByProjetoId(UUID id) {
+        return projetoService.findAllCamposByIdProjeto(id);
     }
 
 }
