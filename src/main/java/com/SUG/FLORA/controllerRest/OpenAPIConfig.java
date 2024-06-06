@@ -22,4 +22,15 @@ public class OpenAPIConfig {
                         .description("Documentação dos end-points"));
     }
 
+    @Bean
+    public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {
+        return openApi -> openApi.getPaths().values()
+                .forEach(pathItem -> pathItem.readOperations().forEach(operation -> {
+                    operation.addParametersItem(new Parameter()
+                            .in(ParameterIn.HEADER.toString())
+                            .schema(new StringSchema())
+                            .name("X-Custom-Header")
+                            .required(false));
+                }));
+    }
 }

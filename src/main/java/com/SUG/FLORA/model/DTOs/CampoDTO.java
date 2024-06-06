@@ -16,14 +16,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class CampoDTO extends UuidDomainDTO implements DTO {
 
-    @Schema(
-        title = "nome do usuário",
-        description = "nome do campo", 
-        requiredMode = RequiredMode.REQUIRED, 
-        example = "campo01", 
-        type = "String",
-        format = "string"
-        )
     private String nome;
     private String descricao;
     private EnderecoDTO enderecoDTO;
