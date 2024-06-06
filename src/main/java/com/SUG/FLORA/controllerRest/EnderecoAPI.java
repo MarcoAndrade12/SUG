@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping("/api/endereco")
+@RequestMapping("endereco")
 public class EnderecoAPI {
 
     @Autowired

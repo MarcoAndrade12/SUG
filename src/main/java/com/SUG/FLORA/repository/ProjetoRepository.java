@@ -21,7 +21,7 @@ public interface ProjetoRepository extends JpaRepository<Projeto, UUID> {
     @Query(value = "SELECT * FROM coleta c WHERE c.projeto_id = :id", nativeQuery = true)
     public List<Coleta> getColetasByProjetoId(UUID id);
 
-    @Query(value = "SELECT c FROM campo c JOIN projeto_campo pc ON pc.campo_id = c.id WHERE c.id = :id")
+    @Query(value = "SELECT * FROM campo as c JOIN projeto_campo pc ON pc.campo_id = c.id WHERE c.id = :id", nativeQuery = true)
     public List<Campo> findAllCamposByProjetoId(UUID id);
 
 }

@@ -100,11 +100,11 @@ public class ProjetosController {
         if (codigo != null) {
             codigo++;
         } else {
-            codigo = 0;
+            codigo = 1;
         }
 
         model.addAttribute("projeto", projeto.getDTO());
-        model.addAttribute("ultimo_codigo", codigo + 1);
+        model.addAttribute("ultimo_codigo", codigo);
 
         return "users/listar-coletas-users";
     }

@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import com.SUG.FLORA.model.Campo;
 import com.SUG.FLORA.model.DTOs.CampoDTO;
+import com.SUG.FLORA.model.DTOs.ColetaDTO;
 
 @Repository
 public interface CampoRepository extends JpaRepository<Campo, UUID> {
     public Campo findByNome(String nome);
+
+    public List<ColetaDTO> findAllColetasById(UUID id);
 
 }

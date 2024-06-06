@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-@RequestMapping(value = "/coletas")
+@RequestMapping(value = "coletas")
 public class ColetasRestController {
 
     @Autowired

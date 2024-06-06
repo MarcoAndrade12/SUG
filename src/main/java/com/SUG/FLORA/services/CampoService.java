@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.SUG.FLORA.model.Campo;
 import com.SUG.FLORA.model.Coleta;
 import com.SUG.FLORA.model.DTOs.CampoDTO;
+import com.SUG.FLORA.model.DTOs.ColetaDTO;
 import com.SUG.FLORA.repository.CampoRepository;
 
 import jakarta.transaction.Transactional;
@@ -47,6 +48,14 @@ public class CampoService {
 
     public List<Campo> findAllByProjetoId(UUID id) {
         return projetoService.findAllCamposByIdProjeto(id);
+    }
+
+    public List<CampoDTO> findAllDTOsByProjetoId(UUID id) {
+        return findAllByProjetoId(id).stream().map(campo -> campo.getDTO()).toList();
+    }
+
+    public List<ColetaDTO> findAllColetasDTOsById(UUID id) {
+        return campoRepository.findAllColetasById(id);
     }
 
 }
